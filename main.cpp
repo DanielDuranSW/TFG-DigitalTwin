@@ -1,31 +1,46 @@
 #include <iostream>
-#include <pthread.h>
+#include <thread>
 #include "dma_monitor.h"
-
-DMAMonitor dmaMonitor;
-
-void *workerFunction(void *arg)
-{
-    dmaMonitor.incrementDMA();
-    int value = dmaMonitor.getDMA();
-    std::cout << "DMA Value: " << value << std::endl;
-    return NULL;
-}
+#include "threads/BLE_Stack_Operation.h"
+#include "threads/Custom_Event_Handler.h"
+#include "threads/FSR_Acquisition.h"
+#include "threads/IMU_Acquisition.h"
+#include "threads/RAM_Operation.h"
+#include "threads/Energy_Saving.h"
 
 int main()
 {
-    const int NUM_THREADS = 10;
-    pthread_t threads[NUM_THREADS];
+    DMAMonitor dmaMonitor;
 
-    for (int i = 0; i < NUM_THREADS; ++i)
-    {
-        pthread_create(&threads[i], NULL, workerFunction, NULL);
-    }
+    // Creación de instancias de cada operación.
+    FSR_Acquisition fsr(&dmaMonitor);
+    IMU_Acquisition imu(&dmaMonitor);
+    RAM_Operation ram(&dmaMonitor);
+    BLE_Stack_Operation ble(&dmaMonitor);
+    Energy_Saving energy(&dmaMonitor);
+    Custom_Event_Handler custom(&dmaMonitor);
 
-    for (int i = 0; i < NUM_THREADS; ++i)
-    {
-        pthread_join(threads[i], NULL);
-    }
+    // Inicio de cada operación en su propio hilo.
+    std::thread fsrThread([&]()
+                          { fsr.run(); });
+    std::thread imuThread([&]()
+                          { imu.run(); });
+    std::thread ramThread([&]()
+                          { ram.run(); });
+    std::thread bleThread([&]()
+                          { ble.run(); });
+    std::thread energyThread([&]()
+                             { energy.run(); });
+    std::thread customThread([&]()
+                             { custom.run(); });
+
+    // Espera a que todos los hilos terminen.
+    fsrThread.join();
+    imuThread.join();
+    ramThread.join();
+    bleThread.join();
+    energyThread.join();
+    customThread.join();
 
     return 0;
 }

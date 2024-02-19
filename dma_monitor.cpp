@@ -1,7 +1,5 @@
 // dma_monitor.cpp
 #include "dma_monitor.h"
-#include <cstring>
-#include <iostream>
 
 DMAMonitor::DMAMonitor() : currentStage(0)
 {

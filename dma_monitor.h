@@ -1,6 +1,8 @@
 // dma_monitor.h
 #pragma once
 #include <pthread.h>
+#include <cstring>
+#include <iostream>
 
 class DMAMonitor
 {
