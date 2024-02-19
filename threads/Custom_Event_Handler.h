@@ -6,10 +6,12 @@
 class Custom_Event_Handler
 {
 private:
-    DMAMonitor *dmaMonitor;
+    DMAMonitor *_dmaMonitor;
 
 public:
-    Custom_Event_Handler(DMAMonitor *monitor);
+    Custom_Event_Handler(DMAMonitor *dmaMonitor);
+    ~Custom_Event_Handler();
+
     void run();
 };
 

@@ -7,10 +7,12 @@
 class FSR_Acquisition
 {
 private:
-    DMAMonitor *dmaMonitor;
+    DMAMonitor *_dmaMonitor;
 
 public:
-    FSR_Acquisition(DMAMonitor *monitor);
+    FSR_Acquisition(DMAMonitor *dmaMonitor);
+    ~FSR_Acquisition();
+
     void run();
 };
 

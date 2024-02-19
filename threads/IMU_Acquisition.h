@@ -6,10 +6,12 @@
 class IMU_Acquisition
 {
 private:
-    DMAMonitor *dmaMonitor;
+    DMAMonitor *_dmaMonitor;
 
 public:
     IMU_Acquisition(DMAMonitor *monitor);
+    ~IMU_Acquisition();
+
     void run();
 };
 

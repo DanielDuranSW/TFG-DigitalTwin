@@ -6,10 +6,12 @@
 class Energy_Saving
 {
 private:
-    DMAMonitor *dmaMonitor;
+    DMAMonitor *_dmaMonitor;
 
 public:
     Energy_Saving(DMAMonitor *monitor);
+    ~Energy_Saving();
+
     void run();
 };
 

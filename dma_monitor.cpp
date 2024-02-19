@@ -1,6 +1,9 @@
 // dma_monitor.cpp
 #include "dma_monitor.h"
 
+int DMAMonitor::sharedCounter = 0;
+pthread_mutex_t DMAMonitor::mtx_sharedCounter = PTHREAD_MUTEX_INITIALIZER;
+
 DMAMonitor::DMAMonitor() : currentStage(0)
 {
     pthread_mutex_init(&mtx, NULL);
@@ -10,6 +13,7 @@ DMAMonitor::DMAMonitor() : currentStage(0)
     pthread_cond_init(&cv_ble, NULL);
     pthread_cond_init(&cv_energy, NULL);
     pthread_cond_init(&cv_custom, NULL);
+    //     pthread_mutex_init(&mtx_sharedCounter, NULL);
 }
 
 DMAMonitor::~DMAMonitor()
@@ -21,12 +25,26 @@ DMAMonitor::~DMAMonitor()
     pthread_cond_destroy(&cv_ble);
     pthread_cond_destroy(&cv_energy);
     pthread_cond_destroy(&cv_custom);
+    // pthread_mutex_destroy(&mtx_sharedCounter);
+}
+
+void DMAMonitor::incrementSharedCounter(const std::string &caller)
+{
+    pthread_mutex_lock(&mtx_sharedCounter);
+    sharedCounter++;
+    printf("Shared counter incremented by %s. Current value: %d\n", caller.c_str(), sharedCounter);
+    pthread_mutex_unlock(&mtx_sharedCounter);
 }
 
 void DMAMonitor::incrementStage()
 {
     pthread_mutex_lock(&mtx);
     currentStage++;
+    if (currentStage > 6 || currentStage < 1)
+    {
+        currentStage = 1;
+    }
+
     switch (currentStage)
     {
     case 1:
@@ -71,7 +89,7 @@ void DMAMonitor::IMU_Acquisition()
     pthread_mutex_lock(&mtx);
     while (currentStage != 2)
     {
-        pthread_cond_wait(&cv_fsr, &mtx);
+        pthread_cond_wait(&cv_imu, &mtx);
     }
     // Lógica
     incrementStage();
@@ -83,7 +101,7 @@ void DMAMonitor::RAM_Operation()
     pthread_mutex_lock(&mtx);
     while (currentStage != 3)
     {
-        pthread_cond_wait(&cv_fsr, &mtx);
+        pthread_cond_wait(&cv_ram, &mtx);
     }
     // Lógica
     incrementStage();
@@ -95,7 +113,7 @@ void DMAMonitor::BLE_Stack_Operation()
     pthread_mutex_lock(&mtx);
     while (currentStage != 4)
     {
-        pthread_cond_wait(&cv_fsr, &mtx);
+        pthread_cond_wait(&cv_ble, &mtx);
     }
     // Lógica
     incrementStage();
@@ -107,18 +125,19 @@ void DMAMonitor::Energy_Saving()
     pthread_mutex_lock(&mtx);
     while (currentStage != 5)
     {
-        pthread_cond_wait(&cv_fsr, &mtx);
+        pthread_cond_wait(&cv_energy, &mtx);
     }
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
 }
+
 void DMAMonitor::Custom_Event_Handler()
 {
     pthread_mutex_lock(&mtx);
     while (currentStage != 6)
     {
-        pthread_cond_wait(&cv_fsr, &mtx);
+        pthread_cond_wait(&cv_custom, &mtx);
     }
     // Lógica
     incrementStage();

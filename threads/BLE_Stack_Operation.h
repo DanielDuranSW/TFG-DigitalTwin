@@ -7,10 +7,13 @@
 class BLE_Stack_Operation
 {
 private:
-    DMAMonitor *dmaMonitor;
+    int _id;
+    DMAMonitor *_dmaMonitor;
 
 public:
     BLE_Stack_Operation(DMAMonitor *monitor);
+    ~BLE_Stack_Operation();
+
     void run();
 };
 

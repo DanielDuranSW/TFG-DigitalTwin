@@ -6,10 +6,12 @@
 class RAM_Operation
 {
 private:
-    DMAMonitor *dmaMonitor;
+    DMAMonitor *_dmaMonitor;
 
 public:
     RAM_Operation(DMAMonitor *monitor);
+    ~RAM_Operation();
+
     void run();
 };
 
