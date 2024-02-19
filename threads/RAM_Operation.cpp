@@ -1,14 +1,9 @@
 #include "RAM_Operation.h"
-#include "../TFG-DigitalTwin/dma.h"
-#include <unistd.h>
 
-void *RAM_Operation(void *arg)
+RAM_Operation::RAM_Operation(DMAMonitor *monitor) {}
+
+void RAM_Operation::run()
 {
-    while (true)
-    {
-        incrementarDMA();
-        // Lógica
-        sleep(1);
-    }
-    return nullptr;
+    dmaMonitor->RAM_Operation();
+    // lógica
 }

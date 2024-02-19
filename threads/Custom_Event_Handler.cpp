@@ -1,14 +1,9 @@
 #include "Custom_Event_Handler.h"
-#include "../TFG-DigitalTwin/dma.h"
-#include <unistd.h>
 
-void *Custom_Event_Handler(void *arg)
+Custom_Event_Handler::Custom_Event_Handler(DMAMonitor *monitor) {}
+
+void Custom_Event_Handler::run()
 {
-    while (true)
-    {
-        incrementarDMA();
-        // Lógica
-        sleep(1);
-    }
-    return nullptr;
+    dmaMonitor->Custom_Event_Handler();
+    // lógica
 }

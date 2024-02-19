@@ -1,14 +1,9 @@
 #include "Energy_Saving.h"
-#include "../TFG-DigitalTwin/dma.h"
-#include <unistd.h>
 
-void *Energy_Saving(void *arg)
+Energy_Saving::Energy_Saving(DMAMonitor *monitor) {}
+
+void Energy_Saving::run()
 {
-    while (true)
-    {
-        incrementarDMA();
-        // Lógica
-        sleep(1);
-    }
-    return nullptr;
+    dmaMonitor->Energy_Saving();
+    // lógica
 }
