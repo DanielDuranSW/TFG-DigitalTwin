@@ -1,14 +1,9 @@
 #include "BLE_Stack_Operation.h"
-#include "../TFG-DigitalTwin/dma.h"
-#include <unistd.h>
 
-void *BLE_Stack_Operation(void *arg)
+BLE_Stack_Operation::BLE_Stack_Operation(DMAMonitor *monitor) {}
+
+void BLE_Stack_Operation::run()
 {
-    while (true)
-    {
-        incrementarDMA();
-        // Lógica
-        sleep(1);
-    }
-    return nullptr;
+    dmaMonitor->BLE_Stack_Operation();
+    // lógica
 }

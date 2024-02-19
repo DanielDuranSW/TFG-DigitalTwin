@@ -1,14 +1,9 @@
 #include "FSR_Acquisition.h"
-#include "../TFG-DigitalTwin/dma.h"
-#include <unistd.h>
 
-void *FSR_Acquisition(void *arg)
+FSR_Acquisition::FSR_Acquisition(DMAMonitor *monitor) {}
+
+void FSR_Acquisition::run()
 {
-    while (true)
-    {
-        incrementarDMA();
-        // Lógica
-        sleep(1);
-    }
-    return nullptr;
+    dmaMonitor->FSR_Acquisition();
+    // lógica
 }
