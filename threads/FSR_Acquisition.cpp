@@ -12,5 +12,5 @@ FSR_Acquisition::~FSR_Acquisition() {}
 void FSR_Acquisition::run()
 {
     _dmaMonitor->FSR_Acquisition();
-    _dmaMonitor->incrementSharedCounter("FSR Acquisition");
+    // _dmaMonitor->incrementSharedCounter("FSR Acquisition");
 }

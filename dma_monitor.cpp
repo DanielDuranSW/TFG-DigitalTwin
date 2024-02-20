@@ -38,16 +38,18 @@ void DMAMonitor::incrementSharedCounter(const std::string &caller)
 
 void DMAMonitor::incrementStage()
 {
-    pthread_mutex_lock(&mtx);
+    // pthread_mutex_lock(&mtx); // Se queda aqui pillado en la segunda interacción
     currentStage++;
+
     if (currentStage > 6 || currentStage < 1)
     {
         currentStage = 1;
     }
-
+    printf("Estado actual: %d\n", currentStage);
     switch (currentStage)
     {
     case 1:
+        // printf("He entrado\n");
         pthread_cond_signal(&cv_fsr);
         break;
     case 2:
@@ -68,17 +70,19 @@ void DMAMonitor::incrementStage()
     default:
         std::cout << "Invalid stage" << std::endl;
     }
-    pthread_mutex_unlock(&mtx);
+    // pthread_mutex_unlock(&mtx);
 }
 
 // Aqui alomejor es mejor hacer un método de incremetar general y orientarlo de otra forma
-void DMAMonitor::FSR_Acquisition()
+void DMAMonitor::FSR_Acquisition() // No esta esperando en la segunda vuelta a que despierte el hilo
 {
     pthread_mutex_lock(&mtx);
+
     while (currentStage != 1)
     {
         pthread_cond_wait(&cv_fsr, &mtx);
     }
+    // incrementSharedCounter("FSR Acquisition");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
@@ -91,6 +95,7 @@ void DMAMonitor::IMU_Acquisition()
     {
         pthread_cond_wait(&cv_imu, &mtx);
     }
+    // incrementSharedCounter("IMU Acquisition");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
@@ -103,6 +108,7 @@ void DMAMonitor::RAM_Operation()
     {
         pthread_cond_wait(&cv_ram, &mtx);
     }
+    // incrementSharedCounter("RAM Operation");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
@@ -115,6 +121,7 @@ void DMAMonitor::BLE_Stack_Operation()
     {
         pthread_cond_wait(&cv_ble, &mtx);
     }
+    // incrementSharedCounter("BLE Stack Operation");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
@@ -127,6 +134,7 @@ void DMAMonitor::Energy_Saving()
     {
         pthread_cond_wait(&cv_energy, &mtx);
     }
+    // incrementSharedCounter("Energy Saving");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);
@@ -139,6 +147,7 @@ void DMAMonitor::Custom_Event_Handler()
     {
         pthread_cond_wait(&cv_custom, &mtx);
     }
+    // incrementSharedCounter("Custom Event Handler");
     // Lógica
     incrementStage();
     pthread_mutex_unlock(&mtx);

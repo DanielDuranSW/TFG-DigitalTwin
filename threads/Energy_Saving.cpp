@@ -11,5 +11,5 @@ Energy_Saving::~Energy_Saving() {}
 void Energy_Saving::run()
 {
     _dmaMonitor->Energy_Saving();
-    _dmaMonitor->incrementSharedCounter("Energy Saving");
+    // _dmaMonitor->incrementSharedCounter("Energy Saving");
 }

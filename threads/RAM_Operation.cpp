@@ -11,5 +11,5 @@ RAM_Operation::~RAM_Operation() {}
 void RAM_Operation::run()
 {
     _dmaMonitor->RAM_Operation();
-    _dmaMonitor->incrementSharedCounter("RAM Operation");
+    // _dmaMonitor->incrementSharedCounter("RAM Operation");
 }

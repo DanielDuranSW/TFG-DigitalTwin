@@ -11,5 +11,5 @@ IMU_Acquisition::~IMU_Acquisition() {}
 void IMU_Acquisition::run()
 {
     _dmaMonitor->IMU_Acquisition();
-    _dmaMonitor->incrementSharedCounter("FSR Acquisition");
+    // _dmaMonitor->incrementSharedCounter("FSR Acquisition");
 }

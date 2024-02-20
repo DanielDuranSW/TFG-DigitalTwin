@@ -12,5 +12,5 @@ BLE_Stack_Operation::~BLE_Stack_Operation() {}
 void BLE_Stack_Operation::run()
 {
     _dmaMonitor->BLE_Stack_Operation();
-    _dmaMonitor->incrementSharedCounter("BLE Stack Operation");
+    // _dmaMonitor->incrementSharedCounter("BLE Stack Operation");
 }
