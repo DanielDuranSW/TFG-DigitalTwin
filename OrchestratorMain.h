@@ -7,9 +7,9 @@ public:
     OrchestratorMain();
     ~OrchestratorMain();
 
-    void OrchestratorMain::start();
+    void start();
 
 private:
-    Insole *insole; // Puntero a Insole
-    int currentStage;
+    // Insole *insole; // Puntero a Insole
+    // int currentStage;
 };

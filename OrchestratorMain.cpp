@@ -9,7 +9,7 @@
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
 
-OrchestratorMain::OrchestratorMain() : currentStage(0)
+OrchestratorMain::OrchestratorMain()
 {
     // insole = new Insole(); // Para asociación con Insole
 }
@@ -65,3 +65,4 @@ void OrchestratorMain::start()
         }
         }
     }
+}

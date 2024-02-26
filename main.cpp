@@ -1,7 +1,8 @@
 // main.cpp
 #include <iostream>
 #include <pthread.h>
-#include "dma_monitor.h"
+#include "State.h"
+#include "OrchestratorMain.h"
 #include "threads/BLE_Stack_Operation.h"
 #include "threads/Custom_Event_Handler.h"
 #include "threads/FSR_Acquisition.h"
@@ -65,36 +66,26 @@ static void *Custom_Event_Handler_func(void *arg)
 
 int main()
 {
-    DMAMonitor *dmaMonitor = new DMAMonitor();
+    pthread_t bleStackThread;
+    pthread_t customEventHandlerThread;
+    pthread_t fsrAcquisitionThread;
+    pthread_t imuAcquisitionThread;
+    pthread_t ramOperationThread;
+    pthread_t energySavingThread;
 
-    pthread_t threads[6];
-    FSR_Acquisition *fsrAcquisition = new FSR_Acquisition(dmaMonitor);
-    pthread_create(&threads[0], NULL, FSR_Acquisition_func, (void *)fsrAcquisition);
+    pthread_create(&bleStackThread, NULL, BLE_Stack_Operation_func, NULL);
+    pthread_create(&customEventHandlerThread, NULL, Custom_Event_Handler_func, NULL);
+    pthread_create(&fsrAcquisitionThread, NULL, FSR_Acquisition_func, NULL);
+    pthread_create(&imuAcquisitionThread, NULL, IMU_Acquisition_func, NULL);
+    pthread_create(&ramOperationThread, NULL, RAM_Operation_func, NULL);
+    pthread_create(&energySavingThread, NULL, Energy_Saving_func, NULL);
 
-    IMU_Acquisition *imuAcquisition = new IMU_Acquisition(dmaMonitor);
-    pthread_create(&threads[1], NULL, IMU_Acquisition_func, (void *)imuAcquisition);
-
-    RAM_Operation *ramOperation = new RAM_Operation(dmaMonitor);
-    pthread_create(&threads[2], NULL, RAM_Operation_func, (void *)ramOperation);
-
-    BLE_Stack_Operation *bleStackOperation = new BLE_Stack_Operation(dmaMonitor);
-    pthread_create(&threads[3], NULL, BLE_Stack_Operation_func, (void *)bleStackOperation);
-
-    Energy_Saving *energySaving = new Energy_Saving(dmaMonitor);
-    pthread_create(&threads[4], NULL, Energy_Saving_func, (void *)energySaving);
-
-    Custom_Event_Handler *customEventHandler = new Custom_Event_Handler(dmaMonitor);
-    pthread_create(&threads[5], NULL, Custom_Event_Handler_func, (void *)customEventHandler);
-
-    // Inicialización de la etapa
-    dmaMonitor->incrementStage();
-
-    for (int i = 0; i < 6; i++)
-    {
-        pthread_join(threads[i], NULL);
-    }
-
-    delete dmaMonitor;
+    pthread_join(bleStackThread, NULL);
+    pthread_join(customEventHandlerThread, NULL);
+    pthread_join(fsrAcquisitionThread, NULL);
+    pthread_join(imuAcquisitionThread, NULL);
+    pthread_join(ramOperationThread, NULL);
+    pthread_join(energySavingThread, NULL);
 
     return 0;
 }
