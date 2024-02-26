@@ -1,18 +1,15 @@
 #ifndef ENERGY_SAVING_H
 #define ENERGY_SAVING_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class Energy_Saving
+class Energy_Saving : public State
 {
-private:
-    DMAMonitor *_dmaMonitor;
-
 public:
-    Energy_Saving(DMAMonitor *monitor);
-    ~Energy_Saving();
+    Energy_Saving();
+    virtual ~Energy_Saving();
 
-    void run();
+    void run() override;
 };
 
 #endif

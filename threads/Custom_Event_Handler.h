@@ -1,18 +1,15 @@
 #ifndef CUSTOM_EVENT_HANDLER_H
 #define CUSTOM_EVENT_HANDLER_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class Custom_Event_Handler
+class Custom_Event_Handler : public State
 {
-private:
-    DMAMonitor *_dmaMonitor;
-
 public:
-    Custom_Event_Handler(DMAMonitor *dmaMonitor);
-    ~Custom_Event_Handler();
+    Custom_Event_Handler();
+    virtual ~Custom_Event_Handler();
 
-    void run();
+    void run() override;
 };
 
 #endif

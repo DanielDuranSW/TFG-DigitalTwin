@@ -1,18 +1,15 @@
 #ifndef IMU_ACQUISITION_H
 #define IMU_ACQUISITION_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class IMU_Acquisition
+class IMU_Acquisition : public State
 {
-private:
-    DMAMonitor *_dmaMonitor;
-
 public:
-    IMU_Acquisition(DMAMonitor *monitor);
-    ~IMU_Acquisition();
+    IMU_Acquisition();
+    virtual ~IMU_Acquisition();
 
-    void run();
+    void run() override;
 };
 
 #endif

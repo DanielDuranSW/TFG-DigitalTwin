@@ -1,20 +1,16 @@
-// FSR_Acquisition.h
+// BLE_Stack_Operation.h
 #ifndef BLE_STACK_OPERATION_H
 #define BLE_STACK_OPERATION_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class BLE_Stack_Operation
+class BLE_Stack_Operation : public State
 {
-private:
-    int _id;
-    DMAMonitor *_dmaMonitor;
-
 public:
-    BLE_Stack_Operation(DMAMonitor *monitor);
-    ~BLE_Stack_Operation();
+    BLE_Stack_Operation();
+    virtual ~BLE_Stack_Operation();
 
-    void run();
+    void run() override;
 };
 
 #endif

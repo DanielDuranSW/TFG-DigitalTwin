@@ -2,18 +2,15 @@
 #ifndef FSR_ACQUISITION_H
 #define FSR_ACQUISITION_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class FSR_Acquisition
+class FSR_Acquisition : public State
 {
-private:
-    DMAMonitor *_dmaMonitor;
-
 public:
-    FSR_Acquisition(DMAMonitor *dmaMonitor);
-    ~FSR_Acquisition();
+    FSR_Acquisition();
+    virtual ~FSR_Acquisition();
 
-    void run();
+    void run() override;
 };
 
 #endif

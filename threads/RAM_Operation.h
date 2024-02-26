@@ -1,18 +1,15 @@
 #ifndef RAM_OPERATION_H
 #define RAM_OPERATION_H
 
-#include "../TFG-DigitalTwin/dma_monitor.h"
+#include "State.h"
 
-class RAM_Operation
+class RAM_Operation : public State
 {
-private:
-    DMAMonitor *_dmaMonitor;
-
 public:
-    RAM_Operation(DMAMonitor *monitor);
-    ~RAM_Operation();
+    RAM_Operation();
+    virtual ~RAM_Operation();
 
-    void run();
+    void run() override;
 };
 
 #endif
