@@ -1,14 +1,6 @@
 // OrchestratorMain.cpp
 #include "OrchestratorMain.h"
 
-#include "State.h"
-#include "threads/BLE_Stack_Operation.h"
-#include "threads/Custom_Event_Handler.h"
-#include "threads/FSR_Acquisition.h"
-#include "threads/IMU_Acquisition.h"
-#include "threads/RAM_Operation.h"
-#include "threads/Energy_Saving.h"
-
 OrchestratorMain::OrchestratorMain()
 {
     // insole = new Insole(); // Para asociación con Insole
@@ -21,48 +13,75 @@ OrchestratorMain::~OrchestratorMain()
 
 void OrchestratorMain::start()
 {
-    while (true)
+    int maxStages = 6;
+    const int totalThreads = 6;
+
+    // pthread_mutex_lock(State::getStartMutex());
+    // while (State::readyCount < totalThreads)
+    // {
+    //     printf("Esperando a que todos los hilos estén listos\n");
+    //     pthread_cond_wait(State::getStartCond(), State::getStartMutex()); // Espera hasta que todos los hilos estén listos
+    // }
+    // pthread_mutex_unlock(State::getStartMutex());
+
+    printf("Todos los hilos están listos\n");
+    State::nextStage();
+
+    pthread_mutex_lock(State::getMutex());
+    while (State::currentStage < maxStages)
     {
         switch (State::currentStage)
         {
-
         case 0:
-        {
-            FSR_Acquisition fsr_acquisition;
-            fsr_acquisition.run();
+            sleep(3);
+            printf("Te doy signal FSR con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_FSR());
+            State::nextStage();
+            printf("FSR da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
 
         case 1:
-        {
-            IMU_Acquisition imu_acquisition;
-            imu_acquisition.run();
+            sleep(3);
+            printf("Te doy signal IMU con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_IMU());
+            State::nextStage();
+            printf("IMU da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
+
         case 2:
-        {
-            RAM_Operation ram_operation;
-            ram_operation.run();
+            sleep(3);
+            printf("Te doy signal RAM con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_RAM());
+            State::nextStage();
+            printf("RAM da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
+
         case 3:
-        {
-            BLE_Stack_Operation ble_stack_operation;
-            ble_stack_operation.run();
+            sleep(3);
+            printf("Te doy signal BLE con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_BLE());
+            State::nextStage();
+            printf("BLE da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
+
         case 4:
-        {
-            Energy_Saving energy_saving;
-            energy_saving.run();
+
+            sleep(3);
+            printf("Te doy signal ENERGY con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_ENERGY());
+            State::nextStage();
+            printf("ENERGY da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
+
         case 5:
-        {
-            Custom_Event_Handler custom_event_handler;
-            custom_event_handler.run();
+
+            sleep(3);
+            printf("Te doy signal CUSTOM con currentState= %d\n", State::currentStage);
+            pthread_cond_signal(State::getCV_CUSTOM());
+            State::nextStage();
+            printf("CUSTOM da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
-        }
         }
     }
+    pthread_mutex_unlock(State::getMutex());
 }

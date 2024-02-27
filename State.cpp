@@ -1,28 +1,26 @@
 // State.cpp
 #include "State.h"
 
-int State::currentStage = 0;
+int State::currentStage = -1;
+int State::readyCount = 0;
+
+pthread_mutex_t State::mtx = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t State::cv_fsr = PTHREAD_COND_INITIALIZER;
+pthread_cond_t State::cv_imu = PTHREAD_COND_INITIALIZER;
+pthread_cond_t State::cv_ram = PTHREAD_COND_INITIALIZER;
+pthread_cond_t State::cv_ble = PTHREAD_COND_INITIALIZER;
+pthread_cond_t State::cv_energy = PTHREAD_COND_INITIALIZER;
+pthread_cond_t State::cv_custom = PTHREAD_COND_INITIALIZER;
+
+pthread_mutex_t State::startMutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t State::startCond = PTHREAD_COND_INITIALIZER;
 
 State::State()
 {
-    pthread_mutex_init(&mtx, NULL);
-    pthread_cond_init(&cv_fsr, NULL);
-    pthread_cond_init(&cv_imu, NULL);
-    pthread_cond_init(&cv_ram, NULL);
-    pthread_cond_init(&cv_ble, NULL);
-    pthread_cond_init(&cv_energy, NULL);
-    pthread_cond_init(&cv_custom, NULL);
 }
 
 State::~State()
 {
-    pthread_mutex_destroy(&mtx);
-    pthread_cond_destroy(&cv_fsr);
-    pthread_cond_destroy(&cv_imu);
-    pthread_cond_destroy(&cv_ram);
-    pthread_cond_destroy(&cv_ble);
-    pthread_cond_destroy(&cv_energy);
-    pthread_cond_destroy(&cv_custom);
 }
 
 void State::nextStage()

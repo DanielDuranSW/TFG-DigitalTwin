@@ -7,13 +7,11 @@ Energy_Saving::~Energy_Saving() {}
 void Energy_Saving::run()
 {
     pthread_mutex_lock(&mtx);
-    while (currentStage != 3)
+    while (currentStage != 4)
     {
+        printf("Energy_Saving espera signal\n");
         pthread_cond_wait(&cv_energy, &mtx);
     }
-    // Lógica de BLE_Stack_Operation
     printf("Energy_Saving, con: %d\n", currentStage);
-    sleep(1);
-    State::nextStage();
     pthread_mutex_unlock(&mtx);
 }

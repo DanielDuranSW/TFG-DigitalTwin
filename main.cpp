@@ -9,83 +9,77 @@
 #include "threads/IMU_Acquisition.h"
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
+#include <cstdio>
 
 static void *FSR_Acquisition_func(void *arg)
 {
-    FSR_Acquisition *fsrAcquisition = (FSR_Acquisition *)arg;
-    fsrAcquisition->run();
-
-    delete fsrAcquisition;
-    return (void *)true;
+    FSR_Acquisition fsrAcquisition;
+    fsrAcquisition.run();
+    return NULL;
 }
 
 static void *IMU_Acquisition_func(void *arg)
 {
-    IMU_Acquisition *imuAcquisition = (IMU_Acquisition *)arg;
-    imuAcquisition->run();
-
-    delete imuAcquisition;
-    return (void *)true;
+    IMU_Acquisition imuAcquisition;
+    imuAcquisition.run();
+    return NULL;
 }
 
 static void *RAM_Operation_func(void *arg)
 {
-    RAM_Operation *ramOperation = (RAM_Operation *)arg;
-    ramOperation->run();
-
-    delete ramOperation;
-    return (void *)true;
+    RAM_Operation ramOperation;
+    ramOperation.run();
+    return NULL;
 }
 
 static void *BLE_Stack_Operation_func(void *arg)
 {
-    BLE_Stack_Operation *bleStackOperation = (BLE_Stack_Operation *)arg;
-    bleStackOperation->run();
-
-    delete bleStackOperation;
-    return (void *)true;
+    BLE_Stack_Operation bleStackOperation;
+    bleStackOperation.run();
+    return NULL;
 }
 
 static void *Energy_Saving_func(void *arg)
 {
-    Energy_Saving *energySaving = (Energy_Saving *)arg;
-    energySaving->run();
-
-    delete energySaving;
-    return (void *)true;
+    Energy_Saving energySaving;
+    energySaving.run();
+    return NULL;
 }
 
 static void *Custom_Event_Handler_func(void *arg)
 {
-    Custom_Event_Handler *customEventHandler = (Custom_Event_Handler *)arg;
-    customEventHandler->run();
-
-    delete customEventHandler;
-    return (void *)true;
+    Custom_Event_Handler customEventHandler;
+    customEventHandler.run();
+    return NULL;
 }
 
 int main()
 {
-    pthread_t bleStackThread;
-    pthread_t customEventHandlerThread;
-    pthread_t fsrAcquisitionThread;
+
     pthread_t imuAcquisitionThread;
     pthread_t ramOperationThread;
+    pthread_t bleStackThread;
     pthread_t energySavingThread;
+    pthread_t customEventHandlerThread;
+    pthread_t fsrAcquisitionThread;
 
-    pthread_create(&bleStackThread, NULL, BLE_Stack_Operation_func, NULL);
-    pthread_create(&customEventHandlerThread, NULL, Custom_Event_Handler_func, NULL);
-    pthread_create(&fsrAcquisitionThread, NULL, FSR_Acquisition_func, NULL);
     pthread_create(&imuAcquisitionThread, NULL, IMU_Acquisition_func, NULL);
     pthread_create(&ramOperationThread, NULL, RAM_Operation_func, NULL);
+    pthread_create(&bleStackThread, NULL, BLE_Stack_Operation_func, NULL);
     pthread_create(&energySavingThread, NULL, Energy_Saving_func, NULL);
+    pthread_create(&customEventHandlerThread, NULL, Custom_Event_Handler_func, NULL);
+    pthread_create(&fsrAcquisitionThread, NULL, FSR_Acquisition_func, NULL);
 
-    pthread_join(bleStackThread, NULL);
-    pthread_join(customEventHandlerThread, NULL);
+    OrchestratorMain orchestratorMain;
+    printf("Me meto en orchestrator.start\n");
+    orchestratorMain.start();
+
     pthread_join(fsrAcquisitionThread, NULL);
     pthread_join(imuAcquisitionThread, NULL);
     pthread_join(ramOperationThread, NULL);
+    pthread_join(bleStackThread, NULL);
     pthread_join(energySavingThread, NULL);
+    pthread_join(customEventHandlerThread, NULL);
 
     return 0;
 }
