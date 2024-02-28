@@ -11,6 +11,7 @@ public:
     virtual ~BLE_Stack_Operation();
 
     void run() override;
+    void waitThreadsReady();
 };
 
 #endif

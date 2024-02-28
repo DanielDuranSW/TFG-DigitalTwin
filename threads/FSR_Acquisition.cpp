@@ -7,7 +7,6 @@ FSR_Acquisition::~FSR_Acquisition() {}
 
 void FSR_Acquisition::run()
 {
-
     pthread_mutex_lock(&mtx);
     while (currentStage != 0)
     {
@@ -17,6 +16,5 @@ void FSR_Acquisition::run()
     // Lógica de FSR_Acquisition
     printf("FSR_Acquisition, con: %d\n", currentStage);
     sleep(3);
-    // State::nextStage();
     pthread_mutex_unlock(&mtx);
 }

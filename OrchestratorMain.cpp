@@ -25,7 +25,6 @@ void OrchestratorMain::start()
     // pthread_mutex_unlock(State::getStartMutex());
 
     printf("Todos los hilos están listos\n");
-    State::nextStage();
 
     pthread_mutex_lock(State::getMutex());
     while (State::currentStage < maxStages)
@@ -78,7 +77,7 @@ void OrchestratorMain::start()
             sleep(3);
             printf("Te doy signal CUSTOM con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_CUSTOM());
-            State::nextStage();
+            State::resetStage();
             printf("CUSTOM da paso al siguiente con currentState= %d\n", State::currentStage);
             break;
         }

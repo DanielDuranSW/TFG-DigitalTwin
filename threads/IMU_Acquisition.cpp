@@ -7,7 +7,6 @@ IMU_Acquisition::~IMU_Acquisition() {}
 
 void IMU_Acquisition::run()
 {
-
     pthread_mutex_lock(&mtx);
     while (currentStage != 1)
     {
@@ -17,6 +16,5 @@ void IMU_Acquisition::run()
     // Lógica de IMU_Acquisition
     printf("IMU_Acquisition, con: %d\n", currentStage);
     sleep(3);
-    // State::nextStage();
     pthread_mutex_unlock(&mtx);
 }

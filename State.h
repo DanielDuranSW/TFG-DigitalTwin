@@ -16,11 +16,13 @@ protected:
 public:
     static int currentStage;
     static int readyCount;
+    static int totalThreads;
 
     State();
     virtual ~State();
-    virtual void run() = 0;  // Método abstracto que deben implementar todos los estados
-    static void nextStage(); // Método para avanzar al siguiente estado
+    virtual void run() = 0;   // Método abstracto que deben implementar todos los estados
+    static void nextStage();  // Método para avanzar al siguiente estado
+    static void resetStage(); // Método para reiniciar el estado
 
     static pthread_cond_t *getCV_FSR() { return &cv_fsr; }
     static pthread_cond_t *getCV_IMU() { return &cv_imu; }
