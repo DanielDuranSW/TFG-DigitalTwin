@@ -24,7 +24,7 @@ void OrchestratorMain::start()
     // }
     // pthread_mutex_unlock(State::getStartMutex());
 
-    printf("Todos los hilos están listos\n");
+    printf("Empezamos OrchestratorMain\n");
 
     pthread_mutex_lock(State::getMutex());
     while (State::currentStage < maxStages)
@@ -32,7 +32,7 @@ void OrchestratorMain::start()
         switch (State::currentStage)
         {
         case 0:
-            sleep(3);
+            sleep(1);
             printf("Te doy signal FSR con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_FSR());
             State::nextStage();
@@ -40,7 +40,7 @@ void OrchestratorMain::start()
             break;
 
         case 1:
-            sleep(3);
+            sleep(1);
             printf("Te doy signal IMU con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_IMU());
             State::nextStage();
@@ -48,7 +48,7 @@ void OrchestratorMain::start()
             break;
 
         case 2:
-            sleep(3);
+            sleep(1);
             printf("Te doy signal RAM con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_RAM());
             State::nextStage();
@@ -56,7 +56,7 @@ void OrchestratorMain::start()
             break;
 
         case 3:
-            sleep(3);
+            sleep(1);
             printf("Te doy signal BLE con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_BLE());
             State::nextStage();
@@ -65,7 +65,7 @@ void OrchestratorMain::start()
 
         case 4:
 
-            sleep(3);
+            sleep(1);
             printf("Te doy signal ENERGY con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_ENERGY());
             State::nextStage();
@@ -74,7 +74,7 @@ void OrchestratorMain::start()
 
         case 5:
 
-            sleep(3);
+            sleep(1);
             printf("Te doy signal CUSTOM con currentState= %d\n", State::currentStage);
             pthread_cond_signal(State::getCV_CUSTOM());
             State::resetStage();
