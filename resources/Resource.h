@@ -1,3 +1,4 @@
+// Resource.h
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
@@ -20,21 +21,12 @@ private:
     pthread_cond_t can_consume;
 
 public:
-    Resource()
-    {
-        pthread_mutex_init(&mutex, nullptr);
-        pthread_cond_init(&can_produce, nullptr);
-        pthread_cond_init(&can_consume, nullptr);
-    }
+    Resource() {}
+    ~Resource() {}
 
-    ~Resource()
-    {
-        pthread_mutex_destroy(&mutex);
-        pthread_cond_destroy(&can_produce);
-        pthread_cond_destroy(&can_consume);
-    }
     void add(int value) {}
     int remove() {}
+    void checkAndConsume() {}
 };
 
 #endif
