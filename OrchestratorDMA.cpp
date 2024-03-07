@@ -3,16 +3,6 @@
 OrchestratorDMA::OrchestratorDMA() {}
 OrchestratorDMA::~OrchestratorDMA() {}
 
-/*
-espera a que este lleno
-
-cuuando esta lleno
-tal
-tal
-
-cuando esta vacio vuelve a esperar
-*/
-
 void OrchestratorDMA::start()
 {
     int maxStages = 6;

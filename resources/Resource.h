@@ -22,7 +22,7 @@ private:
 
 public:
     Resource() {}
-    ~Resource() {}
+    virtual ~Resource() {}
 
     void add(int value) {}
     int remove() {}
