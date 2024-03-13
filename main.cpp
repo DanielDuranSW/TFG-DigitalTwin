@@ -9,9 +9,12 @@
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
 
+#include "resources/RAM.h"
+
 int main()
 {
     State state;
+    RAM ram;
 
     pthread_t fsrAcquisitionThread;
     pthread_t imuAcquisitionThread;
@@ -20,6 +23,8 @@ int main()
     pthread_t energySavingThread;
     pthread_t customEventHandlerThread;
 
+    pthread_t ramToFlashThread;
+
     // Crear los hilos
     pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &state);
     pthread_create(&imuAcquisitionThread, NULL, imu_run, &state);
@@ -27,6 +32,8 @@ int main()
     pthread_create(&bleStackThread, NULL, ble_run, &state);
     pthread_create(&energySavingThread, NULL, energy_run, &state);
     pthread_create(&customEventHandlerThread, NULL, custom_run, &state);
+
+    pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &ram);
 
     // Esperar a que todos los hilos terminen
     pthread_join(fsrAcquisitionThread, NULL);

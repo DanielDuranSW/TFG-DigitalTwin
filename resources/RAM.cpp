@@ -19,9 +19,17 @@ RAM::~RAM()
     pthread_cond_destroy(&can_consume);
 }
 
+void *ram_checkAndConsume(void *ram)
+{
+    RAM *ramInstance = static_cast<RAM *>(ram);
+    // ramInstance->checkAndConsume();
+    ramInstance->test();
+    return NULL;
+}
+
 void RAM::test()
 {
-    std::cout << "HOLa cara de cola" << std::endl;
+    std::cout << "Hola cara de cola" << std::endl;
 }
 
 void RAM::add(int item)

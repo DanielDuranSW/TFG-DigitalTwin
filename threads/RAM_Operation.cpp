@@ -25,5 +25,7 @@ void *ram_run(void *arg)
 
 void ram_function()
 {
+    RAM *ram = new RAM();
+    ram->test();
     sleep(1);
 }
