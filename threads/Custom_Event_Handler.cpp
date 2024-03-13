@@ -1,35 +1,29 @@
 // Custom_Event_Handler.cpp
 #include "Custom_Event_Handler.h"
 
-Custom_Event_Handler::Custom_Event_Handler(
-    pthread_cond_t *cv_custom, pthread_mutex_t *mtx_threads)
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+
+extern pthread_mutex_t mutex;
+extern pthread_cond_t cond;
+extern int current_stage;
+
+void *custom_function(void *arg)
 {
-    this->cv_custom = *cv_custom;
-    this->mtx_threads = *mtx_threads;
-}
-
-Custom_Event_Handler::~Custom_Event_Handler() {}
-
-void Custom_Event_Handler::run()
-{
-    pthread_mutex_lock(&mtx_threads);
-
-    printf("Custom_Event_Handler espera signal\n");
-    pthread_cond_wait(&cv_custom, &mtx_threads);
-    printf("Custom_Event_Handler acepta signal signal\n");
-
-    printf("Custom_Event_Handler, con: %d\n", currentStage);
-    sleep(1);
-    // State::nextStage();
-    pthread_mutex_unlock(&mtx_threads);
-}
-
-void *Custom_Event_Handler::threadFunction(void *arg)
-{
-    Custom_Event_Handler *customEventHandlerThreadObj = static_cast<Custom_Event_Handler *>(arg);
-    while (true)
+    pthread_mutex_lock(&mutex);
+    while (current_stage != 5)
     {
-        customEventHandlerThreadObj->run();
+        pthread_cond_wait(&cond, &mutex);
     }
-    return NULL;
+
+    printf("custom ejecutando...\n");
+    sleep(1); // Simulación de trabajo
+    printf("custom terminado\n");
+
+    current_stage++;
+    pthread_cond_broadcast(&cond);
+    pthread_mutex_unlock(&mutex);
+
+    pthread_exit(NULL);
 }

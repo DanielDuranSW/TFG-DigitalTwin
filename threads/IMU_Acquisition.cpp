@@ -1,34 +1,29 @@
 // IMU_Acquisition.cpp
 #include "IMU_Acquisition.h"
 
-IMU_Acquisition::IMU_Acquisition(pthread_cond_t *cv_imu, pthread_mutex_t *mtx_threads)
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+
+extern pthread_mutex_t mutex;
+extern pthread_cond_t cond;
+extern int current_stage;
+
+void *imu_function(void *arg)
 {
-    this->cv_imu = *cv_imu;
-    this->mtx_threads = *mtx_threads;
-}
-
-IMU_Acquisition::~IMU_Acquisition() {}
-
-void IMU_Acquisition::run()
-{
-    pthread_mutex_lock(&mtx_threads);
-
-    printf("IMU_Acquisition espera signal\n");
-    pthread_cond_wait(&cv_imu, &mtx_threads);
-    printf("IMU_Acquisition acepta signal signal\n");
-
-    // Lógica de IMU_Acquisition
-    printf("IMU_Acquisition, con: %d\n", currentStage);
-    sleep(1);
-    pthread_mutex_unlock(&mtx_threads);
-}
-
-void *IMU_Acquisition::threadFunction(void *arg)
-{
-    IMU_Acquisition *imuAcquisitionThreadObj = static_cast<IMU_Acquisition *>(arg);
-    while (true)
+    pthread_mutex_lock(&mutex);
+    while (current_stage != 1)
     {
-        imuAcquisitionThreadObj->run();
+        pthread_cond_wait(&cond, &mutex);
     }
-    return NULL;
+
+    printf("IMU ejecutando...\n");
+    sleep(1); // Simulación de trabajo
+    printf("IMU terminado\n");
+
+    current_stage++;
+    pthread_cond_broadcast(&cond);
+    pthread_mutex_unlock(&mutex);
+
+    pthread_exit(NULL);
 }

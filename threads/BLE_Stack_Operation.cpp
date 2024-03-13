@@ -1,44 +1,29 @@
 // BLE_Stack_Operation.cpp
 #include "BLE_Stack_Operation.h"
 
-BLE_Stack_Operation::BLE_Stack_Operation(pthread_cond_t *cv_ble, pthread_mutex_t *mtx_threads)
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+
+extern pthread_mutex_t mutex;
+extern pthread_cond_t cond;
+extern int current_stage;
+
+void *ble_function(void *arg)
 {
-    this->cv_ble = *cv_ble;
-    this->mtx_threads = *mtx_threads;
-}
-
-BLE_Stack_Operation::~BLE_Stack_Operation() {}
-
-void BLE_Stack_Operation::run()
-{
-    pthread_mutex_lock(&mtx_threads);
-
-    printf("BLE_Stack_Operation espera signal\n");
-    pthread_cond_wait(&cv_ble, &mtx_threads);
-    printf("BLE_Stack_Operation acepta signal signal\n");
-
-    // Lógica de BLE_Stack_Operation
-    printf("BLE_Stack_Operation, con: %d\n", currentStage);
-    sleep(1);
-    pthread_mutex_unlock(&mtx_threads);
-}
-
-void *BLE_Stack_Operation::threadFunction(void *arg)
-{
-    BLE_Stack_Operation *bleStackOperationThreadObj = static_cast<BLE_Stack_Operation *>(arg);
-    while (true)
+    pthread_mutex_lock(&mutex);
+    while (current_stage != 3)
     {
-        bleStackOperationThreadObj->run();
+        pthread_cond_wait(&cond, &mutex);
     }
-    return NULL;
-}
 
-// void BLE_Stack_Operation::waitThreadsReady()
-// {
-//     pthread_mutex_lock(&startMutex);
-//     while (readyCount < totalThreads)
-//     {
-//         pthread_cond_wait(&startCond, &startMutex); // Espera hasta que todos los hilos estén listos
-//     }
-//     pthread_mutex_unlock(&startMutex);
-// }
+    printf("BLE ejecutando...\n");
+    sleep(1); // Simulación de trabajo
+    printf("BLE terminado\n");
+
+    current_stage++;
+    pthread_cond_broadcast(&cond);
+    pthread_mutex_unlock(&mutex);
+
+    pthread_exit(NULL);
+}
