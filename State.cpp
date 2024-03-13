@@ -5,7 +5,7 @@ int State::currentStage = 0;
 int State::readyCount = 0;
 int State::totalThreads = 6;
 
-pthread_mutex_t State::mtx = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t State::mtx_threads = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t State::cv_fsr = PTHREAD_COND_INITIALIZER;
 pthread_cond_t State::cv_imu = PTHREAD_COND_INITIALIZER;
 pthread_cond_t State::cv_ram = PTHREAD_COND_INITIALIZER;

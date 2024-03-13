@@ -7,7 +7,7 @@
 class State
 {
 protected:
-    static pthread_mutex_t mtx;
+    static pthread_mutex_t mtx_threads;
     static pthread_cond_t cv_fsr, cv_imu, cv_ram, cv_ble, cv_energy, cv_custom;
 
     static pthread_mutex_t startMutex;
@@ -31,7 +31,7 @@ public:
     static pthread_cond_t *getCV_ENERGY() { return &cv_energy; }
     static pthread_cond_t *getCV_CUSTOM() { return &cv_custom; }
 
-    static pthread_mutex_t *getMutex() { return &mtx; }
+    static pthread_mutex_t *getMutex() { return &mtx_threads; }
     static pthread_mutex_t *getStartMutex() { return &startMutex; }
     static pthread_cond_t *getStartCond() { return &startCond; }
 };

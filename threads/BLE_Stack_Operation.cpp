@@ -9,16 +9,16 @@ void BLE_Stack_Operation::run()
 {
     // waitThreadsReady();
 
-    pthread_mutex_lock(&mtx);
+    pthread_mutex_lock(&mtx_threads);
     while (currentStage != 3)
     {
         printf("BLE_Stack_Operation espera signal\n");
-        pthread_cond_wait(&cv_ble, &mtx);
+        pthread_cond_wait(&cv_ble, &mtx_threads);
     }
     // Lógica de BLE_Stack_Operation
     printf("BLE_Stack_Operation, con: %d\n", currentStage);
-    sleep(3);
-    pthread_mutex_unlock(&mtx);
+    sleep(1);
+    pthread_mutex_unlock(&mtx_threads);
 }
 
 // void BLE_Stack_Operation::waitThreadsReady()
