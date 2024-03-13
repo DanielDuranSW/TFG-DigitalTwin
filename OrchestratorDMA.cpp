@@ -5,8 +5,8 @@ OrchestratorDMA::~OrchestratorDMA() {}
 
 void OrchestratorDMA::start()
 {
-    int maxStages = 6;
-    const int totalThreads = 6;
+    // int maxStages = 6;
+    // const int totalThreads = 6;
 
     // pthread_mutex_lock(State::getStartMutex());
     // while (State::readyCount < totalThreads)

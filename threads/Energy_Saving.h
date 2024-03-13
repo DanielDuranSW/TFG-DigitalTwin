@@ -6,10 +6,11 @@
 class Energy_Saving : public State
 {
 public:
-    Energy_Saving();
+    Energy_Saving(pthread_cond_t *cv_energy, pthread_mutex_t *mtx_threads);
     virtual ~Energy_Saving();
 
-    void run() override;
+    void run();
+    static void *threadFunction(void *arg);
 };
 
 #endif

@@ -7,10 +7,13 @@
 class FSR_Acquisition : public State
 {
 public:
-    FSR_Acquisition();
-    virtual ~FSR_Acquisition();
+    FSR_Acquisition(
+        pthread_cond_t *cv_fsr, pthread_mutex_t *mtx_threads);
 
-    void run() override;
+    ~FSR_Acquisition();
+
+    void run();
+    static void *threadFunction(void *arg);
 };
 
 #endif

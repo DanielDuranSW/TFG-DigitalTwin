@@ -6,10 +6,12 @@
 class IMU_Acquisition : public State
 {
 public:
-    IMU_Acquisition();
-    virtual ~IMU_Acquisition();
+    IMU_Acquisition(
+        pthread_cond_t *cv_imu, pthread_mutex_t *mtx_threads);
+    ~IMU_Acquisition();
 
-    void run() override;
+    void run();
+    static void *threadFunction(void *arg);
 };
 
 #endif
