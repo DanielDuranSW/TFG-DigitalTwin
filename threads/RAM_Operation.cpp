@@ -13,7 +13,7 @@ void *ram_run(void *arg)
         }
 
         printf("RAM_Operation ejecutando...\n");
-        sleep(1); // Simulación de trabajo
+        ram_function(); // Simulación de trabajo
         printf("RAM_Operation terminado\n");
 
         state->setCurrentStage(3);
@@ -21,4 +21,9 @@ void *ram_run(void *arg)
         state->unlockMutex();
     }
     pthread_exit(NULL);
+}
+
+void ram_function()
+{
+    sleep(1);
 }
