@@ -1,31 +1,24 @@
 // Custom_Event_Handler.cpp
 #include "Custom_Event_Handler.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-
-extern pthread_mutex_t mutex;
-extern pthread_cond_t cond;
-extern int current_stage;
-
-void *custom_function(void *arg)
+void *custom_run(void *arg)
 {
+    State *state = static_cast<State *>(arg);
     while (true)
     {
-        pthread_mutex_lock(&mutex);
-        while (current_stage != 5)
+        state->lockMutex();
+        while (state->getCurrentStage() != 5)
         {
-            pthread_cond_wait(&cond, &mutex);
+            state->waitCondition();
         }
 
-        printf("Custom ejecutando...\n");
+        printf("Custom_Event_Handler ejecutando...\n");
         sleep(1); // Simulación de trabajo
-        printf("Custom terminado\n");
+        printf("Custom_Event_Handler terminado\n");
 
-        current_stage = 0;
-        pthread_cond_broadcast(&cond);
-        pthread_mutex_unlock(&mutex);
+        state->setCurrentStage(0);
+        state->broadcastCondition();
+        state->unlockMutex();
     }
     pthread_exit(NULL);
 }

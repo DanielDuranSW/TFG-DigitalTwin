@@ -1,31 +1,24 @@
 // FSR_Acquisition.cpp
 #include "FSR_Acquisition.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-
-extern pthread_mutex_t mutex;
-extern pthread_cond_t cond;
-extern int current_stage;
-
-void *fsr_function(void *arg)
+void *fsr_run(void *arg)
 {
+    State *state = static_cast<State *>(arg);
     while (true)
     {
-        pthread_mutex_lock(&mutex);
-        while (current_stage != 0)
+        state->lockMutex();
+        while (state->getCurrentStage() != 0)
         {
-            pthread_cond_wait(&cond, &mutex);
+            state->waitCondition();
         }
 
         printf("FSR_Acquisition ejecutando...\n");
         sleep(1); // Simulación de trabajo
         printf("FSR_Acquisition terminado\n");
 
-        current_stage++;
-        pthread_cond_broadcast(&cond);
-        pthread_mutex_unlock(&mutex);
+        state->setCurrentStage(1);
+        state->broadcastCondition();
+        state->unlockMutex();
     }
     pthread_exit(NULL);
 }

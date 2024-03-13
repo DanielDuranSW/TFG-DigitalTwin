@@ -1,31 +1,24 @@
 // Energy_Saving.cpp
 #include "Energy_Saving.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-
-extern pthread_mutex_t mutex;
-extern pthread_cond_t cond;
-extern int current_stage;
-
-void *energy_function(void *arg)
+void *energy_run(void *arg)
 {
+    State *state = static_cast<State *>(arg);
     while (true)
     {
-        pthread_mutex_lock(&mutex);
-        while (current_stage != 4)
+        state->lockMutex();
+        while (state->getCurrentStage() != 4)
         {
-            pthread_cond_wait(&cond, &mutex);
+            state->waitCondition();
         }
 
-        printf("Energy ejecutando...\n");
+        printf("Energy_Saving ejecutando...\n");
         sleep(1); // Simulación de trabajo
-        printf("Energy terminado\n");
+        printf("Energy_Saving terminado\n");
 
-        current_stage++;
-        pthread_cond_broadcast(&cond);
-        pthread_mutex_unlock(&mutex);
+        state->setCurrentStage(5);
+        state->broadcastCondition();
+        state->unlockMutex();
     }
     pthread_exit(NULL);
 }

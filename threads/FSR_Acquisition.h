@@ -2,6 +2,8 @@
 #ifndef FSR_ACQUISITION_H
 #define FSR_ACQUISITION_H
 
-void *fsr_function(void *arg);
+#include "State.h"
+
+void *fsr_run(void *arg);
 
 #endif

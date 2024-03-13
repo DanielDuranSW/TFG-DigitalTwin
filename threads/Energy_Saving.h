@@ -1,6 +1,8 @@
 #ifndef ENERGY_SAVING_H
 #define ENERGY_SAVING_H
 
-void *energy_function(void *arg);
+#include "State.h"
+
+void *energy_run(void *arg);
 
 #endif

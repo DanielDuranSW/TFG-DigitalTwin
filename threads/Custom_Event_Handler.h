@@ -1,6 +1,8 @@
 #ifndef CUSTOM_EVENT_HANDLER_H
 #define CUSTOM_EVENT_HANDLER_H
 
-void *custom_function(void *arg);
+#include "State.h"
+
+void *custom_run(void *arg);
 
 #endif

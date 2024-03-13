@@ -2,6 +2,8 @@
 #ifndef IMU_ACQUISITION_H
 #define IMU_ACQUISITION_H
 
-void *imu_function(void *arg);
+#include "State.h"
+
+void *imu_run(void *arg);
 
 #endif

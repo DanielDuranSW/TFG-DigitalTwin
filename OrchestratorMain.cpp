@@ -6,12 +6,10 @@ OrchestratorMain::OrchestratorMain() {}
 
 OrchestratorMain::~OrchestratorMain() {}
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-int current_stage = 0;
-
 void OrchestratorMain::start()
 {
+    State state;
+
     pthread_t fsrAcquisitionThread;
     pthread_t imuAcquisitionThread;
     pthread_t ramOperationThread;
@@ -20,12 +18,12 @@ void OrchestratorMain::start()
     pthread_t customEventHandlerThread;
 
     // Crear los hilos
-    pthread_create(&fsrAcquisitionThread, NULL, fsr_function, NULL);
-    pthread_create(&imuAcquisitionThread, NULL, imu_function, NULL);
-    pthread_create(&ramOperationThread, NULL, ram_function, NULL);
-    pthread_create(&bleStackThread, NULL, ble_function, NULL);
-    pthread_create(&energySavingThread, NULL, energy_function, NULL);
-    pthread_create(&customEventHandlerThread, NULL, custom_function, NULL);
+    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &state);
+    pthread_create(&imuAcquisitionThread, NULL, imu_run, &state);
+    pthread_create(&ramOperationThread, NULL, ram_run, &state);
+    pthread_create(&bleStackThread, NULL, ble_run, &state);
+    pthread_create(&energySavingThread, NULL, energy_run, &state);
+    pthread_create(&customEventHandlerThread, NULL, custom_run, &state);
 
     // Esperar a que todos los hilos terminen
     pthread_join(fsrAcquisitionThread, NULL);

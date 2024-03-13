@@ -2,6 +2,8 @@
 #ifndef BLE_STACK_OPERATION_H
 #define BLE_STACK_OPERATION_H
 
-void *ble_function(void *arg);
+#include "State.h"
+
+void *ble_run(void *arg);
 
 #endif
