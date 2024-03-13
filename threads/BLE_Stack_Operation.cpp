@@ -11,19 +11,21 @@ extern int current_stage;
 
 void *ble_function(void *arg)
 {
-    pthread_mutex_lock(&mutex);
-    while (current_stage != 3)
+    while (true)
     {
-        pthread_cond_wait(&cond, &mutex);
+        pthread_mutex_lock(&mutex);
+        while (current_stage != 3)
+        {
+            pthread_cond_wait(&cond, &mutex);
+        }
+
+        printf("BLE ejecutando...\n");
+        sleep(1); // Simulación de trabajo
+        printf("BLE terminado\n");
+
+        current_stage++;
+        pthread_cond_broadcast(&cond);
+        pthread_mutex_unlock(&mutex);
     }
-
-    printf("BLE ejecutando...\n");
-    sleep(1); // Simulación de trabajo
-    printf("BLE terminado\n");
-
-    current_stage++;
-    pthread_cond_broadcast(&cond);
-    pthread_mutex_unlock(&mutex);
-
     pthread_exit(NULL);
 }

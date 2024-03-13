@@ -11,19 +11,21 @@ extern int current_stage;
 
 void *custom_function(void *arg)
 {
-    pthread_mutex_lock(&mutex);
-    while (current_stage != 5)
+    while (true)
     {
-        pthread_cond_wait(&cond, &mutex);
+        pthread_mutex_lock(&mutex);
+        while (current_stage != 5)
+        {
+            pthread_cond_wait(&cond, &mutex);
+        }
+
+        printf("Custom ejecutando...\n");
+        sleep(1); // Simulación de trabajo
+        printf("Custom terminado\n");
+
+        current_stage = 0;
+        pthread_cond_broadcast(&cond);
+        pthread_mutex_unlock(&mutex);
     }
-
-    printf("custom ejecutando...\n");
-    sleep(1); // Simulación de trabajo
-    printf("custom terminado\n");
-
-    current_stage++;
-    pthread_cond_broadcast(&cond);
-    pthread_mutex_unlock(&mutex);
-
     pthread_exit(NULL);
 }

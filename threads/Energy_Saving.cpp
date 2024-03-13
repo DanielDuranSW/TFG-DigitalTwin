@@ -11,19 +11,21 @@ extern int current_stage;
 
 void *energy_function(void *arg)
 {
-    pthread_mutex_lock(&mutex);
-    while (current_stage != 4)
+    while (true)
     {
-        pthread_cond_wait(&cond, &mutex);
+        pthread_mutex_lock(&mutex);
+        while (current_stage != 4)
+        {
+            pthread_cond_wait(&cond, &mutex);
+        }
+
+        printf("Energy ejecutando...\n");
+        sleep(1); // Simulación de trabajo
+        printf("Energy terminado\n");
+
+        current_stage++;
+        pthread_cond_broadcast(&cond);
+        pthread_mutex_unlock(&mutex);
     }
-
-    printf("energy ejecutando...\n");
-    sleep(1); // Simulación de trabajo
-    printf("energy terminado\n");
-
-    current_stage++;
-    pthread_cond_broadcast(&cond);
-    pthread_mutex_unlock(&mutex);
-
     pthread_exit(NULL);
 }

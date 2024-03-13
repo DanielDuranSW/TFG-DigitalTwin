@@ -11,19 +11,21 @@ extern int current_stage;
 
 void *fsr_function(void *arg)
 {
-    pthread_mutex_lock(&mutex);
-    while (current_stage != 0)
+    while (true)
     {
-        pthread_cond_wait(&cond, &mutex);
+        pthread_mutex_lock(&mutex);
+        while (current_stage != 0)
+        {
+            pthread_cond_wait(&cond, &mutex);
+        }
+
+        printf("FSR_Acquisition ejecutando...\n");
+        sleep(1); // Simulación de trabajo
+        printf("FSR_Acquisition terminado\n");
+
+        current_stage++;
+        pthread_cond_broadcast(&cond);
+        pthread_mutex_unlock(&mutex);
     }
-
-    printf("FSR_Acquisition ejecutando...\n");
-    sleep(1); // Simulación de trabajo
-    printf("FSR_Acquisition terminado\n");
-
-    current_stage++;
-    pthread_cond_broadcast(&cond);
-    pthread_mutex_unlock(&mutex);
-
     pthread_exit(NULL);
 }

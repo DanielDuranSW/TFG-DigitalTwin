@@ -1,21 +1,16 @@
 // OrchestratorMain.cpp
-// #include "OrchestratorMain.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "threads/BLE_Stack_Operation.h"
-#include "threads/Custom_Event_Handler.h"
-#include "threads/FSR_Acquisition.h"
-#include "threads/IMU_Acquisition.h"
-#include "threads/RAM_Operation.h"
-#include "threads/Energy_Saving.h"
+#include "OrchestratorMain.h"
+
+OrchestratorMain::OrchestratorMain() {}
+
+OrchestratorMain::~OrchestratorMain() {}
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 int current_stage = 0;
 
-int main()
+void OrchestratorMain::start()
 {
     pthread_t fsrAcquisitionThread;
     pthread_t imuAcquisitionThread;
@@ -39,6 +34,4 @@ int main()
     pthread_join(bleStackThread, NULL);
     pthread_join(energySavingThread, NULL);
     pthread_join(customEventHandlerThread, NULL);
-
-    return 0;
 }
