@@ -6,9 +6,10 @@
 #include "Resource.h"
 #define TLB 4
 #define PCK 2
-#define BUFFER_SIZE 16
+#define BUFFER_SIZE 10
 
 void *ram_checkAndConsume(void *ram);
+
 class RAM : public Resource
 {
 private:

@@ -6,8 +6,8 @@
 #include <iostream>
 #include <unistd.h>
 
-#define BUFFER_SIZE 10
-#define TLB_SIZE 4
+// #define BUFFER_SIZE 10
+// #define TLB_SIZE 4
 
 class Resource
 {

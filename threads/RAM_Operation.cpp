@@ -1,31 +1,30 @@
 // RAM_Operation.cpp
 #include "RAM_Operation.h"
-
-RAM *ram = new RAM();
+#include "ThreadsData.h"
 
 void *ram_run(void *arg)
 {
-    State *state = static_cast<State *>(arg);
+    Instances *args = static_cast<Instances *>(arg);
     while (true)
     {
-        state->lockMutex();
-        while (state->getCurrentStage() != 2)
+        args->state.lockMutex();
+        while (args->state.getCurrentStage() != 2)
         {
-            state->waitCondition();
+            args->state.waitCondition();
         }
 
         printf("RAM_Operation ejecutando...\n");
-        ram_function(); // Simulación de trabajo
+        ram_function(&args->ram); // Simulación de trabajo
         printf("RAM_Operation terminado\n");
 
-        state->setCurrentStage(3);
-        state->broadcastCondition();
-        state->unlockMutex();
+        args->state.setCurrentStage(3);
+        args->state.broadcastCondition();
+        args->state.unlockMutex();
     }
     pthread_exit(NULL);
 }
 
-void ram_function()
+void ram_function(RAM *ram)
 {
     // RAM *ram = new RAM();
     // ram->test();

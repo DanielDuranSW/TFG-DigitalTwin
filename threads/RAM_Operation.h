@@ -5,6 +5,6 @@
 #include "resources/RAM.h"
 
 void *ram_run(void *arg);
-void ram_function();
+void ram_function(RAM *ram);
 
 #endif

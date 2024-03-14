@@ -9,12 +9,16 @@
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
 
-#include "resources/RAM.h"
+#include "ThreadsData.h"
 
 int main()
 {
     State state;
     RAM ram;
+
+    Instances argsInstance;
+    argsInstance.state = state;
+    argsInstance.ram = ram;
 
     pthread_t fsrAcquisitionThread;
     pthread_t imuAcquisitionThread;
@@ -26,14 +30,14 @@ int main()
     pthread_t ramToFlashThread;
 
     // Crear los hilos
-    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &state);
-    pthread_create(&imuAcquisitionThread, NULL, imu_run, &state);
-    pthread_create(&ramOperationThread, NULL, ram_run, &state);
-    pthread_create(&bleStackThread, NULL, ble_run, &state);
-    pthread_create(&energySavingThread, NULL, energy_run, &state);
-    pthread_create(&customEventHandlerThread, NULL, custom_run, &state);
+    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
+    pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
+    pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);
+    pthread_create(&bleStackThread, NULL, ble_run, &argsInstance.state);
+    pthread_create(&energySavingThread, NULL, energy_run, &argsInstance.state);
+    pthread_create(&customEventHandlerThread, NULL, custom_run, &argsInstance.state);
 
-    pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &ram);
+    pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &argsInstance.ram);
 
     // Esperar a que todos los hilos terminen
     pthread_join(fsrAcquisitionThread, NULL);
@@ -42,6 +46,8 @@ int main()
     pthread_join(bleStackThread, NULL);
     pthread_join(energySavingThread, NULL);
     pthread_join(customEventHandlerThread, NULL);
+
+    pthread_join(ramToFlashThread, NULL);
 
     return 0;
 }

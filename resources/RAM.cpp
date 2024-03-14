@@ -22,8 +22,8 @@ RAM::~RAM()
 void *ram_checkAndConsume(void *ram)
 {
     RAM *ramInstance = static_cast<RAM *>(ram);
-    // ramInstance->checkAndConsume();
-    ramInstance->test();
+    ramInstance->checkAndConsume();
+    // ramInstance->test();
     return NULL;
 }
 
@@ -75,6 +75,8 @@ void RAM::checkAndConsume()
 {
     while (true) // Este bucle podría ser controlado por una variable de estado para detenerlo
     {
+
+        printf("Esperando a consumir...con tamaño %d\n", count);
         pthread_mutex_lock(&mutex);
 
         // Lógica para anticipar el consumo si el buffer está por llenarse
