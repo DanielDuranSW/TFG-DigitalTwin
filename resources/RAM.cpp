@@ -42,6 +42,8 @@ void RAM::add(int item)
         pthread_cond_wait(&can_produce, &mutex);
     }
 
+    printf("Añadido a buffer con tamaño %d\n", count);
+
     buffer[writePos] = item;
     writePos = (writePos + 1) % capacity; // Incremento de manera circular
     ++count;

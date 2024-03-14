@@ -1,6 +1,8 @@
 // RAM_Operation.cpp
 #include "RAM_Operation.h"
 
+RAM *ram = new RAM();
+
 void *ram_run(void *arg)
 {
     State *state = static_cast<State *>(arg);
@@ -25,7 +27,8 @@ void *ram_run(void *arg)
 
 void ram_function()
 {
-    RAM *ram = new RAM();
-    ram->test();
+    // RAM *ram = new RAM();
+    // ram->test();
+    ram->add(1);
     sleep(1);
 }
