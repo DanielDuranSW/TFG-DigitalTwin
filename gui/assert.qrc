@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/asserts">
+        <file>DiagramaGUI.png</file>
+    </qresource>
+</RCC>

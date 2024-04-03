@@ -1,6 +1,7 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 /build-gui-dani-Debug
+/build-gui-Desktop_Qt_6_6_2_GCC_64bit-Debug
 
 *~
 *.autosave

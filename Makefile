@@ -1,6 +1,6 @@
 CC := g++
 LDLIBS := -pthread
-CPPFLAGS := -g -I. -Ithreads -Wall
+CPPFLAGS := -g -I. -Ithreads -I/home/daniduran/Qt/6.6.2/gcc_64/include -Wall
 
 # Listado de archivos fuente en el proyecto
 SRCS := $(wildcard *.cpp) $(wildcard threads/*.cpp) $(wildcard resources/*.cpp)

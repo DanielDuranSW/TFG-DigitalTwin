@@ -11,43 +11,51 @@
 
 #include "ThreadsData.h"
 
-int main()
+#include "gui/mainwindow.h"
+#include <QApplication>
+
+int main(int argc, char *argv[])
 {
-    State state;
-    RAM ram;
+    // State state;
+    // RAM ram;
 
-    Instances argsInstance;
-    argsInstance.state = state;
-    argsInstance.ram = ram;
+    // Instances argsInstance;
+    // argsInstance.state = state;
+    // argsInstance.ram = ram;
 
-    pthread_t fsrAcquisitionThread;
-    pthread_t imuAcquisitionThread;
-    pthread_t ramOperationThread;
-    pthread_t bleStackThread;
-    pthread_t energySavingThread;
-    pthread_t customEventHandlerThread;
+    // pthread_t fsrAcquisitionThread;
+    // pthread_t imuAcquisitionThread;
+    // pthread_t ramOperationThread;
+    // pthread_t bleStackThread;
+    // pthread_t energySavingThread;
+    // pthread_t customEventHandlerThread;
 
-    pthread_t ramToFlashThread;
+    // pthread_t ramToFlashThread;
 
     // Crear los hilos
-    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
-    pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
-    pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);
-    pthread_create(&bleStackThread, NULL, ble_run, &argsInstance.state);
-    pthread_create(&energySavingThread, NULL, energy_run, &argsInstance.state);
-    pthread_create(&customEventHandlerThread, NULL, custom_run, &argsInstance.state);
+    // pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
+    // pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
+    // pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);
+    // pthread_create(&bleStackThread, NULL, ble_run, &argsInstance.state);
+    // pthread_create(&energySavingThread, NULL, energy_run, &argsInstance.state);
+    // pthread_create(&customEventHandlerThread, NULL, custom_run, &argsInstance.state);
 
-    pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &argsInstance.ram);
+    // pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &argsInstance.ram);
 
     // Esperar a que todos los hilos terminen
-    pthread_join(fsrAcquisitionThread, NULL);
-    pthread_join(imuAcquisitionThread, NULL);
-    pthread_join(ramOperationThread, NULL);
-    pthread_join(bleStackThread, NULL);
-    pthread_join(energySavingThread, NULL);
-    pthread_join(customEventHandlerThread, NULL);
+    // pthread_join(fsrAcquisitionThread, NULL);
+    // pthread_join(imuAcquisitionThread, NULL);
+    // pthread_join(ramOperationThread, NULL);
+    // pthread_join(bleStackThread, NULL);
+    // pthread_join(energySavingThread, NULL);
+    // pthread_join(customEventHandlerThread, NULL);
 
-    pthread_join(ramToFlashThread, NULL);
+    // pthread_join(ramToFlashThread, NULL);
+
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 
     return 0;
 }
