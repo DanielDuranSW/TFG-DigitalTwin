@@ -2,6 +2,7 @@
 # ----------------------------------------------------------------------------
 /build-gui-dani-Debug
 /build-gui-Desktop_Qt_6_6_2_GCC_64bit-Debug
+.vscode 
 
 *~
 *.autosave

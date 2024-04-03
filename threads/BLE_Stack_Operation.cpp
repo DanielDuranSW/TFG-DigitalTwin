@@ -11,12 +11,12 @@ void *ble_run(void *arg)
         {
             state->waitCondition();
         }
-
+        // Enciende circulo con señal
         printf("BLE_Stack_Operation ejecutando...\n");
         sleep(1); // Simulación de trabajo
 
         printf("BLE_Stack_Operation terminado\n");
-
+        // Apaga circulo con señal
         state->setCurrentStage(4);
         state->broadcastCondition();
         state->unlockMutex();

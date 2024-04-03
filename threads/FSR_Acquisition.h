@@ -2,7 +2,7 @@
 #ifndef FSR_ACQUISITION_H
 #define FSR_ACQUISITION_H
 
-#include "State.h"
+#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
 
 void *fsr_run(void *arg);
 

@@ -24,6 +24,42 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         assert.qrc
+        ../resources/DMA.cpp
+        ../resources/DMA.h
+        ../resources/Flash.cpp
+        ../resources/Flash.h
+        ../resources/RAM.cpp
+        ../resources/RAM.h
+        ../resources/Resource.cpp
+        ../resources/Resource.h
+        ../resources/RTC.cpp
+        ../resources/RTC.h
+        ../resources/SPI.cpp
+        ../resources/SPI.h
+        ../threads/BLE_Stack_Operation.cpp
+        ../threads/BLE_Stack_Operation.h
+        ../threads/Custom_Event_Handler.cpp
+        ../threads/Custom_Event_Handler.h
+        ../threads/Energy_Saving.cpp
+        ../threads/Energy_Saving.h
+        ../threads/FSR_Acquisition.cpp
+        ../threads/FSR_Acquisition.h
+        ../threads/IMU_Acquisition.cpp
+        ../threads/IMU_Acquisition.h
+        ../threads/RAM_Operation.cpp
+        ../threads/RAM_Operation.h
+        ../Insole.cpp
+        ../Insole.h
+        ../Makefile
+        ../OrchestratorDMA.cpp
+        ../OrchestratorDMA.h
+        ../OrchestratorMain.cpp
+        ../OrchestratorMain.h
+        ../State.cpp
+        ../State.h
+        ../ThreadsData.h
+        ../StateSignalHandler.cpp
+        ../StateSignalHandler.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

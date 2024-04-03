@@ -1,6 +1,5 @@
 // RAM_Operation.cpp
 #include "RAM_Operation.h"
-#include "ThreadsData.h"
 
 void *ram_run(void *arg)
 {
