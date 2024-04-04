@@ -3,23 +3,25 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
+//#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
 
-namespace Ui
-{
-    class MainWindow;
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class MainWindow;
 }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+//    explicit MainWindow(QWidget *parent = nullptr);
 
-public slots:
-    void onCircleStateChanged(bool state);
+// public slots:
+//    void onCircleStateChanged(bool state);
 
 private:
     Ui::MainWindow *ui;

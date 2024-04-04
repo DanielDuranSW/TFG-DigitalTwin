@@ -3,10 +3,10 @@
 #include <QGraphicsEllipseItem>
 #include <QTimer>
 
-    QGraphicsEllipseItem *circle1;
+QGraphicsEllipseItem *circle1;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
-                                          ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -18,23 +18,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     // Crear un círculo en la escena 1
     circle1 = new QGraphicsEllipseItem(0, 0, 50, 50);
-    circle1->setBrush(Qt::blue); // Establecer color inicial
+    circle1->setBrush(Qt::blue); /* Establecer color inicial */
     scene->addItem(circle1);
 
-    //     // Configurar temporizador para cambiar el color del círculo 1
-    //     QTimer *timer = new QTimer(this);
-    //     connect(timer, &QTimer::timeout, [=]()
-    //             {
-    //         static bool isBlue = true;
-    //         if (isBlue) {
-    //             circle1->setBrush(Qt::red);
-    //         } else {
-    //             circle1->setBrush(Qt::blue);
-    //         }
-    //         isBlue = !isBlue; });
-    //     timer->start(1000); // Cambiar cada segundo
+    // Configurar temporizador para cambiar el color del círculo 1
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, [=]()
+            {
+                static bool isBlue = true;
+                if (isBlue) {
+                    circle1->setBrush(Qt::red);
+                } else {
+                    circle1->setBrush(Qt::blue);
+                }
+                isBlue = !isBlue; });
+    timer->start(1000); // Cambiar cada segundo
 }
-
+/*
 void MainWindow::onCircleStateChanged(bool state)
 {
     if (state)
@@ -48,7 +48,7 @@ void MainWindow::onCircleStateChanged(bool state)
         circle1->setBrush(Qt::red);
     }
 }
-
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
