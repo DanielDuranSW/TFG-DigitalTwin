@@ -7,15 +7,16 @@
 class StateSignalHandler : public QObject
 {
     Q_OBJECT
-
 public:
     explicit StateSignalHandler(QObject *parent = nullptr);
+    //StateSignalHandler stateSignalHandler;
 
 signals:
-    void circleStateChanged(bool state);
+    void circleColorChanged(bool isWorking);
 
 public slots:
-    void emitCircleStateChanged(bool state);
+    void onFsrWorking(bool b);
+    // Implementar ranuras para otros hilos si es necesario
 };
 
 #endif // STATESIGNALHANDLER_H

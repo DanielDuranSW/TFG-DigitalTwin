@@ -5,7 +5,8 @@
 
 QGraphicsEllipseItem *circle1;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
+MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) :
+    QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -18,37 +19,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     // Crear un círculo en la escena 1
     circle1 = new QGraphicsEllipseItem(0, 0, 50, 50);
-    circle1->setBrush(Qt::blue); /* Establecer color inicial */
+    circle1->setBrush(Qt::blue);
     scene->addItem(circle1);
 
-    // Configurar temporizador para cambiar el color del círculo 1
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, [=]()
-            {
-                static bool isBlue = true;
-                if (isBlue) {
-                    circle1->setBrush(Qt::red);
-                } else {
-                    circle1->setBrush(Qt::blue);
-                }
-                isBlue = !isBlue; });
-    timer->start(1000); // Cambiar cada segundo
+    // Conectar la señal del StateSignalHandler a la ranura de la MainWindow
+    connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
 }
-/*
-void MainWindow::onCircleStateChanged(bool state)
+
+void MainWindow::onCircleColorChanged(bool isWorking)
 {
-    if (state)
-    {
-        // Cambiar el color del círculo a verde
+    // Cambiar el color del círculo en función del estado de trabajo del hilo
+    if (isWorking) {
         circle1->setBrush(Qt::green);
-    }
-    else
-    {
-        // Cambiar el color del círculo a rojo
+    } else {
         circle1->setBrush(Qt::red);
     }
 }
-*/
+
 MainWindow::~MainWindow()
 {
     delete ui;
