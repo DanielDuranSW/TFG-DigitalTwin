@@ -1,7 +1,5 @@
 // FSR_Acquisition.cpp
 #include "FSR_Acquisition.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/StateSignalHandler.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/ThreadsData.h"
 
 void *fsr_run(void *arg)
 {
@@ -17,11 +15,11 @@ void *fsr_run(void *arg)
             state->waitCondition();
         }
 
-        stateSignalHandler->onFsrWorking(true);
+        stateSignalHandler->onWorking("Fsr",true);
         printf("FSR_Acquisition ejecutando...\n");
         sleep(1); // Simulación de trabajo
         printf("FSR_Acquisition terminado\n");
-        stateSignalHandler->onFsrWorking(false);
+        stateSignalHandler->onWorking("Fsr",false);
 
         state->setCurrentStage(1);
         state->broadcastCondition();

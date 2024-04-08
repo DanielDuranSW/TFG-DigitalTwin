@@ -1,10 +1,9 @@
-// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QGraphicsEllipseItem>
-#include "/home/daniduran/ws/TFG-DigitalTwin/StateSignalHandler.h"
+#include "StateSignalHandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,11 +20,12 @@ public:
     ~MainWindow();
 
 public slots:
-    void onCircleColorChanged(bool isWorking);
+    void onCircleColorChanged(const QString &circleName, bool isWorking);
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsEllipseItem *circle1;
+    QMap<QString, QGraphicsScene*> sceneMap;
+    QMap<QString, QGraphicsEllipseItem*> circleMap;
 };
 
 #endif // MAINWINDOW_H

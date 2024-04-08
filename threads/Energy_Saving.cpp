@@ -3,7 +3,10 @@
 
 void *energy_run(void *arg)
 {
-    State *state = static_cast<State *>(arg);
+    Instances *args = static_cast<Instances*>(arg);
+    State *state = &(args->state);
+    StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
+
     while (true)
     {
         state->lockMutex();
@@ -12,9 +15,11 @@ void *energy_run(void *arg)
             state->waitCondition();
         }
 
+        stateSignalHandler->onWorking("Energy",true);
         printf("Energy_Saving ejecutando...\n");
         sleep(1); // Simulación de trabajo
         printf("Energy_Saving terminado\n");
+        stateSignalHandler->onWorking("Energy",false);
 
         state->setCurrentStage(5);
         state->broadcastCondition();

@@ -1,7 +1,9 @@
 #ifndef ENERGY_SAVING_H
 #define ENERGY_SAVING_H
 
-#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
+#include "State.h"
+#include "StateSignalHandler.h"
+#include "ThreadsData.h"
 
 void *energy_run(void *arg);
 

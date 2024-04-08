@@ -2,7 +2,9 @@
 #ifndef IMU_ACQUISITION_H
 #define IMU_ACQUISITION_H
 
-#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
+#include "State.h"
+#include "StateSignalHandler.h"
+#include "ThreadsData.h"
 
 void *imu_run(void *arg);
 

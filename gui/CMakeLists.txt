@@ -81,6 +81,11 @@ else()
     endif()
 endif()
 
+# Ruta a la carpeta que contiene tus archivos de encabezado
+target_include_directories(gui PRIVATE
+    /home/daniduran/ws/TFG-DigitalTwin
+)
+
 target_link_libraries(gui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -2,8 +2,9 @@
 #ifndef BLE_STACK_OPERATION_H
 #define BLE_STACK_OPERATION_H
 
-#include "/home/daniduran/ws/TFG-DigitalTwin/State.h"
-
+#include "State.h"
+#include "StateSignalHandler.h"
+#include "ThreadsData.h"
 
 void *ble_run(void *arg);
 

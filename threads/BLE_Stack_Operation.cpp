@@ -3,7 +3,10 @@
 
 void *ble_run(void *arg)
 {
-    State *state = static_cast<State *>(arg);
+    Instances *args = static_cast<Instances*>(arg);
+    State *state = &(args->state);
+    StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
+
     while (true)
     {
         state->lockMutex();
@@ -11,12 +14,12 @@ void *ble_run(void *arg)
         {
             state->waitCondition();
         }
-        // Enciende circulo con señal
+        stateSignalHandler->onWorking("Ble",true);
         printf("BLE_Stack_Operation ejecutando...\n");
         sleep(1); // Simulación de trabajo
 
         printf("BLE_Stack_Operation terminado\n");
-        // Apaga circulo con señal
+        stateSignalHandler->onWorking("Ble",false);
         state->setCurrentStage(4);
         state->broadcastCondition();
         state->unlockMutex();

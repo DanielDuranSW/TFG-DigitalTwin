@@ -9,14 +9,12 @@ class StateSignalHandler : public QObject
     Q_OBJECT
 public:
     explicit StateSignalHandler(QObject *parent = nullptr);
-    //StateSignalHandler stateSignalHandler;
 
 signals:
-    void circleColorChanged(bool isWorking);
+    void circleColorChanged(const QString &circleName, bool isWorking);
 
 public slots:
-    void onFsrWorking(bool b);
-    // Implementar ranuras para otros hilos si es necesario
+    void onWorking(const QString &circleName, bool b);
 };
 
 #endif // STATESIGNALHANDLER_H
