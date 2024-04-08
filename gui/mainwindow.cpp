@@ -1,9 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QGraphicsEllipseItem>
 #include <QTimer>
 
-QGraphicsEllipseItem *circle1;
+
 
 MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) :
     QMainWindow(parent),
@@ -22,12 +21,15 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     circle1->setBrush(Qt::blue);
     scene->addItem(circle1);
 
+
     // Conectar la señal del StateSignalHandler a la ranura de la MainWindow
+    // connect(objeto, SIGNAL(), this, SLOT());
     connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
 }
 
 void MainWindow::onCircleColorChanged(bool isWorking)
 {
+    printf("AAAAAAAAAAAAAAAAAAAAAAAAAa %B \n",isWorking);
     // Cambiar el color del círculo en función del estado de trabajo del hilo
     if (isWorking) {
         circle1->setBrush(Qt::green);

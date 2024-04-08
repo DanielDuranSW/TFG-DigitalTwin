@@ -3,6 +3,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsEllipseItem>
 #include "/home/daniduran/ws/TFG-DigitalTwin/StateSignalHandler.h"
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +25,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsEllipseItem *circle1;
 };
 
 #endif // MAINWINDOW_H

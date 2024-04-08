@@ -10,7 +10,7 @@
 #include "/home/daniduran/ws/TFG-DigitalTwin/threads/IMU_Acquisition.h"
 #include "/home/daniduran/ws/TFG-DigitalTwin/threads/RAM_Operation.h"
 #include "/home/daniduran/ws/TFG-DigitalTwin/threads/Energy_Saving.h"
-//#include "/home/daniduran/ws/TFG-DigitalTwin/ThreadsData.h"
+#include "/home/daniduran/ws/TFG-DigitalTwin/ThreadsData.h"
 
 #include "mainwindow.h"
 #include <QApplication>
@@ -28,12 +28,13 @@ int main(int argc, char *argv[])
 
     State state;
     RAM ram;
+    StateSignalHandler stateSignalHandler;
 
     Instances argsInstance;
     argsInstance.state = state;
     argsInstance.ram = ram;
+    argsInstance.stateSignalHandler = &stateSignalHandler;
     //
-    StateSignalHandler stateSignalHandler;
 
     GUIArguments guiArgs;
     guiArgs.argc = argc;
