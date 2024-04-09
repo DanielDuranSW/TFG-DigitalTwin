@@ -4,13 +4,13 @@
 #include <unistd.h>
 
 #include "ManagerGUI.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/BLE_Stack_Operation.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/Custom_Event_Handler.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/FSR_Acquisition.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/IMU_Acquisition.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/RAM_Operation.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/threads/Energy_Saving.h"
-#include "/home/daniduran/ws/TFG-DigitalTwin/ThreadsData.h"
+#include "threads/BLE_Stack_Operation.h"
+#include "threads/Custom_Event_Handler.h"
+#include "threads/FSR_Acquisition.h"
+#include "threads/IMU_Acquisition.h"
+#include "threads/RAM_Operation.h"
+#include "threads/Energy_Saving.h"
+#include "ThreadsData.h"
 
 #include "mainwindow.h"
 #include <QApplication>

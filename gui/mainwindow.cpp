@@ -24,6 +24,13 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewEnergy->setScene(sceneMap["Energy"]);
     ui->graphicsViewCustom->setScene(sceneMap["Custom"]);
 
+    ui->graphicsViewFsr->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewImu->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewRam->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewBle->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewEnergy->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewCustom->setStyleSheet("background-color: transparent;");
+
     // Crear los círculos y asociarlos con sus respectivas escenas
     QMap<QString, QGraphicsEllipseItem*> circleMap;
     QStringList keys = sceneMap.keys();
