@@ -80,7 +80,7 @@ void RAM::checkAndConsume()
     {
 
         printf("Esperando a consumir...con tamaño %d\n", count);
-        pthread_mutex_lock(&mutex);
+        //pthread_mutex_lock(&mutex);
 
         // Lógica para anticipar el consumo si el buffer está por llenarse
         if (count >= BUFFER_SIZE - 1)
@@ -106,7 +106,7 @@ void RAM::checkAndConsume()
             pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
         }
 
-        pthread_mutex_unlock(&mutex);
+        //pthread_mutex_unlock(&mutex);
         sleep(5); // Evitar la sobrecarga
     }
 }
