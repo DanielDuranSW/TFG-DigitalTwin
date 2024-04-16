@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     sceneMap["Ble"] = new QGraphicsScene(this);
     sceneMap["Energy"] = new QGraphicsScene(this);
     sceneMap["Custom"] = new QGraphicsScene(this);
+    sceneMap["WaitingTransfer"] = new QGraphicsScene(this);
+    sceneMap["RamToFlash"] = new QGraphicsScene(this);
 
     ui->graphicsViewFsr->setScene(sceneMap["Fsr"]);
     ui->graphicsViewImu->setScene(sceneMap["Imu"]);
@@ -23,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewBle->setScene(sceneMap["Ble"]);
     ui->graphicsViewEnergy->setScene(sceneMap["Energy"]);
     ui->graphicsViewCustom->setScene(sceneMap["Custom"]);
+    ui->graphicsViewWaitingTransfer->setScene(sceneMap["WaitingTransfer"]);
+    ui->graphicsViewRamToFlash->setScene(sceneMap["RamToFlash"]);
 
     ui->graphicsViewFsr->setStyleSheet("background-color: transparent;");
     ui->graphicsViewImu->setStyleSheet("background-color: transparent;");
@@ -30,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewBle->setStyleSheet("background-color: transparent;");
     ui->graphicsViewEnergy->setStyleSheet("background-color: transparent;");
     ui->graphicsViewCustom->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewWaitingTransfer->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewRamToFlash->setStyleSheet("background-color: transparent;");
 
     // Crear los círculos y asociarlos con sus respectivas escenas
     QMap<QString, QGraphicsEllipseItem*> circleMap;

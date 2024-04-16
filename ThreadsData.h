@@ -11,6 +11,8 @@ struct Instances
     State state;
     RAM ram;
     StateSignalHandler *stateSignalHandler;
+
+    Instances() : ram(nullptr) {}
 };
 
 #endif // THREADS_DATA_H

@@ -15,7 +15,7 @@ void *ram_run(void *arg)
         }
         stateSignalHandler->onWorking("Ram",true);
         printf("RAM_Operation ejecutando...\n");
-        ram_function(&args->ram); // Simulación de trabajo
+        ram_function(args);
         printf("RAM_Operation terminado\n");
         stateSignalHandler->onWorking("Ram",false);
         args->state.setCurrentStage(3);
@@ -25,10 +25,9 @@ void *ram_run(void *arg)
     pthread_exit(NULL);
 }
 
-void ram_function(RAM *ram)
+void ram_function(Instances *args)
 {
-    // RAM *ram = new RAM();
-    // ram->test();
-    ram->add(1);
+    args->ram.add(1);
     sleep(1);
 }
+

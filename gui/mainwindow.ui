@@ -225,6 +225,74 @@
      </brush>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsViewWaitingTransfer">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>556</x>
+      <y>170</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="backgroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+    <property name="foregroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="0">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsViewRamToFlash">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>556</x>
+      <y>250</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="backgroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+    <property name="foregroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="0">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>graphicsViewFsr</zorder>
    <zorder>graphicsViewImu</zorder>
@@ -232,6 +300,8 @@
    <zorder>graphicsViewBle</zorder>
    <zorder>graphicsViewEnergy</zorder>
    <zorder>graphicsViewCustom</zorder>
+   <zorder>graphicsViewWaitingTransfer</zorder>
+   <zorder>graphicsViewRamToFlash</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

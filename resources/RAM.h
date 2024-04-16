@@ -4,6 +4,8 @@
 #define RAM_H
 
 #include "Resource.h"
+#include "StateSignalHandler.h"
+
 #define TLB 4
 #define PCK 2
 #define BUFFER_SIZE 10
@@ -23,8 +25,10 @@ private:
     pthread_cond_t can_produce;
     pthread_cond_t can_consume;
 
+    StateSignalHandler *stateSignalHandler;
+
 public:
-    RAM();
+    RAM(StateSignalHandler *stateSignalHandler);
     virtual ~RAM();
 
     void add(int value);

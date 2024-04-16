@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
     pthread_t guiThread;
 
     State state;
-    RAM ram;
     StateSignalHandler stateSignalHandler;
+    RAM ram(&stateSignalHandler);
 
     Instances argsInstance;
     argsInstance.state = state;
-    argsInstance.ram = ram;
+    argsInstance.ram = RAM(&stateSignalHandler);
     argsInstance.stateSignalHandler = &stateSignalHandler;
     //
 
