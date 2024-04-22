@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <iostream>
 #include <unistd.h>
+#include "config.h"
 
 // #define BUFFER_SIZE 10
 // #define TLB_SIZE 4

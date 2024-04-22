@@ -3,7 +3,7 @@
 
 void *imu_run(void *arg)
 {
-    Instances *args = static_cast<Instances*>(arg);
+    Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
@@ -15,11 +15,11 @@ void *imu_run(void *arg)
             state->waitCondition();
         }
 
-        stateSignalHandler->onWorking("Imu",true);
+        stateSignalHandler->onWorking("Imu", true);
         printf("IMU ejecutando...\n");
-        sleep(1); // Simulación de trabajo
+        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
         printf("IMU terminado\n");
-        stateSignalHandler->onWorking("Imu",false);
+        stateSignalHandler->onWorking("Imu", false);
 
         state->setCurrentStage(2);
         state->broadcastCondition();

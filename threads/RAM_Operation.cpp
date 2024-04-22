@@ -13,11 +13,11 @@ void *ram_run(void *arg)
         {
             args->state.waitCondition();
         }
-        stateSignalHandler->onWorking("Ram",true);
+        stateSignalHandler->onWorking("Ram", true);
         printf("RAM_Operation ejecutando...\n");
         ram_function(args);
         printf("RAM_Operation terminado\n");
-        stateSignalHandler->onWorking("Ram",false);
+        stateSignalHandler->onWorking("Ram", false);
         args->state.setCurrentStage(3);
         args->state.broadcastCondition();
         args->state.unlockMutex();
@@ -28,6 +28,5 @@ void *ram_run(void *arg)
 void ram_function(Instances *args)
 {
     args->ram.add(1);
-    sleep(1);
+    usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 }
-

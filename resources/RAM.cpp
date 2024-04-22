@@ -97,16 +97,16 @@ void RAM::checkAndConsume()
                 // Procesado del item consumido
                 std::cout << "Consumido: " << consumedItem << std::endl;
 
-                sleep(1);
+                usleep(STATE_GENERAL_DURATION);
                 stateSignalHandler->onWorking("WaitingTransfer",true);
                 stateSignalHandler->onWorking("RamToFlash",false);
-                sleep(1);
+                usleep(STATE_GENERAL_DURATION);
 
             }
             pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
         }
 
         //pthread_mutex_unlock(&mutex);
-        sleep(5); // Evitar la sobrecarga
+        usleep(RAM_BUFFER_RATIO_REFRESH); // Evitar la sobrecarga
     }
 }

@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "config.h"
 
 class State
 {

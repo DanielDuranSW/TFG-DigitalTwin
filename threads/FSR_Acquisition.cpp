@@ -3,7 +3,7 @@
 
 void *fsr_run(void *arg)
 {
-    Instances *args = static_cast<Instances*>(arg);
+    Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
@@ -15,11 +15,11 @@ void *fsr_run(void *arg)
             state->waitCondition();
         }
 
-        stateSignalHandler->onWorking("Fsr",true);
+        stateSignalHandler->onWorking("Fsr", true);
         printf("FSR_Acquisition ejecutando...\n");
-        sleep(1); // Simulación de trabajo
+        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
         printf("FSR_Acquisition terminado\n");
-        stateSignalHandler->onWorking("Fsr",false);
+        stateSignalHandler->onWorking("Fsr", false);
 
         state->setCurrentStage(1);
         state->broadcastCondition();

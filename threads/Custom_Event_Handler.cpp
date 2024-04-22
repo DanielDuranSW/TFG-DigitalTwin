@@ -3,7 +3,7 @@
 
 void *custom_run(void *arg)
 {
-    Instances *args = static_cast<Instances*>(arg);
+    Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
@@ -15,11 +15,11 @@ void *custom_run(void *arg)
             state->waitCondition();
         }
 
-        stateSignalHandler->onWorking("Custom",true);
+        stateSignalHandler->onWorking("Custom", true);
         printf("Custom_Event_Handler ejecutando...\n");
-        sleep(1); // Simulación de trabajo
+        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
         printf("Custom_Event_Handler terminado\n");
-        stateSignalHandler->onWorking("Custom",false);
+        stateSignalHandler->onWorking("Custom", false);
 
         state->setCurrentStage(0);
         state->broadcastCondition();
