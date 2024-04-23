@@ -6,6 +6,7 @@ void *energy_run(void *arg)
     Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
+    Resource *resource = &(args->resource);
 
     while (true)
     {
@@ -18,6 +19,16 @@ void *energy_run(void *arg)
         stateSignalHandler->onWorking("Energy", true);
         printf("Energy_Saving ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+        // Aqui se debe dormir hasta que el hilo RTC lo despierte
+
+        // Notificar al hilo RTC y esperar
+        /*resource->signalCondition();
+        resource->unlockMutex();
+        resource->lockMutex();
+        resource->waitCondition();
+        resource->unlockMutex();*/
+        sleep(1);
+
         printf("Energy_Saving terminado\n");
         stateSignalHandler->onWorking("Energy", false);
 

@@ -837,6 +837,28 @@
      </brush>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsViewRtc">
+    <property name="geometry">
+     <rect>
+      <x>293</x>
+      <y>192</y>
+      <width>55</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="foregroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>graphicsViewFsr</zorder>
    <zorder>graphicsViewImu</zorder>
@@ -862,6 +884,7 @@
    <zorder>graphicsViewBuffer12</zorder>
    <zorder>graphicsViewBuffer10</zorder>
    <zorder>graphicsViewBuffer3</zorder>
+   <zorder>graphicsViewRtc</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

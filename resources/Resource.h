@@ -7,15 +7,21 @@
 #include <unistd.h>
 #include "config.h"
 
-// #define BUFFER_SIZE 10
-// #define TLB_SIZE 4
-
 class Resource
 {
-private:
+protected:
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+    int current_stage;
+
 public:
     Resource();
     virtual ~Resource();
+    void lockMutex();
+    void unlockMutex();
+    void waitCondition();
+    void signalCondition();
+    void broadcastCondition();
 };
 
 #endif

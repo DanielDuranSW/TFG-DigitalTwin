@@ -40,16 +40,15 @@ void RAM::add(int item)
     }
     QString bufferName = QString("Buffer%1").arg(writePos);
     printf("----------------------Dibujo nombre del buffer: %s\n", qPrintable(bufferName));
-    stateSignalHandler->onWorkingBuffer(bufferName,true); // aqui se deberia dibujar el rectangulo
+    stateSignalHandler->onWorkingBuffer(bufferName, true); // aqui se deberia dibujar el rectangulo
     printf("Añadido a buffer con tamaño %d\n", count);
-    stateSignalHandler->onWorking("WaitingTransfer",true);
+    stateSignalHandler->onWorking("WaitingTransfer", true);
     buffer[writePos] = item;
     writePos = (writePos + 1) % capacity; // Incremento de manera circular
     ++count;
 
     pthread_mutex_unlock(&mutex);
     pthread_cond_signal(&can_consume); // Notificar que hay al menos un elemento para consumir
-
 }
 
 /*int RAM::remove()
@@ -76,8 +75,8 @@ void RAM::checkAndConsume()
     while (true) // Este bucle podría ser controlado por una variable de estado para detenerlo
     {
 
-        printf("Esperando a consumir...con tamaño %d\n", count);
-        //pthread_mutex_lock(&mutex);
+        // printf("Esperando a consumir...con tamaño %d\n", count);
+        // pthread_mutex_lock(&mutex);
 
         // Lógica para anticipar el consumo si el buffer está por llenarse
         if (count >= BUFFER_SIZE - 1)
@@ -86,29 +85,28 @@ void RAM::checkAndConsume()
             // Consumir todos los elementos excepto uno (al que apunta el productor)
             while (count > 1)
             {
-                stateSignalHandler->onWorking("RamToFlash",true);
-                stateSignalHandler->onWorking("WaitingTransfer",false);
+                stateSignalHandler->onWorking("RamToFlash", true);
+                stateSignalHandler->onWorking("WaitingTransfer", false);
                 int consumedItem = buffer[readPos];
                 readPos = (readPos + 1) % capacity;
                 --count;
 
                 QString bufferName = QString("Buffer%1").arg(readPos);
                 printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
-                stateSignalHandler->onWorkingBuffer(bufferName,false);
+                stateSignalHandler->onWorkingBuffer(bufferName, false);
 
                 // Procesado del item consumido
                 std::cout << "Consumido: " << consumedItem << std::endl;
 
                 usleep(STATE_GENERAL_DURATION);
-                stateSignalHandler->onWorking("WaitingTransfer",true);
-                stateSignalHandler->onWorking("RamToFlash",false);
+                stateSignalHandler->onWorking("WaitingTransfer", true);
+                stateSignalHandler->onWorking("RamToFlash", false);
                 usleep(STATE_GENERAL_DURATION);
-
             }
             pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
         }
 
-        //pthread_mutex_unlock(&mutex);
+        // pthread_mutex_unlock(&mutex);
         usleep(RAM_BUFFER_RATIO_REFRESH); // Evitar la sobrecarga
     }
 }

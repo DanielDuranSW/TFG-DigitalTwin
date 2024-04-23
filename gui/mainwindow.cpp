@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     sceneMap["Custom"] = new QGraphicsScene(this);
     sceneMap["WaitingTransfer"] = new QGraphicsScene(this);
     sceneMap["RamToFlash"] = new QGraphicsScene(this);
+    sceneMap["Rtc"] = new QGraphicsScene(this);
 
     sceneMap["Buffer0"] = new QGraphicsScene(this);
     sceneMap["Buffer1"] = new QGraphicsScene(this);
@@ -43,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewCustom->setScene(sceneMap["Custom"]);
     ui->graphicsViewWaitingTransfer->setScene(sceneMap["WaitingTransfer"]);
     ui->graphicsViewRamToFlash->setScene(sceneMap["RamToFlash"]);
+    ui->graphicsViewRtc->setScene(sceneMap["Rtc"]);
 
     ui->graphicsViewBuffer0->setScene(sceneMap["Buffer0"]);
     ui->graphicsViewBuffer1->setScene(sceneMap["Buffer1"]);
@@ -69,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewCustom->setStyleSheet("background-color: transparent;");
     ui->graphicsViewWaitingTransfer->setStyleSheet("background-color: transparent;");
     ui->graphicsViewRamToFlash->setStyleSheet("background-color: transparent;");
+    ui->graphicsViewRtc->setStyleSheet("background-color: transparent;");
     ui->graphicsViewBuffer0->setStyleSheet("background-color: transparent;");
     ui->graphicsViewBuffer1->setStyleSheet("background-color: transparent;");
     ui->graphicsViewBuffer2->setStyleSheet("background-color: transparent;");

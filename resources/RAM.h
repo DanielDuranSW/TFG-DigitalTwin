@@ -5,10 +5,7 @@
 
 #include "Resource.h"
 #include "StateSignalHandler.h"
-
-#define TLB 4
-#define PCK 2
-#define BUFFER_SIZE 10
+#include "config.h"
 
 void *ram_checkAndConsume(void *ram);
 

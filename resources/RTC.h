@@ -3,12 +3,9 @@
 #define RTC_H
 
 #include "Resource.h"
+#include "StateSignalHandler.h"
+#include "ThreadsData.h"
 
-class RTC : public Resource
-{
-public:
-    RTC();
-    virtual ~RTC();
-};
+void *rtc_run(void *arg);
 
 #endif
