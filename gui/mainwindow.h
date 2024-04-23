@@ -21,11 +21,13 @@ public:
 
 public slots:
     void onCircleColorChanged(const QString &circleName, bool isWorking);
+    void onRectangleColorChanged(const QString &rectangleName, bool isWorking);
 
 private:
     Ui::MainWindow *ui;
     QMap<QString, QGraphicsScene*> sceneMap;
     QMap<QString, QGraphicsEllipseItem*> circleMap;
+    QMap<QString, QGraphicsRectItem*> rectangleMap;
 };
 
 #endif // MAINWINDOW_H

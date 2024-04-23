@@ -12,9 +12,11 @@ public:
 
 signals:
     void circleColorChanged(const QString &circleName, bool isWorking);
+    void rectangleColorChanged(const QString &rectangleName, bool isWorking);
 
 public slots:
     void onWorking(const QString &circleName, bool b);
+    void onWorkingBuffer(const QString &figureName, bool b);
 };
 
 #endif // STATESIGNALHANDLER_H

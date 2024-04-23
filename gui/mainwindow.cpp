@@ -86,7 +86,6 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     ui->graphicsViewBuffer14->setStyleSheet("background-color: transparent;");
     ui->graphicsViewBuffer15->setStyleSheet("background-color: transparent;");
 
-    // Crear los círculos y asociarlos con sus respectivas escenas
     QMap<QString, QGraphicsEllipseItem *> circleMap;
     QMap<QString, QGraphicsRectItem *> rectangleMap;
     QStringList keys = sceneMap.keys();
@@ -112,10 +111,11 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
 
     // Conectar la señal del StateSignalHandler a la ranura de la MainWindow
     connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
-
+    connect(stateSignalHandler, &StateSignalHandler::rectangleColorChanged, this, &MainWindow::onRectangleColorChanged);
     // Guardar los mapas para su uso posterior
     this->sceneMap = sceneMap;
     this->circleMap = circleMap;
+    this->rectangleMap = rectangleMap;
 }
 
 void MainWindow::onCircleColorChanged(const QString &circleName, bool isWorking)
@@ -134,6 +134,28 @@ void MainWindow::onCircleColorChanged(const QString &circleName, bool isWorking)
         }
     }
 }
+
+void MainWindow::onRectangleColorChanged(const QString &rectangleName, bool isWorking)
+{
+    printf("Cambiar color del rectángulo %s\n", qPrintable(rectangleName));
+    /*printf("Rectangle Map:\n");
+    for (auto it = rectangleMap.begin(); it != rectangleMap.end(); ++it) {
+        printf("Key: %s, Value: %p\n", qPrintable(it.key()), it.value());
+    }*/
+    if (rectangleMap.contains(rectangleName))
+    {
+        QGraphicsRectItem *rectangle = rectangleMap.value(rectangleName);
+        if (isWorking)
+        {
+            rectangle->setBrush(Qt::red);
+        }
+        else
+        {
+            rectangle->setBrush(QColor(33, 144, 255));
+        }
+    }
+}
+
 
 MainWindow::~MainWindow()
 {

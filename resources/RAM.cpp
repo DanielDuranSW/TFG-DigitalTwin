@@ -29,11 +29,6 @@ void *ram_checkAndConsume(void *ram)
     return NULL;
 }
 
-void RAM::test()
-{
-    std::cout << "Hola cara de cola" << std::endl;
-}
-
 void RAM::add(int item)
 {
     pthread_mutex_lock(&mutex);
@@ -43,7 +38,9 @@ void RAM::add(int item)
     {
         pthread_cond_wait(&can_produce, &mutex);
     }
-
+    QString bufferName = QString("Buffer%1").arg(writePos);
+    printf("----------------------Dibujo nombre del buffer: %s\n", qPrintable(bufferName));
+    stateSignalHandler->onWorkingBuffer(bufferName,true); // aqui se deberia dibujar el rectangulo
     printf("Añadido a buffer con tamaño %d\n", count);
     stateSignalHandler->onWorking("WaitingTransfer",true);
     buffer[writePos] = item;
@@ -55,7 +52,7 @@ void RAM::add(int item)
 
 }
 
-int RAM::remove()
+/*int RAM::remove()
 {
     pthread_mutex_lock(&mutex);
 
@@ -72,7 +69,7 @@ int RAM::remove()
     pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
 
     return item;
-}
+}*/
 
 void RAM::checkAndConsume()
 {
@@ -94,6 +91,11 @@ void RAM::checkAndConsume()
                 int consumedItem = buffer[readPos];
                 readPos = (readPos + 1) % capacity;
                 --count;
+
+                QString bufferName = QString("Buffer%1").arg(readPos);
+                printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
+                stateSignalHandler->onWorkingBuffer(bufferName,false);
+
                 // Procesado del item consumido
                 std::cout << "Consumido: " << consumedItem << std::endl;
 
