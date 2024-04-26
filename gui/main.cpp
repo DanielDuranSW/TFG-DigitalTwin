@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     guiArgs.stateSignalHandler = &stateSignalHandler;
 
     pthread_create(&guiThread, NULL, gui_run, &guiArgs);
-    // usleep(INITIAL_WAIT);
+    usleep(INITIAL_WAIT);
     pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
     pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
     pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);

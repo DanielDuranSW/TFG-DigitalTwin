@@ -18,17 +18,16 @@ void *energy_run(void *arg)
 
         stateSignalHandler->onWorking("Energy", true);
         printf("Energy_Saving ejecutando...\n");
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
-        // Aqui se debe dormir hasta que el hilo RTC lo despierte
 
+        // Aqui se debe dormir hasta que el hilo RTC lo despierte
         // Notificar al hilo RTC y esperar
-        /*resource->signalCondition();
+        resource->signalCondition();
         resource->unlockMutex();
         resource->lockMutex();
         resource->waitCondition();
-        resource->unlockMutex();*/
-        sleep(1);
-
+        resource->unlockMutex();
+        // sleep(2);
+        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
         printf("Energy_Saving terminado\n");
         stateSignalHandler->onWorking("Energy", false);
 

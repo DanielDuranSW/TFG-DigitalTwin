@@ -15,12 +15,10 @@ void *rtc_run(void *arg)
         // Despertar al hilo energy saving
 
         resource->lockMutex();
-
         resource->waitCondition();
         usleep(RESOURCE_RTC_DURATION);
         stateSignalHandler->onWorking("Rtc", true);
         resource->signalCondition();
-
         resource->unlockMutex();
     }
     pthread_exit(NULL);

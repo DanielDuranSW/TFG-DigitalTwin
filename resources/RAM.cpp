@@ -87,13 +87,14 @@ void RAM::checkAndConsume()
             {
                 stateSignalHandler->onWorking("RamToFlash", true);
                 stateSignalHandler->onWorking("WaitingTransfer", false);
-                int consumedItem = buffer[readPos];
-                readPos = (readPos + 1) % capacity;
-                --count;
 
                 QString bufferName = QString("Buffer%1").arg(readPos);
                 printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
                 stateSignalHandler->onWorkingBuffer(bufferName, false);
+
+                int consumedItem = buffer[readPos];
+                readPos = (readPos + 1) % capacity;
+                --count;
 
                 // Procesado del item consumido
                 std::cout << "Consumido: " << consumedItem << std::endl;
