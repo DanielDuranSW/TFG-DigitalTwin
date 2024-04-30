@@ -8,5 +8,6 @@
 
 void *ram_run(void *arg);
 void ram_function(Instances *args);
+void printVector(const std::vector<int> &vec);
 
 #endif

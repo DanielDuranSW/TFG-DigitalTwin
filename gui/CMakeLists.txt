@@ -50,6 +50,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../threads/IMU_Acquisition.h
         ../threads/RAM_Operation.cpp
         ../threads/RAM_Operation.h
+        ../threads/CSVReader.h
+        ../threads/CSVReader.cpp
         ../Insole.cpp
         ../Insole.h
         ../Makefile
@@ -63,6 +65,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../StateSignalHandler.cpp
         ../StateSignalHandler.h
         ../config.h
+        ../data/data1.csv
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

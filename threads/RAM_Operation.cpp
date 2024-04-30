@@ -27,6 +27,20 @@ void *ram_run(void *arg)
 
 void ram_function(Instances *args)
 {
+    std::cout << "FSR Data: ";
+    printVector(args->fsrData);
+    std::cout << "IMU Data: ";
+    printVector(args->imuData);
+
     args->ram.add(1);
-    usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+    usleep(STATE_GENERAL_DURATION);
+}
+
+void printVector(const std::vector<int> &vec)
+{
+    for (const auto &element : vec)
+    {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
 }

@@ -10,6 +10,7 @@
 #include "threads/IMU_Acquisition.h"
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
+#include "threads/CSVReader.h"
 #include "ThreadsData.h"
 #include "resources/RTC.h"
 #include "config.h"
@@ -33,12 +34,14 @@ int main(int argc, char *argv[])
     StateSignalHandler stateSignalHandler;
     RAM ram(&stateSignalHandler);
     Resource resource;
+    CSVReader csvReader("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
 
     Instances argsInstance;
     argsInstance.state = state;
     argsInstance.ram = RAM(&stateSignalHandler);
     argsInstance.stateSignalHandler = &stateSignalHandler;
     argsInstance.resource = resource;
+    argsInstance.csvReader = &csvReader;
 
     GUIArguments guiArgs;
     guiArgs.argc = argc;

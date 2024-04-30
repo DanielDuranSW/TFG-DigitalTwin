@@ -6,6 +6,7 @@
 #include "State.h"
 #include "StateSignalHandler.h"
 #include "resources/Resource.h"
+#include "threads/CSVReader.h"
 
 struct Instances
 {
@@ -13,6 +14,9 @@ struct Instances
     RAM ram;
     StateSignalHandler *stateSignalHandler;
     Resource resource;
+    CSVReader *csvReader;
+    std::vector<int> fsrData;
+    std::vector<int> imuData;
 
     Instances() : ram(nullptr) {}
 };
