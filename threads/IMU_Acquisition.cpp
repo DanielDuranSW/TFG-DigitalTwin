@@ -20,9 +20,8 @@ void *imu_run(void *arg)
         printf("IMU ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
-        std::vector<int> fsrData;
         std::vector<int> imuData;
-        csvReader->getNextLine(fsrData, imuData);
+        csvReader->getcsvIMU(imuData);
         args->imuData = imuData;
 
         printf("IMU terminado\n");

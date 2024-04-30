@@ -21,8 +21,7 @@ void *fsr_run(void *arg)
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         std::vector<int> fsrData;
-        std::vector<int> imuData;
-        csvReader->getNextLine(fsrData, imuData);
+        csvReader->getcsvFSR(fsrData);
         args->fsrData = fsrData;
 
         printf("FSR_Acquisition terminado\n");

@@ -11,11 +11,14 @@ class CSVReader
 {
 public:
     CSVReader(const std::string &filename);
-    bool getNextLine(std::vector<int> &fsrData, std::vector<int> &imuData);
+    bool getcsvFSR(std::vector<int> &fsrData);
+    void getcsvIMU(std::vector<int> &imuData);
+
     bool isOpen() const;
 
 private:
     std::ifstream file;
+    std::string line;
 };
 
 #endif
