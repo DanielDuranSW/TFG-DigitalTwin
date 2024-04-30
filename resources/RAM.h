@@ -28,10 +28,9 @@ public:
     RAM(StateSignalHandler *stateSignalHandler);
     virtual ~RAM();
 
-    void add(int value);
-    int remove();
+    void add(std::vector<uint8_t> packet);
+    // int remove();
     void checkAndConsume();
-    void test();
 };
 
 #endif

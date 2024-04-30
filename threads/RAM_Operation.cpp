@@ -1,5 +1,6 @@
 // RAM_Operation.cpp
 #include "RAM_Operation.h"
+#include "DataPacket.h"
 
 void *ram_run(void *arg)
 {
@@ -27,12 +28,67 @@ void *ram_run(void *arg)
 
 void ram_function(Instances *args)
 {
-    std::cout << "FSR Data: ";
-    printVector(args->fsrData);
-    std::cout << "IMU Data: ";
-    printVector(args->imuData);
+    std::vector<int> fsrData = args->fsrData;
+    std::vector<int> imuData = args->imuData;
 
-    args->ram.add(1);
+    // Convertir los datos de fsr e imu a bytes
+    std::vector<uint8_t> fsrBytes;
+    for (const auto &value : fsrData)
+    {
+        uint8_t byte1 = (value >> 8) & 0xFF; // Obtener el byte más significativo
+        uint8_t byte2 = value & 0xFF;        // Obtener el byte menos significativo
+        fsrBytes.push_back(byte1);
+        fsrBytes.push_back(byte2);
+    }
+
+    std::vector<uint8_t> imuBytes;
+    for (const auto &value : imuData)
+    {
+        uint8_t byte1 = (value >> 8) & 0xFF; // Obtener el byte más significativo
+        uint8_t byte2 = value & 0xFF;        // Obtener el byte menos significativo
+        imuBytes.push_back(byte1);
+        imuBytes.push_back(byte2);
+    }
+
+    // Combinar los bytes de fsr e imu en una sola variable
+    std::vector<uint8_t> data;
+    data.reserve(fsrBytes.size() + imuBytes.size());
+    data.insert(data.end(), fsrBytes.begin(), fsrBytes.end());
+    data.insert(data.end(), imuBytes.begin(), imuBytes.end());
+
+    // std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAA-Contenido del vector data:" << std::endl;
+    // for (const auto &byte : data)
+    // {
+    //     std::cout << std::hex << static_cast<int>(byte) << " "; // Imprimir el byte en hexadecimal
+    // }
+    // std::cout << std::endl;
+
+    // Recuperar DataPacket y añadir los bytes
+    DataPacket &dataPacket = args->dataPacket;
+    size_t bytesLeft = dataPacket.getBytesLeft();
+    printf("EEEEEEEEEEE-Bytes left: %ld\n", bytesLeft);
+    // printf("OOOOOOOOOOO-Data size: %ld\n", data.size());
+
+    // HASTA AQUI VA BUENO
+    // Comprobado que hace bien las iteraciones, solo queda que meta los datos como tal bien
+    // linea 16 DataPacket.cpp
+
+    // Si los datos caben en el paquete, añadirlos
+    if (bytesLeft >= data.size())
+    {
+        dataPacket.insert_data(data);
+    }
+    else
+    {
+        // Si los datos no caben, añadir los que quepan y guardar el resto para el siguiente ciclo
+        dataPacket.insert_data(std::vector<uint8_t>(data.begin(), data.begin() + bytesLeft));
+        args->ram.add(dataPacket.to_bytes());
+
+        // Guardar el resto de los datos para el siguiente ciclo
+        // self.packet = DataPacket(self.config)
+        // self.packet.insert_data(data [data_left:])
+    }
+
     usleep(STATE_GENERAL_DURATION);
 }
 

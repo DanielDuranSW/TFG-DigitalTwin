@@ -29,7 +29,7 @@ void *ram_checkAndConsume(void *ram)
     return NULL;
 }
 
-void RAM::add(int item)
+void RAM::add(std::vector<uint8_t> packet)
 {
     pthread_mutex_lock(&mutex);
 
@@ -38,12 +38,21 @@ void RAM::add(int item)
     {
         pthread_cond_wait(&can_produce, &mutex);
     }
+
+    std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAA-Contenido del packete es:" << std::endl;
+    for (const auto &byte : packet)
+    {
+        std::cout << std::hex << static_cast<int>(byte) << " "; // Imprimir el byte en hexadecimal
+    }
+    std::cout << std::endl;
+
     QString bufferName = QString("Buffer%1").arg(writePos);
     printf("----------------------Dibujo nombre del buffer: %s\n", qPrintable(bufferName));
     stateSignalHandler->onWorkingBuffer(bufferName, true); // aqui se deberia dibujar el rectangulo
     printf("Añadido a buffer con tamaño %d\n", count);
     stateSignalHandler->onWorking("WaitingTransfer", true);
-    buffer[writePos] = item;
+    // buffer[writePos] = packet;
+    buffer[writePos] = 1;
     writePos = (writePos + 1) % capacity; // Incremento de manera circular
     ++count;
 
@@ -60,14 +69,14 @@ void RAM::add(int item)
         pthread_cond_wait(&can_consume, &mutex);
     }
 
-    int item = buffer[readPos];
+    int packet = buffer[readPos];
     readPos = (readPos + 1) % capacity;
     --count;
 
     pthread_mutex_unlock(&mutex);
     pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
 
-    return item;
+    return packet;
 }*/
 
 void RAM::checkAndConsume()
@@ -92,12 +101,12 @@ void RAM::checkAndConsume()
                 printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
                 stateSignalHandler->onWorkingBuffer(bufferName, false);
 
-                int consumedItem = buffer[readPos];
+                int consumedpacket = buffer[readPos];
                 readPos = (readPos + 1) % capacity;
                 --count;
 
-                // Procesado del item consumido
-                std::cout << "Consumido: " << consumedItem << std::endl;
+                // Procesado del packet consumido
+                std::cout << "Consumido: " << consumedpacket << std::endl;
 
                 usleep(STATE_GENERAL_DURATION);
                 stateSignalHandler->onWorking("WaitingTransfer", true);

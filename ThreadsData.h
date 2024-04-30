@@ -7,6 +7,7 @@
 #include "StateSignalHandler.h"
 #include "resources/Resource.h"
 #include "threads/CSVReader.h"
+#include "DataPacket.h"
 
 struct Instances
 {
@@ -15,8 +16,10 @@ struct Instances
     StateSignalHandler *stateSignalHandler;
     Resource resource;
     CSVReader *csvReader;
+    DataPacket dataPacket;
     std::vector<int> fsrData;
     std::vector<int> imuData;
+    std::vector<uint8_t> leftoverData;
 
     Instances() : ram(nullptr) {}
 };

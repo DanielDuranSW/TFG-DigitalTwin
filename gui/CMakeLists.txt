@@ -52,8 +52,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../threads/RAM_Operation.h
         ../threads/CSVReader.h
         ../threads/CSVReader.cpp
-        ../Insole.cpp
-        ../Insole.h
         ../Makefile
         ../OrchestratorDMA.cpp
         ../OrchestratorDMA.h
@@ -65,6 +63,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../StateSignalHandler.cpp
         ../StateSignalHandler.h
         ../config.h
+        ../DataPacket.h
+        ../DataPacket.cpp
         ../data/data1.csv
     )
 # Define target properties for Android with Qt 6 as:
