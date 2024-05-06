@@ -6,7 +6,7 @@ DataPacket::DataPacket() : token(TOKEN_VALUE), crc(CRC_VALUE), dummy(DUMMY_BYTE)
     // Inicialización de los valores de configuración
     bytesLeft = DATA_PACKET_SIZE;
     index = 0;
-    data.resize(DATA_PACKET_SIZE, 0); // Inicializar el vector de datos con ceros
+    data.resize(DATA_PACKET_SIZE, 0);
 }
 
 void DataPacket::insert_data(const std::vector<uint8_t> &byte_data)

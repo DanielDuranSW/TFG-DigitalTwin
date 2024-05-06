@@ -34,14 +34,16 @@ int main(int argc, char *argv[])
     StateSignalHandler stateSignalHandler;
     RAM ram(&stateSignalHandler);
     Resource resource;
-    CSVReader csvReader("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
+    CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
+    CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
 
     Instances argsInstance;
     argsInstance.state = state;
     argsInstance.ram = RAM(&stateSignalHandler);
     argsInstance.stateSignalHandler = &stateSignalHandler;
     argsInstance.resource = resource;
-    argsInstance.csvReader = &csvReader;
+    argsInstance.csvReaderFSR = &csvReaderFSR;
+    argsInstance.csvReaderIMU = &csvReaderIMU;
     argsInstance.dataPacket = DataPacket();
 
     GUIArguments guiArgs;

@@ -30,6 +30,11 @@ void ram_function(Instances *args)
 {
     std::vector<int> fsrData = args->fsrData;
     std::vector<int> imuData = args->imuData;
+    printf("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n");
+    printVector(fsrData);
+    printf("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\n");
+    printVector(imuData);
+    printf("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr\n");
 
     // Convertir los datos de fsr e imu a bytes
     std::vector<uint8_t> fsrBytes;

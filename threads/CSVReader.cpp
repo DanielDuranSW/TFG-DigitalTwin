@@ -5,42 +5,50 @@ CSVReader::CSVReader(const std::string &filename) : file(filename) {}
 
 bool CSVReader::getcsvFSR(std::vector<int> &fsrData)
 {
-    if (std::getline(file, line))
+    for (int lineCount = 0; lineCount < linesToRead; lineCount++)
     {
-        std::istringstream iss(line);
-        std::string token;
-
-        for (int i = 0; i < 32; ++i)
+        if (std::getline(file, line))
         {
-            if (!std::getline(iss, token, ','))
-                return false; // No hay suficientes datos en la línea
-            fsrData.push_back(std::stoi(token));
-        }
+            std::istringstream iss(line);
+            std::string token;
 
-        return true;
+            for (int i = 0; i < 32; ++i)
+            {
+                if (!std::getline(iss, token, ','))
+                    return false; // No hay suficientes datos en la línea
+                fsrData.push_back(std::stoi(token));
+            }
+        }
     }
-    return false; // EOF
+    return true;
 }
 
-void CSVReader::getcsvIMU(std::vector<int> &imuData)
+bool CSVReader::getcsvIMU(std::vector<int> &imuData)
 {
-    std::istringstream iss(line);
-    std::string token;
-
-    // Saltar los primeros 32 números
-    for (int i = 0; i < 32; ++i)
+    for (int lineCount = 0; lineCount < linesToRead; lineCount++)
     {
-        if (!std::getline(iss, token, ','))
-            return; // No hay suficientes datos en la línea
-    }
+        if (std::getline(file, line))
+        {
+            std::istringstream iss(line);
+            std::string token;
 
-    // Leer los siguientes 6 números para IMU
-    for (int i = 0; i < 6; ++i)
-    {
-        if (!std::getline(iss, token, ','))
-            return; // No hay suficientes datos en la línea
-        imuData.push_back(std::stoi(token));
+            // Saltar los primeros 32 números
+            for (int i = 0; i < 32; ++i)
+            {
+                if (!std::getline(iss, token, ','))
+                    return false; // No hay suficientes datos en la línea
+            }
+
+            // Leer los siguientes 6 números para IMU
+            for (int i = 0; i < 6; ++i)
+            {
+                if (!std::getline(iss, token, ','))
+                    return false; // No hay suficientes datos en la línea
+                imuData.push_back(std::stoi(token));
+            }
+        }
     }
+    return true;
 }
 
 bool CSVReader::isOpen() const

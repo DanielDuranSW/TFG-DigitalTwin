@@ -6,7 +6,7 @@ void *fsr_run(void *arg)
     Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
-    CSVReader *csvReader = args->csvReader;
+    CSVReader *csvReaderFSR = args->csvReaderFSR;
 
     while (true)
     {
@@ -21,7 +21,7 @@ void *fsr_run(void *arg)
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         std::vector<int> fsrData;
-        csvReader->getcsvFSR(fsrData);
+        csvReaderFSR->getcsvFSR(fsrData);
         args->fsrData = fsrData;
 
         printf("FSR_Acquisition terminado\n");

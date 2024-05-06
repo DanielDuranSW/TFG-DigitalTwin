@@ -7,12 +7,14 @@
 #include <sstream>
 #include <vector>
 
+#define linesToRead 2
+
 class CSVReader
 {
 public:
     CSVReader(const std::string &filename);
     bool getcsvFSR(std::vector<int> &fsrData);
-    void getcsvIMU(std::vector<int> &imuData);
+    bool getcsvIMU(std::vector<int> &imuData);
 
     bool isOpen() const;
 

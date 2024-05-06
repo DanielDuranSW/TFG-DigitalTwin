@@ -6,7 +6,7 @@ void *imu_run(void *arg)
     Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
-    CSVReader *csvReader = args->csvReader;
+    CSVReader *csvReaderIMU = args->csvReaderIMU;
 
     while (true)
     {
@@ -21,7 +21,7 @@ void *imu_run(void *arg)
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         std::vector<int> imuData;
-        csvReader->getcsvIMU(imuData);
+        csvReaderIMU->getcsvIMU(imuData);
         args->imuData = imuData;
 
         printf("IMU terminado\n");

@@ -15,7 +15,8 @@ struct Instances
     RAM ram;
     StateSignalHandler *stateSignalHandler;
     Resource resource;
-    CSVReader *csvReader;
+    CSVReader *csvReaderFSR;
+    CSVReader *csvReaderIMU;
     DataPacket dataPacket;
     std::vector<int> fsrData;
     std::vector<int> imuData;
