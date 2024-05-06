@@ -6,16 +6,25 @@ DataPacket::DataPacket() : token(TOKEN_VALUE), crc(CRC_VALUE), dummy(DUMMY_BYTE)
     // Inicialización de los valores de configuración
     bytesLeft = DATA_PACKET_SIZE;
     index = 0;
-    // data.resize(DATA_PACKET_SIZE, 0); // Inicializar el vector de datos con ceros
+    data.resize(DATA_PACKET_SIZE, 0); // Inicializar el vector de datos con ceros
 }
 
 void DataPacket::insert_data(const std::vector<uint8_t> &byte_data)
 {
     size_t dataLength = byte_data.size();
-    endIndex = index + dataLength;
-    // data.insert(data.begin() + index, byte_data.begin(), byte_data.end()); // NUSE
+    size_t endIndex = index + dataLength;
+
+    for (size_t i = 0; i < dataLength; ++i)
+    {
+        if (index >= DATA_PACKET_SIZE)
+        {
+            break;
+        }
+        data[index++] = byte_data[i];
+    }
+
     index = endIndex;
-    bytesLeft = bytesLeft - dataLength;
+    bytesLeft -= dataLength;
 }
 
 std::vector<uint8_t> DataPacket::to_bytes() const

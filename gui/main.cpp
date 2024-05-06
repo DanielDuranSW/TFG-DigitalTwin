@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
     argsInstance.stateSignalHandler = &stateSignalHandler;
     argsInstance.resource = resource;
     argsInstance.csvReader = &csvReader;
+    argsInstance.dataPacket = DataPacket();
 
     GUIArguments guiArgs;
     guiArgs.argc = argc;

@@ -70,8 +70,8 @@ void ram_function(Instances *args)
     // printf("OOOOOOOOOOO-Data size: %ld\n", data.size());
 
     // HASTA AQUI VA BUENO
-    // Comprobado que hace bien las iteraciones, solo queda que meta los datos como tal bien
-    // linea 16 DataPacket.cpp
+    // Comprobado que hace bien la primera iteración, a partir de la primera no hace resta ni nada
+    // se queda en 0 bytes left
 
     // Si los datos caben en el paquete, añadirlos
     if (bytesLeft >= data.size())
@@ -85,8 +85,8 @@ void ram_function(Instances *args)
         args->ram.add(dataPacket.to_bytes());
 
         // Guardar el resto de los datos para el siguiente ciclo
-        // self.packet = DataPacket(self.config)
-        // self.packet.insert_data(data [data_left:])
+        args->dataPacket = DataPacket(); // Reiniciar el paquete de datos
+        args->dataPacket.insert_data(std::vector<uint8_t>(data.begin() + bytesLeft, data.end()));
     }
 
     usleep(STATE_GENERAL_DURATION);
