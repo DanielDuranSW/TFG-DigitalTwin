@@ -51,7 +51,7 @@ void RAM::add(std::vector<uint8_t> packet)
     stateSignalHandler->onWorkingBuffer(bufferName, true); // aqui se deberia dibujar el rectangulo
     printf("Añadido a buffer con tamaño %d\n", count);
     stateSignalHandler->onWorking("WaitingTransfer", true);
-    // buffer[writePos] = packet;
+    // buffer[writePos] = packet; Aqui tengo que meter el paquete de alguna manera
     buffer[writePos] = 1;
     writePos = (writePos + 1) % capacity; // Incremento de manera circular
     ++count;

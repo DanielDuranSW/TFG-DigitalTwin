@@ -55,7 +55,7 @@ void ram_function(Instances *args)
         imuBytes.push_back(byte2);
     }
 
-    // Combinar los bytes de fsr e imu en una sola variable
+    // Combinar los bytes de fsr e imu en una sola variable 76 bytes
     std::vector<uint8_t> data;
     data.reserve(fsrBytes.size() + imuBytes.size());
     data.insert(data.end(), fsrBytes.begin(), fsrBytes.end());
