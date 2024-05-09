@@ -51,8 +51,8 @@ void RAM::add(std::vector<uint8_t> packet)
     stateSignalHandler->onWorkingBuffer(bufferName, true); // aqui se deberia dibujar el rectangulo
     printf("Añadido a buffer con tamaño %d\n", count);
     stateSignalHandler->onWorking("WaitingTransfer", true);
-    // buffer[writePos] = packet; Aqui tengo que meter el paquete de alguna manera
-    buffer[writePos] = 1;
+    buffer[writePos] = packet;
+    // buffer[writePos] = 1;
     writePos = (writePos + 1) % capacity; // Incremento de manera circular
     ++count;
 
@@ -91,6 +91,11 @@ void RAM::checkAndConsume()
         if (count >= BUFFER_SIZE - 1)
         {
 
+            QString FlashName = QString("Flash%1").arg(flashCount);
+            printf("----------------------Dibujo nombre del Flash: %s\n", qPrintable(FlashName));
+            stateSignalHandler->onWorkingBuffer(FlashName, true);
+            ++flashCount;
+
             // Consumir todos los elementos excepto uno (al que apunta el productor)
             while (count > 1)
             {
@@ -101,12 +106,13 @@ void RAM::checkAndConsume()
                 printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
                 stateSignalHandler->onWorkingBuffer(bufferName, false);
 
-                int consumedpacket = buffer[readPos];
+                std::vector<uint8_t> consumedPacket = buffer[readPos];
+                flashMemory.push_back(consumedPacket);
                 readPos = (readPos + 1) % capacity;
                 --count;
 
                 // Procesado del packet consumido
-                std::cout << "Consumido: " << consumedpacket << std::endl;
+                // std::cout << "Consumido: " << consumedpacket << std::endl;
 
                 usleep(STATE_GENERAL_DURATION);
                 stateSignalHandler->onWorking("WaitingTransfer", true);

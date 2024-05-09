@@ -42,16 +42,31 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     int rectangleHeight = ui->graphicsViewBuffer->height() -4;
 
     // Crear un QGraphicsScene y asociarlo con el QGraphicsView
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    ui->graphicsViewBuffer->setScene(scene);
+    QGraphicsScene *sceneBuffer = new QGraphicsScene(this);
+    ui->graphicsViewBuffer->setScene(sceneBuffer);
     ui->graphicsViewBuffer->setStyleSheet("background-color: transparent;");
 
     for (int i = 0; i < BUFFER_SIZE; ++i) {
         QString bufferKey = QString("Buffer%1").arg(i);
-        QGraphicsRectItem *rectangle = scene->addRect((i - 1) * rectangleWidth, 0, rectangleWidth, rectangleHeight);
+        QGraphicsRectItem *rectangle = sceneBuffer->addRect((i - 1) * rectangleWidth, 0, rectangleWidth, rectangleHeight);
         rectangle->setBrush(QColor(33, 144, 255)); // Color del rectángulo
         rectangle->setPen(QPen(Qt::black, 2)); // Grosor y color del borde
         rectangleMap[bufferKey] = rectangle;
+    }
+    rectangleWidth =ui->graphicsViewFlash->width() / FLASH_SIZE;
+    rectangleHeight = ui->graphicsViewFlash->height() -4;
+
+    // Crear un QGraphicsScene y asociarlo con el QGraphicsView
+    QGraphicsScene *sceneFlash = new QGraphicsScene(this);
+    ui->graphicsViewFlash->setScene(sceneFlash);
+    ui->graphicsViewFlash->setStyleSheet("background-color: transparent;");
+
+    for (int i = 0; i < FLASH_SIZE; ++i) {
+        QString flashKey = QString("Flash%1").arg(i);
+        QGraphicsRectItem *rectangle = sceneFlash->addRect((i - 1) * rectangleWidth, 0, rectangleWidth, rectangleHeight);
+        rectangle->setBrush(QColor(33, 144, 255)); // Color del rectángulo
+        rectangle->setPen(QPen(Qt::black, 2)); // Grosor y color del borde
+        rectangleMap[flashKey] = rectangle;
     }
 
     QMap<QString, QGraphicsEllipseItem *> circleMap;

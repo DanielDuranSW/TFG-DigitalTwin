@@ -325,6 +325,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsViewFlash">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>503</y>
+      <width>590</width>
+      <height>39</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>graphicsViewFsr</zorder>
    <zorder>graphicsViewImu</zorder>
@@ -336,6 +346,7 @@
    <zorder>graphicsViewRamToFlash</zorder>
    <zorder>graphicsViewRtc</zorder>
    <zorder>graphicsViewBuffer</zorder>
+   <zorder>graphicsViewFlash</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

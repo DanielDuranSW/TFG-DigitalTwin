@@ -4,7 +4,8 @@
 // 0.5 segundos (500,000 microsegundos) -> usleep(500000);
 // 1 segundos -> usleep(1000000);
 
-#define BUFFER_SIZE 16
+#define BUFFER_SIZE 10
+#define FLASH_SIZE 32
 
 extern int TLB;
 extern int PCK;
