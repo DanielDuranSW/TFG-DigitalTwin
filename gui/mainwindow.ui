@@ -335,6 +335,39 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButtonUpdateConfigurations">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>110</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditBufferSize">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>310</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditStateGeneralDuration">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>50</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>graphicsViewFsr</zorder>
    <zorder>graphicsViewImu</zorder>
@@ -347,6 +380,9 @@
    <zorder>graphicsViewRtc</zorder>
    <zorder>graphicsViewBuffer</zorder>
    <zorder>graphicsViewFlash</zorder>
+   <zorder>pushButtonUpdateConfigurations</zorder>
+   <zorder>lineEditBufferSize</zorder>
+   <zorder>lineEditStateGeneralDuration</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

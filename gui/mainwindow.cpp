@@ -86,6 +86,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     // Conectar la señal del StateSignalHandler a la ranura de la MainWindow
     connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
     connect(stateSignalHandler, &StateSignalHandler::rectangleColorChanged, this, &MainWindow::onRectangleColorChanged);
+    connect(ui->pushButtonUpdateConfigurations, &QPushButton::clicked, this, &MainWindow::updateConfigurations);
     // Guardar los mapas para su uso posterior
     this->sceneMap = sceneMap;
     this->circleMap = circleMap;
@@ -128,6 +129,12 @@ void MainWindow::onRectangleColorChanged(const QString &rectangleName, bool isWo
             rectangle->setBrush(QColor(33, 144, 255));
         }
     }
+}
+
+void MainWindow::updateConfigurations()
+{
+    //BUFFER_SIZE = ui->lineEditBufferSize->text().toInt();
+    STATE_GENERAL_DURATION = ui->lineEditStateGeneralDuration->text().toInt();
 }
 
 MainWindow::~MainWindow()

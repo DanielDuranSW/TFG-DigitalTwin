@@ -53,10 +53,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../threads/CSVReader.h
         ../threads/CSVReader.cpp
         ../Makefile
-        ../OrchestratorDMA.cpp
-        ../OrchestratorDMA.h
-        ../OrchestratorMain.cpp
-        ../OrchestratorMain.h
         ../State.cpp
         ../State.h
         ../ThreadsData.h
