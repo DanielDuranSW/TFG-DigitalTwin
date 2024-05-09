@@ -75,9 +75,9 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     {
 
             // Si no es un buffer, crea un círculo
-            QGraphicsEllipseItem *circle = new QGraphicsEllipseItem(0, 0, 50, 50);
+            QGraphicsEllipseItem *circle = new QGraphicsEllipseItem(0, 0, 71, 71);
             circle->setBrush(QColor(33, 144, 255));
-            circle->setPen(QPen(Qt::black, 2)); // Grosor y color del borde
+            // circle->setPen(QPen(Qt::black, 2)); // Grosor y color del borde
             sceneMap[key]->addItem(circle);
             circleMap[key] = circle;
 
@@ -135,6 +135,7 @@ void MainWindow::updateConfigurations()
 {
     //BUFFER_SIZE = ui->lineEditBufferSize->text().toInt();
     STATE_GENERAL_DURATION = ui->lineEditStateGeneralDuration->text().toInt();
+    RESOURCE_RTC_DURATION = ui->lineEditResourceRtcDuration->text().toInt();
 }
 
 MainWindow::~MainWindow()

@@ -15,7 +15,6 @@ void *fsr_run(void *arg)
         {
             state->waitCondition();
         }
-        stateSignalHandler->onWorking("Rtc", false);
         stateSignalHandler->onWorking("Fsr", true);
         printf("FSR_Acquisition ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo

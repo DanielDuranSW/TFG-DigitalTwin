@@ -14,7 +14,7 @@ void *custom_run(void *arg)
         {
             state->waitCondition();
         }
-
+        stateSignalHandler->onWorking("Rtc", false);
         stateSignalHandler->onWorking("Custom", true);
         printf("Custom_Event_Handler ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo

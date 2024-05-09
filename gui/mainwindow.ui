@@ -20,10 +20,10 @@
    <widget class="QGraphicsView" name="graphicsViewFsr">
     <property name="geometry">
      <rect>
-      <x>239</x>
-      <y>71</y>
-      <width>55</width>
-      <height>55</height>
+      <x>233</x>
+      <y>67</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -45,10 +45,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>324</x>
-      <y>41</y>
-      <width>55</width>
-      <height>55</height>
+      <x>328</x>
+      <y>39</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -95,10 +95,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>409</x>
-      <y>71</y>
-      <width>55</width>
-      <height>55</height>
+      <x>420</x>
+      <y>68</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -129,10 +129,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>409</x>
-      <y>314</y>
-      <width>55</width>
-      <height>55</height>
+      <x>417</x>
+      <y>308</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -163,10 +163,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>323</x>
-      <y>345</y>
-      <width>55</width>
-      <height>55</height>
+      <x>328</x>
+      <y>342</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -197,10 +197,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>314</y>
-      <width>55</width>
-      <height>55</height>
+      <x>233</x>
+      <y>308</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -231,10 +231,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>578</x>
-      <y>120</y>
-      <width>55</width>
-      <height>55</height>
+      <x>560</x>
+      <y>125</y>
+      <width>78</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -265,10 +265,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>578</x>
-      <y>199</y>
-      <width>55</width>
-      <height>55</height>
+      <x>562</x>
+      <y>220</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -296,10 +296,10 @@
    <widget class="QGraphicsView" name="graphicsViewRtc">
     <property name="geometry">
      <rect>
-      <x>293</x>
-      <y>192</y>
-      <width>55</width>
-      <height>55</height>
+      <x>327</x>
+      <y>196</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -338,8 +338,8 @@
    <widget class="QPushButton" name="pushButtonUpdateConfigurations">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>110</y>
+      <x>80</x>
+      <y>160</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -362,10 +362,55 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>50</y>
+      <y>40</y>
       <width>113</width>
       <height>25</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>151</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Espera general</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditResourceRtcDuration">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>110</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>90</y>
+      <width>151</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Espera ISR</string>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
     </property>
    </widget>
    <zorder>label</zorder>
@@ -383,6 +428,9 @@
    <zorder>pushButtonUpdateConfigurations</zorder>
    <zorder>lineEditBufferSize</zorder>
    <zorder>lineEditStateGeneralDuration</zorder>
+   <zorder>label_2</zorder>
+   <zorder>lineEditResourceRtcDuration</zorder>
+   <zorder>label_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
