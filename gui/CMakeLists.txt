@@ -63,6 +63,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../StateSignalHandler.cpp
         ../StateSignalHandler.h
         ../config.h
+        ../config.cpp
         ../DataPacket.h
         ../DataPacket.cpp
         ../data/data1.csv
