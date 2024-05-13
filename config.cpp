@@ -1,8 +1,6 @@
 // config.cpp
 #include "config.h"
 
-int TLB = 4;
-int PCK = 2;
 int INITIAL_WAIT = 1000000;
 int STATE_GENERAL_DURATION = 50000;
 int STATE_FSR_DURATION = 0;
