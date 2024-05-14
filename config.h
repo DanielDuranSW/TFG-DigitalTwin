@@ -5,6 +5,7 @@
 #include <vector>
 
 #define BUFFER_SIZE 10
+#define BUFFER_LLAC_SIZE 10
 #define FLASH_SIZE 32
 
 extern int TLB;
@@ -25,5 +26,9 @@ extern std::vector<int> fsr_in_mid_proximal_phalanges;
 extern std::vector<int> fsr_in_metatarsals;
 extern std::vector<int> fsr_in_tarsometatarsals;
 extern std::vector<int> fsr_in_calcaneus_talus;
+
+extern std::vector<int> imu_in_x;
+extern std::vector<int> imu_in_y;
+extern std::vector<int> imu_in_z;
 
 #endif // CONFIG_H

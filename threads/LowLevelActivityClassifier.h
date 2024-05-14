@@ -9,7 +9,8 @@
 #include "config.h"
 
 void *low_level_activity_classifier_run(void *arg);
-double calculateMean(const std::vector<int> &data, const std::vector<int> &positions);
+int calculateMean(const std::vector<int> &data, const std::vector<int> &positions);
 void printVector(const std::vector<int> &vec, const char *vecName);
+void printVectorFromPositions(const std::vector<int> &data, const std::vector<int> &positions, const char *vecName);
 
 #endif

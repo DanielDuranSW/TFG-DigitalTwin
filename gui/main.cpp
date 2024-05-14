@@ -55,9 +55,8 @@ int main(int argc, char *argv[])
     guiArgs.stateSignalHandler = &stateSignalHandler;
 
     pthread_create(&guiThread, NULL, gui_run, &guiArgs);
-    usleep(INITIAL_WAIT);
     pthread_create(&lowLevelActivityClassifierThread, NULL, low_level_activity_classifier_run, &argsInstance);
-    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
+    usleep(INITIAL_WAIT);
     pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
     pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);
     pthread_create(&bleStackThread, NULL, ble_run, &argsInstance.state);
@@ -65,6 +64,7 @@ int main(int argc, char *argv[])
     pthread_create(&customEventHandlerThread, NULL, custom_run, &argsInstance.state);
     pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &argsInstance.ram);
     pthread_create(&rtcThread, NULL, rtc_run, &argsInstance);
+    pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
 
     pthread_join(lowLevelActivityClassifierThread, NULL);
     pthread_join(fsrAcquisitionThread, NULL);
