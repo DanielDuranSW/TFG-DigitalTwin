@@ -14,6 +14,8 @@ protected:
     pthread_cond_t cond;
     int current_stage;
 
+    pthread_cond_t condLLAC;
+
 public:
     State();
     virtual ~State();
@@ -24,6 +26,10 @@ public:
     void broadcastCondition();
     int getCurrentStage();
     void setCurrentStage(int stage);
+
+    // For LowLevelActivityClassifier
+    void waitConditionLLAC();
+    void signalConditionLLAC();
 };
 
 #endif

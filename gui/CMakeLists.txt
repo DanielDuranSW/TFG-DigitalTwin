@@ -38,6 +38,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../resources/RTC.h
         ../resources/SPI.cpp
         ../resources/SPI.h
+        ../resources/CSVReader.h
+        ../resources/CSVReader.cpp
         ../threads/BLE_Stack_Operation.cpp
         ../threads/BLE_Stack_Operation.h
         ../threads/Custom_Event_Handler.cpp
@@ -50,8 +52,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../threads/IMU_Acquisition.h
         ../threads/RAM_Operation.cpp
         ../threads/RAM_Operation.h
-        ../threads/CSVReader.h
-        ../threads/CSVReader.cpp
+        ../threads/LowLevelActivityClassifier.h
+        ../threads/LowLevelActivityClassifier.cpp
         ../Makefile
         ../State.cpp
         ../State.h

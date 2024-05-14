@@ -1,8 +1,8 @@
 /// config.h
 #ifndef CONFIG_H
 #define CONFIG_H
-// 0.5 segundos (500,000 microsegundos) -> usleep(500000);
-// 1 segundos -> usleep(1000000);
+
+#include <vector>
 
 #define BUFFER_SIZE 10
 #define FLASH_SIZE 32
@@ -19,5 +19,11 @@ extern int STATE_ENERGY_DURATION;
 extern int STATE_CUSTOM_DURATION;
 extern int RESOURCE_RTC_DURATION;
 extern int RAM_BUFFER_RATIO_REFRESH;
+
+extern std::vector<int> fsr_in_distal_phalanges;
+extern std::vector<int> fsr_in_mid_proximal_phalanges;
+extern std::vector<int> fsr_in_metatarsals;
+extern std::vector<int> fsr_in_tarsometatarsals;
+extern std::vector<int> fsr_in_calcaneus_talus;
 
 #endif // CONFIG_H

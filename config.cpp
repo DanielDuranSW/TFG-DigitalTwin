@@ -1,13 +1,23 @@
 // config.cpp
 #include "config.h"
 
+// 0.5 segundos (500,000 microsegundos) -> usleep(500000);
+// 1 segundos -> usleep(1000000);
+
 int INITIAL_WAIT = 1000000;
-int STATE_GENERAL_DURATION = 50000;
+int STATE_GENERAL_DURATION = 500000;
 int STATE_FSR_DURATION = 0;
 int STATE_IMU_DURATION = 0;
 int STATE_RAM_DURATION = 0;
 int STATE_BLE_DURATION = 0;
 int STATE_ENERGY_DURATION = 0;
 int STATE_CUSTOM_DURATION = 0;
-int RESOURCE_RTC_DURATION = 100000;
+int RESOURCE_RTC_DURATION = 1000000;
 int RAM_BUFFER_RATIO_REFRESH = 10000;
+
+// Definiciones de las posiciones de los grupos FSR
+std::vector<int> fsr_in_distal_phalanges = {0, 1, 2, 4};
+std::vector<int> fsr_in_mid_proximal_phalanges = {6, 7, 8, 9, 10, 11};
+std::vector<int> fsr_in_metatarsals = {12, 13, 14, 15, 16, 26, 27};
+std::vector<int> fsr_in_tarsometatarsals = {2, 3, 19, 22, 23, 24, 25};
+std::vector<int> fsr_in_calcaneus_talus = {17, 18, 28, 29, 30, 31};

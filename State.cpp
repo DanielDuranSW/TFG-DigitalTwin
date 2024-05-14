@@ -5,12 +5,14 @@ State::State() : current_stage(0)
 {
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&cond, NULL);
+    pthread_cond_init(&condLLAC, NULL);
 }
 
 State::~State()
 {
     pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&cond);
+    pthread_cond_destroy(&condLLAC);
 }
 
 void State::lockMutex()
@@ -46,4 +48,16 @@ int State::getCurrentStage()
 void State::setCurrentStage(int stage)
 {
     current_stage = stage;
+}
+
+// For LowLevelActivityClassifier
+
+void State::waitConditionLLAC()
+{
+    pthread_cond_wait(&condLLAC, &mutex);
+}
+
+void State::signalConditionLLAC()
+{
+    pthread_cond_signal(&condLLAC);
 }

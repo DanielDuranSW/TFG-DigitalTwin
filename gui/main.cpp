@@ -10,8 +10,10 @@
 #include "threads/IMU_Acquisition.h"
 #include "threads/RAM_Operation.h"
 #include "threads/Energy_Saving.h"
-#include "threads/CSVReader.h"
+
+#include "threads/LowLevelActivityClassifier.h"
 #include "ThreadsData.h"
+#include "resources/CSVReader.h"
 #include "resources/RTC.h"
 #include "config.h"
 
@@ -29,6 +31,7 @@ int main(int argc, char *argv[])
     pthread_t ramToFlashThread;
     pthread_t guiThread;
     pthread_t rtcThread;
+    pthread_t lowLevelActivityClassifierThread;
 
     State state;
     StateSignalHandler stateSignalHandler;
@@ -53,6 +56,7 @@ int main(int argc, char *argv[])
 
     pthread_create(&guiThread, NULL, gui_run, &guiArgs);
     usleep(INITIAL_WAIT);
+    pthread_create(&lowLevelActivityClassifierThread, NULL, low_level_activity_classifier_run, &argsInstance);
     pthread_create(&fsrAcquisitionThread, NULL, fsr_run, &argsInstance.state);
     pthread_create(&imuAcquisitionThread, NULL, imu_run, &argsInstance.state);
     pthread_create(&ramOperationThread, NULL, ram_run, &argsInstance);
@@ -62,6 +66,7 @@ int main(int argc, char *argv[])
     pthread_create(&ramToFlashThread, NULL, ram_checkAndConsume, &argsInstance.ram);
     pthread_create(&rtcThread, NULL, rtc_run, &argsInstance);
 
+    pthread_join(lowLevelActivityClassifierThread, NULL);
     pthread_join(fsrAcquisitionThread, NULL);
     pthread_join(imuAcquisitionThread, NULL);
     pthread_join(ramOperationThread, NULL);
@@ -70,6 +75,7 @@ int main(int argc, char *argv[])
     pthread_join(customEventHandlerThread, NULL);
     pthread_join(ramToFlashThread, NULL);
     pthread_join(guiThread, NULL);
+    pthread_join(rtcThread, NULL);
 
     return 0;
 }

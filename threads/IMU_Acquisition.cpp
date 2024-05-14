@@ -27,6 +27,9 @@ void *imu_run(void *arg)
         printf("IMU terminado\n");
         stateSignalHandler->onWorking("Imu", false);
 
+        // Dar paso a LLAC
+        state->signalConditionLLAC();
+
         state->setCurrentStage(2);
         state->broadcastCondition();
         state->unlockMutex();

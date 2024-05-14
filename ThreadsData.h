@@ -6,7 +6,7 @@
 #include "State.h"
 #include "StateSignalHandler.h"
 #include "resources/Resource.h"
-#include "threads/CSVReader.h"
+#include "resources/CSVReader.h"
 #include "DataPacket.h"
 
 struct Instances
