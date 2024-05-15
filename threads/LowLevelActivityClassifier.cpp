@@ -14,6 +14,8 @@ std::vector<int> buffer_imu_in_z(BUFFER_LLAC_SIZE);
 int bufferIndexFSR = 0;
 int bufferIndexIMU = 0;
 
+bool bo = false;
+
 void addToBuffer(std::vector<int> &buffer, int value, int index)
 {
     buffer[index % BUFFER_SIZE] = value;
@@ -23,6 +25,7 @@ void *low_level_activity_classifier_run(void *arg)
 {
     Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
+    ClassifierFeatures *classifierFeatures = args->classifierFeatures;
 
     while (true)
     {
@@ -127,6 +130,17 @@ void *low_level_activity_classifier_run(void *arg)
                 printVector(buffer_imu_in_z, "Buffer IMU Z");
             }
             bufferIndexIMU++;
+        }
+
+        bool buffersFull =
+            std::all_of(buffer_imu_in_z.begin(), buffer_imu_in_z.end(), [](int i)
+                        { return i != 0; });
+
+        if (buffersFull || bo)
+        {
+            classifierFeatures->Feature1(buffer_fsr_in_distal_phalanges, buffer_fsr_in_mid_proximal_phalanges, buffer_fsr_in_metatarsals, buffer_fsr_in_tarsometatarsals, buffer_fsr_in_calcaneus_talus, buffer_imu_in_x, buffer_imu_in_y, buffer_imu_in_z);
+
+            bo = true;
         }
 
         state->unlockMutex();

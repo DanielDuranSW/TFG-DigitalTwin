@@ -40,6 +40,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../resources/SPI.h
         ../resources/CSVReader.h
         ../resources/CSVReader.cpp
+        ../resources/ClassifierFeatures.h
+        ../resources/ClassifierFeatures.cpp
         ../threads/BLE_Stack_Operation.cpp
         ../threads/BLE_Stack_Operation.h
         ../threads/Custom_Event_Handler.cpp
