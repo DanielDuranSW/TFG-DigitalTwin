@@ -4,12 +4,10 @@
 
 #include <vector>
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 16
 #define BUFFER_LLAC_SIZE 10
 #define FLASH_SIZE 32
 
-extern int TLB;
-extern int PCK;
 extern int INITIAL_WAIT;
 extern int STATE_GENERAL_DURATION;
 extern int STATE_FSR_DURATION;

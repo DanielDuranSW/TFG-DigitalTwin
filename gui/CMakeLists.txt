@@ -68,6 +68,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../DataPacket.cpp
         ../data/data1.csv
     )
+
+# Include path for fft3.h
+set(FFTW_ROOT /usr/local)
+find_path(FFTW_INCLUDE_DIR fftw3.h PATHS ${FFTW_ROOT}/include)
+find_library(FFTW_LIBRARY fftw3 PATHS ${FFTW_ROOT}/lib)
+target_include_directories(gui PRIVATE ${FFTW_INCLUDE_DIR})
+target_link_libraries(gui PRIVATE ${FFTW_LIBRARY})
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

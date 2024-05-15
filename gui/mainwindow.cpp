@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
         rectangle->setPen(QPen(Qt::black, 2)); // Grosor y color del borde
         rectangleMap[bufferKey] = rectangle;
     }
-    rectangleWidth =ui->graphicsViewFlash->width() / FLASH_SIZE;
+    rectangleWidth = ui->graphicsViewFlash->width() / FLASH_SIZE;
     rectangleHeight = ui->graphicsViewFlash->height() -4;
 
     // Crear un QGraphicsScene y asociarlo con el QGraphicsView
