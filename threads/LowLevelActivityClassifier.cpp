@@ -16,9 +16,15 @@ int bufferIndexIMU = 0;
 
 bool bo = false;
 
-void addToBuffer(std::vector<int> &buffer, int value, int index)
+void addToBuffer(std::vector<int> &buffer, int value)
 {
-    buffer[index % BUFFER_SIZE] = value;
+    // Mover todos los elementos una posición a la derecha
+    for (int i = BUFFER_LLAC_SIZE - 1; i > 0; --i)
+    {
+        buffer[i] = buffer[i - 1];
+    }
+    // Insertar el nuevo valor en la primera posición
+    buffer[0] = value;
 }
 
 void *low_level_activity_classifier_run(void *arg)
@@ -74,19 +80,19 @@ void *low_level_activity_classifier_run(void *arg)
                 printVectorFromPositions(block, fsr_in_calcaneus_talus, "Values for calcaneus talus");
                 printf("Mean calcaneus talus: %d\n", mean_calcaneus_talus);
 
-                addToBuffer(buffer_fsr_in_distal_phalanges, mean_distal_phalanges, bufferIndexFSR);
+                addToBuffer(buffer_fsr_in_distal_phalanges, mean_distal_phalanges);
                 printVector(buffer_fsr_in_distal_phalanges, "Buffer Distal Phalanges");
 
-                addToBuffer(buffer_fsr_in_mid_proximal_phalanges, mean_mid_proximal_phalanges, bufferIndexFSR);
+                addToBuffer(buffer_fsr_in_mid_proximal_phalanges, mean_mid_proximal_phalanges);
                 printVector(buffer_fsr_in_mid_proximal_phalanges, "Buffer Mid Proximal Phalanges");
 
-                addToBuffer(buffer_fsr_in_metatarsals, mean_metatarsals, bufferIndexFSR);
+                addToBuffer(buffer_fsr_in_metatarsals, mean_metatarsals);
                 printVector(buffer_fsr_in_metatarsals, "Buffer Metatarsals");
 
-                addToBuffer(buffer_fsr_in_tarsometatarsals, mean_tarsometatarsals, bufferIndexFSR);
+                addToBuffer(buffer_fsr_in_tarsometatarsals, mean_tarsometatarsals);
                 printVector(buffer_fsr_in_tarsometatarsals, "Buffer Tarsometatarsals");
 
-                addToBuffer(buffer_fsr_in_calcaneus_talus, mean_calcaneus_talus, bufferIndexFSR);
+                addToBuffer(buffer_fsr_in_calcaneus_talus, mean_calcaneus_talus);
                 printVector(buffer_fsr_in_calcaneus_talus, "Buffer Calcaneus Talus");
             }
             bufferIndexFSR++;
@@ -120,13 +126,13 @@ void *low_level_activity_classifier_run(void *arg)
                 printVectorFromPositions(block, imu_in_z, "Values for IMU Z");
                 printf("Mean IMU Z: %d\n", mean_imu_z);
 
-                addToBuffer(buffer_imu_in_x, mean_imu_x, bufferIndexIMU);
+                addToBuffer(buffer_imu_in_x, mean_imu_x);
                 printVector(buffer_imu_in_x, "Buffer IMU X");
 
-                addToBuffer(buffer_imu_in_y, mean_imu_y, bufferIndexIMU);
+                addToBuffer(buffer_imu_in_y, mean_imu_y);
                 printVector(buffer_imu_in_y, "Buffer IMU Y");
 
-                addToBuffer(buffer_imu_in_z, mean_imu_z, bufferIndexIMU);
+                addToBuffer(buffer_imu_in_z, mean_imu_z);
                 printVector(buffer_imu_in_z, "Buffer IMU Z");
             }
             bufferIndexIMU++;
