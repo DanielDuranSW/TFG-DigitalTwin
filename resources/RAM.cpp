@@ -90,6 +90,16 @@ void RAM::checkAndConsume()
         // Lógica para anticipar el consumo si el buffer está por llenarse
         if (count >= BUFFER_SIZE - 1)
         {
+            if (flashCount == FLASH_SIZE)
+            {
+                for (int i = 0; i < FLASH_SIZE; ++i)
+                {
+                    QString previousFlashName = QString("Flash%1").arg(i);
+                    stateSignalHandler->onWorkingBuffer(previousFlashName, false);
+                }
+                // Reiniciar el flashCount si es necesario
+                flashCount = 0;
+            }
 
             QString FlashName = QString("Flash%1").arg(flashCount);
             printf("----------------------Dibujo nombre del Flash: %s\n", qPrintable(FlashName));
@@ -123,6 +133,6 @@ void RAM::checkAndConsume()
         }
 
         // pthread_mutex_unlock(&mutex);
-        usleep(RAM_BUFFER_RATIO_REFRESH); // Evitar la sobrecarga
+        usleep(STATE_GENERAL_DURATION); // Evitar la sobrecarga
     }
 }

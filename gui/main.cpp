@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     StateSignalHandler stateSignalHandler;
     RAM ram(&stateSignalHandler);
     Resource resource;
-    CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
-    CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
+    CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
+    CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
     ClassifierFeatures classifierFeatures;
 
     Instances argsInstance;

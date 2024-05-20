@@ -67,6 +67,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../DataPacket.h
         ../DataPacket.cpp
         ../data/data1.csv
+        ../data/data2.csv
+        ../data/data3.csv
     )
 
 # Include path for fft3.h

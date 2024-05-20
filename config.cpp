@@ -13,7 +13,7 @@ int STATE_BLE_DURATION = 0;
 int STATE_ENERGY_DURATION = 0;
 int STATE_CUSTOM_DURATION = 0;
 int RESOURCE_RTC_DURATION = 1000000;
-int RAM_BUFFER_RATIO_REFRESH = 10000;
+int RAM_BUFFER_RATIO_REFRESH = STATE_GENERAL_DURATION / 4; // No se usa
 
 // Definiciones de las posiciones de los grupos FSR
 std::vector<int> fsr_in_distal_phalanges = {0, 1, 2, 4};

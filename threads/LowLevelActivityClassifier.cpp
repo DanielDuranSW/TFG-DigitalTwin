@@ -146,6 +146,7 @@ void *low_level_activity_classifier_run(void *arg)
         {
             // classifierFeatures->Feature1(buffer_fsr_in_distal_phalanges, buffer_fsr_in_mid_proximal_phalanges, buffer_fsr_in_metatarsals, buffer_fsr_in_tarsometatarsals, buffer_fsr_in_calcaneus_talus, buffer_imu_in_x, buffer_imu_in_y, buffer_imu_in_z);
             classifierFeatures->Feature2and3(buffer_fsr_in_distal_phalanges);
+            classifierFeatures->Feature4(buffer_fsr_in_distal_phalanges, buffer_fsr_in_calcaneus_talus);
             bo = true;
         }
 

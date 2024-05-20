@@ -91,3 +91,37 @@ void ClassifierFeatures::Feature2and3(const std::vector<int> &buffer)
     fftw_free(in);
     fftw_free(out);
 }
+
+void ClassifierFeatures::Feature4(const std::vector<int> &buffer_fsr_in_distal_phalanges, const std::vector<int> &buffer_fsr_in_calcaneus_talus)
+{
+    // Comprobar que los buffers tienen el mismo tamaño
+    if (buffer_fsr_in_distal_phalanges.size() != buffer_fsr_in_calcaneus_talus.size())
+    {
+        std::cerr << "Error: Buffers must have the same size." << std::endl;
+        return;
+    }
+
+    int n = buffer_fsr_in_distal_phalanges.size();
+    double mean1 = calculateMean(buffer_fsr_in_distal_phalanges);
+    double mean2 = calculateMean(buffer_fsr_in_calcaneus_talus);
+
+    double numerator = 0;
+    double denominator1 = 0;
+    double denominator2 = 0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        double diff1 = buffer_fsr_in_distal_phalanges[i] - mean1;
+        double diff2 = buffer_fsr_in_calcaneus_talus[i] - mean2;
+
+        numerator += diff1 * diff2;
+        denominator1 += diff1 * diff1;
+        denominator2 += diff2 * diff2;
+    }
+
+    double denominator = sqrt(denominator1) * sqrt(denominator2);
+
+    double correlation = (denominator == 0) ? 0 : numerator / denominator;
+
+    printf("FEATUREEEEEEEEEEEEEEE44444444444444444444 %f\n", correlation);
+}
