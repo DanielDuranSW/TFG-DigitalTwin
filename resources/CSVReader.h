@@ -7,7 +7,7 @@
 #include <sstream>
 #include <vector>
 
-#define linesToRead 2
+#define linesToRead 1
 
 class CSVReader
 {

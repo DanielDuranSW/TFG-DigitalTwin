@@ -42,6 +42,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../resources/CSVReader.cpp
         ../resources/ClassifierFeatures.h
         ../resources/ClassifierFeatures.cpp
+        ../resources/ClassifierModel.h
+        ../resources/ClassifierModel.cpp
         ../threads/BLE_Stack_Operation.cpp
         ../threads/BLE_Stack_Operation.h
         ../threads/Custom_Event_Handler.cpp
@@ -77,6 +79,14 @@ find_path(FFTW_INCLUDE_DIR fftw3.h PATHS ${FFTW_ROOT}/include)
 find_library(FFTW_LIBRARY fftw3 PATHS ${FFTW_ROOT}/lib)
 target_include_directories(gui PRIVATE ${FFTW_INCLUDE_DIR})
 target_link_libraries(gui PRIVATE ${FFTW_LIBRARY})
+
+# Include path for ONNX Runtime
+set(ONNXRUNTIME_ROOT /usr/local/onnxruntime)
+find_path(ONNXRUNTIME_INCLUDE_DIR onnxruntime_cxx_api.h PATHS ${ONNXRUNTIME_ROOT}/include)
+find_library(ONNXRUNTIME_LIBRARY onnxruntime PATHS ${ONNXRUNTIME_ROOT}/lib)
+target_include_directories(gui PRIVATE ${ONNXRUNTIME_INCLUDE_DIR})
+target_link_libraries(gui PRIVATE ${ONNXRUNTIME_LIBRARY})
+
 
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

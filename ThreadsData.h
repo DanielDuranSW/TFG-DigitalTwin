@@ -9,6 +9,7 @@
 #include "resources/CSVReader.h"
 #include "DataPacket.h"
 #include "resources/ClassifierFeatures.h"
+#include "resources/ClassifierModel.h"
 
 struct Instances
 {
@@ -23,6 +24,7 @@ struct Instances
     std::vector<int> imuData;
     std::vector<uint8_t> leftoverData;
     ClassifierFeatures *classifierFeatures;
+    ClassifierModel *classifierModel;
 
     Instances() : ram(nullptr) {}
 };

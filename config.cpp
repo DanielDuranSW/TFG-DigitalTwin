@@ -13,15 +13,19 @@ int STATE_BLE_DURATION = 0;
 int STATE_ENERGY_DURATION = 0;
 int STATE_CUSTOM_DURATION = 0;
 int RESOURCE_RTC_DURATION = 1000000;
-int RAM_BUFFER_RATIO_REFRESH = STATE_GENERAL_DURATION / 4; // No se usa
+int RAM_BUFFER_RATIO_REFRESH = STATE_GENERAL_DURATION / 4;
 
 // Definiciones de las posiciones de los grupos FSR
-std::vector<int> fsr_in_distal_phalanges = {0, 1, 2, 4};
-std::vector<int> fsr_in_mid_proximal_phalanges = {29, 30, 31};
-std::vector<int> fsr_in_metatarsals = {9, 10, 11, 12};
-std::vector<int> fsr_in_tarsometatarsals = {5, 6, 7, 8};
-std::vector<int> fsr_in_calcaneus_talus = {13, 14, 15, 16};
+std::vector<int> fsr_in_distal_phalanges = {20, 4, 23, 7, 6};
+std::vector<int> fsr_in_mid_proximal_phalanges = {21, 16, 22, 19, 3, 5, 15};
+std::vector<int> fsr_in_metatarsals = {0, 1, 2, 13, 14, 17, 18};
+std::vector<int> fsr_in_tarsometatarsals = {10, 11, 12};
+std::vector<int> fsr_in_calcaneus_talus = {8, 9, 31, 28, 25, 24, 27, 26, 29, 30};
 
-std::vector<int> imu_in_x = {0, 3};
-std::vector<int> imu_in_y = {1, 4};
-std::vector<int> imu_in_z = {2, 5};
+std::vector<int> imu_acc_x = {0};
+std::vector<int> imu_acc_y = {1};
+std::vector<int> imu_acc_z = {2};
+
+std::vector<int> imu_gyro_x = {3};
+std::vector<int> imu_gyro_y = {4};
+std::vector<int> imu_gyro_z = {5};

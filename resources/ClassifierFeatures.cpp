@@ -5,27 +5,10 @@ ClassifierFeatures::ClassifierFeatures() {}
 
 ClassifierFeatures::~ClassifierFeatures() {}
 
-void ClassifierFeatures::Feature1(std::vector<int> buffer_fsr_in_distal_phalanges, std::vector<int> buffer_fsr_in_mid_proximal_phalanges, std::vector<int> buffer_fsr_in_metatarsals, std::vector<int> buffer_fsr_in_tarsometatarsals, std::vector<int> buffer_fsr_in_calcaneus_talus, std::vector<int> buffer_imu_in_x, std::vector<int> buffer_imu_in_y, std::vector<int> buffer_imu_in_z)
+int ClassifierFeatures::Feature1(std::vector<int> buffer)
 {
     // Calcular la media de cada buffer
-    int mean_distal_phalanges = calculateMean(buffer_fsr_in_distal_phalanges);
-    int mean_mid_proximal_phalanges = calculateMean(buffer_fsr_in_mid_proximal_phalanges);
-    int mean_metatarsals = calculateMean(buffer_fsr_in_metatarsals);
-    int mean_tarsometatarsals = calculateMean(buffer_fsr_in_tarsometatarsals);
-    int mean_calcaneus_talus = calculateMean(buffer_fsr_in_calcaneus_talus);
-    int mean_imu_x = calculateMean(buffer_imu_in_x);
-    int mean_imu_y = calculateMean(buffer_imu_in_y);
-    int mean_imu_z = calculateMean(buffer_imu_in_z);
-
-    // printf("FEATUREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n");
-    // printf("Mean distal phalanges: %d\n", mean_distal_phalanges);
-    // printf("Mean mid proximal phalanges: %d\n", mean_mid_proximal_phalanges);
-    // printf("Mean metatarsals: %d\n", mean_metatarsals);
-    // printf("Mean tarsometatarsals: %d\n", mean_tarsometatarsals);
-    // printf("Mean calcaneus talus: %d\n", mean_calcaneus_talus);
-    // printf("Mean IMU X: %d\n", mean_imu_x);
-    // printf("Mean IMU Y: %d\n", mean_imu_y);
-    // printf("Mean IMU Z: %d\n", mean_imu_z);
+    return calculateMean(buffer);
 }
 
 int ClassifierFeatures::calculateMean(const std::vector<int> &buffer)
@@ -81,10 +64,10 @@ void ClassifierFeatures::Feature2and3(const std::vector<int> &buffer)
     // Es la magnitud máxima encontrada en el espectro de frecuencia después de aplicar la transformada de Fourier
     int feature2 = maxMagnitude;
     // Es la frecuencia asociada al mayor valor en el espectro de frecuencia, normalizada por el tamaño de la señal.
-    int feature3 = frequency;
+    // int feature3 = frequency;
 
     printf("FEATUREEEEEEEEEEEEEEE22222222222222222222 %i\n", feature2);
-    printf("FEATUREEEEEEEEEEEEEEE33333333333333333333 %i\n", feature3);
+    // printf("FEATUREEEEEEEEEEEEEEE33333333333333333333 %i\n", feature3);
 
     // Liberar memoria y plan de FFTW
     fftw_destroy_plan(plan);

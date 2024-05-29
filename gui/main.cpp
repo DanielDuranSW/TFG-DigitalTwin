@@ -16,6 +16,7 @@
 #include "resources/CSVReader.h"
 #include "resources/RTC.h"
 #include "resources/ClassifierFeatures.h"
+#include "resources/ClassifierModel.h"
 #include "config.h"
 
 #include "mainwindow.h"
@@ -41,6 +42,7 @@ int main(int argc, char *argv[])
     CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
     CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
     ClassifierFeatures classifierFeatures;
+    ClassifierModel classifierModel;
 
     Instances argsInstance;
     argsInstance.state = state;
@@ -51,6 +53,7 @@ int main(int argc, char *argv[])
     argsInstance.csvReaderIMU = &csvReaderIMU;
     argsInstance.dataPacket = DataPacket();
     argsInstance.classifierFeatures = &classifierFeatures;
+    argsInstance.classifierModel = &classifierModel;
 
     GUIArguments guiArgs;
     guiArgs.argc = argc;

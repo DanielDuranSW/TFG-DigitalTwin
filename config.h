@@ -25,8 +25,12 @@ extern std::vector<int> fsr_in_metatarsals;
 extern std::vector<int> fsr_in_tarsometatarsals;
 extern std::vector<int> fsr_in_calcaneus_talus;
 
-extern std::vector<int> imu_in_x;
-extern std::vector<int> imu_in_y;
-extern std::vector<int> imu_in_z;
+extern std::vector<int> imu_acc_x;
+extern std::vector<int> imu_acc_y;
+extern std::vector<int> imu_acc_z;
+
+extern std::vector<int> imu_gyro_x;
+extern std::vector<int> imu_gyro_y;
+extern std::vector<int> imu_gyro_z;
 
 #endif // CONFIG_H
