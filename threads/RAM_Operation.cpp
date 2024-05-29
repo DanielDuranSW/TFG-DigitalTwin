@@ -17,6 +17,10 @@ void *ram_run(void *arg)
         stateSignalHandler->onWorking("Ram", true);
         printf("RAM_Operation ejecutando...\n");
         ram_function(args);
+
+        INTENSITY_CONSUMED += 0.1;
+        stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
+
         printf("RAM_Operation terminado\n");
         stateSignalHandler->onWorking("Ram", false);
         args->state.setCurrentStage(3);

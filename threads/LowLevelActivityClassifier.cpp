@@ -36,6 +36,7 @@ void *low_level_activity_classifier_run(void *arg)
     Instances *args = static_cast<Instances *>(arg);
     State *state = &(args->state);
     ClassifierFeatures *classifierFeatures = args->classifierFeatures;
+    ClassifierModel *classifierModel = args->classifierModel;
 
     while (true)
     {
@@ -174,23 +175,46 @@ void *low_level_activity_classifier_run(void *arg)
         if (buffersFull || bo)
         {
 
-            classifierFeatures->Feature2and3(buffer_fsr_in_distal_phalanges);
-            classifierFeatures->Feature4(buffer_fsr_in_distal_phalanges, buffer_fsr_in_calcaneus_talus);
-
             int mean_1 = classifierFeatures->Feature1(buffer_fsr_in_distal_phalanges);
             int mean_2 = classifierFeatures->Feature1(buffer_fsr_in_mid_proximal_phalanges);
             int mean_3 = classifierFeatures->Feature1(buffer_fsr_in_metatarsals);
             int mean_4 = classifierFeatures->Feature1(buffer_fsr_in_tarsometatarsals);
             int mean_5 = classifierFeatures->Feature1(buffer_fsr_in_calcaneus_talus);
 
-            // std::vector<int> inputData = {
-            //     mean_1, mean_2, mean_3, mean_4, mean_5,
-            //     mean_acc_x, mean_acc_y, mean_acc_z,
-            //     mean_gyro_x, mean_gyro_y, mean_gyro_z,
-            //     mag_1, mag_2, mag_3, mag_4, mag_5,
-            //     mag_acc_x, mag_acc_y, mag_acc_z,
-            //     mag_gyro_x, mag_gyro_y, mag_gyro_z};
-            std::vector<int> inputData = {};
+            int mean_acc_x = classifierFeatures->Feature1(buffer_imu_acc_x);
+            int mean_acc_y = classifierFeatures->Feature1(buffer_imu_acc_y);
+            int mean_acc_z = classifierFeatures->Feature1(buffer_imu_acc_z);
+
+            int mean_gyro_x = classifierFeatures->Feature1(buffer_imu_gyro_x);
+            int mean_gyro_y = classifierFeatures->Feature1(buffer_imu_gyro_y);
+            int mean_gyro_z = classifierFeatures->Feature1(buffer_imu_gyro_z);
+
+            int mag_1 = classifierFeatures->Feature2and3(buffer_fsr_in_distal_phalanges);
+            int mag_2 = classifierFeatures->Feature2and3(buffer_fsr_in_mid_proximal_phalanges);
+            int mag_3 = classifierFeatures->Feature2and3(buffer_fsr_in_metatarsals);
+            int mag_4 = classifierFeatures->Feature2and3(buffer_fsr_in_tarsometatarsals);
+            int mag_5 = classifierFeatures->Feature2and3(buffer_fsr_in_calcaneus_talus);
+
+            int mag_acc_x = classifierFeatures->Feature2and3(buffer_imu_acc_x);
+            int mag_acc_y = classifierFeatures->Feature2and3(buffer_imu_acc_y);
+            int mag_acc_z = classifierFeatures->Feature2and3(buffer_imu_acc_z);
+
+            int mag_gyro_x = classifierFeatures->Feature2and3(buffer_imu_gyro_x);
+            int mag_gyro_y = classifierFeatures->Feature2and3(buffer_imu_gyro_y);
+            int mag_gyro_z = classifierFeatures->Feature2and3(buffer_imu_gyro_z);
+
+            std::vector<int> inputData = {
+                mean_1, mean_2, mean_3, mean_4, mean_5,
+                mean_acc_x, mean_acc_y, mean_acc_z,
+                mean_gyro_x, mean_gyro_y, mean_gyro_z,
+                mag_1, mag_2, mag_3, mag_4, mag_5,
+                mag_acc_x, mag_acc_y, mag_acc_z,
+                mag_gyro_x, mag_gyro_y, mag_gyro_z};
+
+            // std::string activity = classifierModel->runInference(inputData);
+            // printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
+            // printf("Activity: %s\n", activity.c_str());
+
             bo = true;
         }
 

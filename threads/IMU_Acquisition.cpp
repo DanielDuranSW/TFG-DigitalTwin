@@ -24,6 +24,9 @@ void *imu_run(void *arg)
         csvReaderIMU->getcsvIMU(imuData);
         args->imuData = imuData;
 
+        INTENSITY_CONSUMED += 0.1;
+        stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
+
         printf("IMU terminado\n");
         stateSignalHandler->onWorking("Imu", false);
 

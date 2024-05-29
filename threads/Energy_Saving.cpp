@@ -28,6 +28,10 @@ void *energy_run(void *arg)
         resource->unlockMutex();
         // sleep(2);
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+
+        INTENSITY_CONSUMED += 0.001;
+        stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
+
         printf("Energy_Saving terminado\n");
         stateSignalHandler->onWorking("Energy", false);
 

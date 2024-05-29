@@ -7,9 +7,13 @@
 #include <iostream>
 #include "Resource.h"
 
-class ClassifierModel : public Resource
+class ClassifierModel
 {
 private:
+    Ort::Env env;
+    Ort::SessionOptions session_options;
+    Ort::Session session;
+
 public:
     ClassifierModel();
     ~ClassifierModel();

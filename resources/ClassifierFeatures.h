@@ -18,7 +18,7 @@ public:
 
     int Feature1(std::vector<int> buffer_fsr_in_distal_phalanges);
     int calculateMean(const std::vector<int> &buffer);
-    void Feature2and3(const std::vector<int> &buffer);
+    int Feature2and3(const std::vector<int> &buffer);
     void Feature4(const std::vector<int> &buffer_fsr_in_distal_phalanges, const std::vector<int> &buffer_fsr_in_calcaneus_talus);
 };
 

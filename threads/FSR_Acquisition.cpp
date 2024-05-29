@@ -23,6 +23,9 @@ void *fsr_run(void *arg)
         csvReaderFSR->getcsvFSR(fsrData);
         args->fsrData = fsrData;
 
+        INTENSITY_CONSUMED += 0.1;
+        stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
+
         printf("FSR_Acquisition terminado\n");
         stateSignalHandler->onWorking("Fsr", false);
 

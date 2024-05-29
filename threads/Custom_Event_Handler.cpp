@@ -18,6 +18,10 @@ void *custom_run(void *arg)
         stateSignalHandler->onWorking("Custom", true);
         printf("Custom_Event_Handler ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+
+        INTENSITY_CONSUMED += 0.1;
+        stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
+
         printf("Custom_Event_Handler terminado\n");
         stateSignalHandler->onWorking("Custom", false);
 

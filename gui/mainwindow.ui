@@ -82,6 +82,9 @@
       <height>551</height>
      </rect>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/asserts/DiagramaGUI.png);</string>
     </property>
@@ -346,16 +349,6 @@
     </property>
     <property name="text">
      <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEditBufferSize">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>310</y>
-      <width>113</width>
-      <height>25</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEditStateGeneralDuration">
@@ -1602,6 +1595,70 @@
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="labelIntensity">
+    <property name="geometry">
+     <rect>
+      <x>533</x>
+      <y>350</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelIntensity_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>350</y>
+      <width>64</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>mA</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>graphicsViewFsr</zorder>
    <zorder>graphicsViewImu</zorder>
@@ -1615,7 +1672,6 @@
    <zorder>graphicsViewBuffer</zorder>
    <zorder>graphicsViewFlash</zorder>
    <zorder>pushButtonUpdateConfigurations</zorder>
-   <zorder>lineEditBufferSize</zorder>
    <zorder>lineEditStateGeneralDuration</zorder>
    <zorder>label_2</zorder>
    <zorder>lineEditResourceRtcDuration</zorder>
@@ -1661,6 +1717,8 @@
    <zorder>label_42</zorder>
    <zorder>label_43</zorder>
    <zorder>label_44</zorder>
+   <zorder>labelIntensity</zorder>
+   <zorder>labelIntensity_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -23,7 +23,7 @@ int ClassifierFeatures::calculateMean(const std::vector<int> &buffer)
     return static_cast<int>(sum / static_cast<long long>(buffer.size()));
 }
 
-void ClassifierFeatures::Feature2and3(const std::vector<int> &buffer)
+int ClassifierFeatures::Feature2and3(const std::vector<int> &buffer)
 {
     // Tamaño del búfer para la FFT
     int N = buffer.size();
@@ -66,13 +66,15 @@ void ClassifierFeatures::Feature2and3(const std::vector<int> &buffer)
     // Es la frecuencia asociada al mayor valor en el espectro de frecuencia, normalizada por el tamaño de la señal.
     // int feature3 = frequency;
 
-    printf("FEATUREEEEEEEEEEEEEEE22222222222222222222 %i\n", feature2);
+    // printf("FEATUREEEEEEEEEEEEEEE22222222222222222222 %i\n", feature2);
     // printf("FEATUREEEEEEEEEEEEEEE33333333333333333333 %i\n", feature3);
 
     // Liberar memoria y plan de FFTW
     fftw_destroy_plan(plan);
     fftw_free(in);
     fftw_free(out);
+
+    return feature2;
 }
 
 void ClassifierFeatures::Feature4(const std::vector<int> &buffer_fsr_in_distal_phalanges, const std::vector<int> &buffer_fsr_in_calcaneus_talus)

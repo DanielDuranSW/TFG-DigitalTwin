@@ -87,11 +87,19 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
     connect(stateSignalHandler, &StateSignalHandler::rectangleColorChanged, this, &MainWindow::onRectangleColorChanged);
     connect(ui->pushButtonUpdateConfigurations, &QPushButton::clicked, this, &MainWindow::updateConfigurations);
+    connect(stateSignalHandler, &StateSignalHandler::intensityChanged, this, &MainWindow::onIntensityChanged);
+
     // Guardar los mapas para su uso posterior
     this->sceneMap = sceneMap;
     this->circleMap = circleMap;
     this->sceneMap = sceneMap;
 }
+
+void MainWindow::onIntensityChanged(float intensityValue)
+{
+    ui->labelIntensity->setText(QString::number(intensityValue, 'f', 3));
+}
+
 
 void MainWindow::onCircleColorChanged(const QString &circleName, bool isWorking)
 {

@@ -19,6 +19,8 @@ extern int STATE_CUSTOM_DURATION;
 extern int RESOURCE_RTC_DURATION;
 extern int RAM_BUFFER_RATIO_REFRESH;
 
+extern float INTENSITY_CONSUMED;
+
 extern std::vector<int> fsr_in_distal_phalanges;
 extern std::vector<int> fsr_in_mid_proximal_phalanges;
 extern std::vector<int> fsr_in_metatarsals;
