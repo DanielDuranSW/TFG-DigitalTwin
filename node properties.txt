@@ -1,0 +1,39 @@
+node properties
+  type: TreeEnsembleClassifier
+  module: ai.onnx.ml v1
+  name: TreeEnsembleClassifier
+
+attributes
+class_ids: 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2
+class_nodeids: 2, 2, 2, 3, 3, 3, 5, 5, 5, 6, 6, 6
+class_treeids: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+class_weights: 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1
+classlabels_strings: ID, ST, WA
+nodes_falsenodeids: 4, 3, 0, 0, 6, 0, 0
+nodes_featureids: 7, 17, 0, 0, 21, 0, 0
+nodes_hitrates: 1, 1, 1, 1, 1, 1, 1
+nodes_missing_value_tracks_true: 0, 0, 0, 0, 0, 0, 0
+nodes_modes: BRANCH_LEQ, BRANCH_LEQ, LEAF, LEAF, BRANCH_LEQ, LEAF, LEAF
+nodes_nodeids: 0, 1, 2, 3, 4, 5, 6
+nodes_treeids: 0, 0, 0, 0, 0, 0, 0
+nodes_truenodeids: 1, 2, 0, 0, 5, 0, 0
+nodes_values: 16240.31640625, 376881.5, 0, 0, 107809.390625, 0, 0
+post_transform: NONE
+
+inputs
+  float_input
+    name: float_input
+    tensor: float32[?,2]
+
+outputs:
+  output_label
+    name: output_label
+    tensor: string[?]
+
+  output_probability
+    name: output_probability
+    tensor: sequence<map<string,float32>>
+
+He podido resolver el problema reordenando las columnas del marco de datos. 
+Las columnas que no se utilizan para entrenar, incluyendo la columna de la 
+etiqueta debe estar al final (a la derecha)

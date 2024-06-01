@@ -50,6 +50,16 @@ bool CSVReader::getcsvIMU(std::vector<int> &imuData)
     }
     return true;
 }
+void CSVReader::skipLines(int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        if (!std::getline(file, line))
+        {
+            break; // Si no hay suficientes líneas, sal del bucle
+        }
+    }
+}
 
 bool CSVReader::isOpen() const
 {

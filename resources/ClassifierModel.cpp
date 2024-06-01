@@ -1,50 +1,72 @@
+// ClassifierModel.cpp
 #include "ClassifierModel.h"
+#include <iostream>
 
-ClassifierModel::ClassifierModel()
-    : env(ORT_LOGGING_LEVEL_WARNING, "example"),
-      session_options(),
-      session(env, "/home/daniduran/ws/TFG-DigitalTwin/resources/model.onnx", session_options)
+ClassifierModel::ClassifierModel(const std::string &model_path)
+    : env(ORT_LOGGING_LEVEL_WARNING, "test"),
+      session(env, model_path.c_str(), session_options)
 {
     session_options.SetIntraOpNumThreads(1);
-    session_options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
 }
+
 ClassifierModel::~ClassifierModel() {}
 
-std::string ClassifierModel::runInference(const std::vector<int> &inputData)
+std::string ClassifierModel::runInference(std::vector<float> &inputData)
 {
-    Ort::Env env(ORT_LOGGING_LEVEL_WARNING, "ONNXRuntime");
+    try
+    {
+        Ort::AllocatorWithDefaultOptions allocator;
 
-    // Cargar el modelo desde el archivo .onnx
-    Ort::SessionOptions session_options;
-    Ort::Session session(env, "/home/daniduran/ws/TFG-DigitalTwin/resources/model.onnx", session_options);
+        // Define input dimensions
+        std::vector<int64_t> input_node_dims = {1, static_cast<int64_t>(inputData.size())};
+        auto memory_info = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
+        auto input_tensor = Ort::Value::CreateTensor<float>(memory_info, inputData.data(), inputData.size(), input_node_dims.data(), input_node_dims.size());
 
-    // Preparar los datos de entrada
-    std::vector<float> input_data_float(inputData.begin(), inputData.end()); // Convertir datos de entrada a float
+        const char *input_node_names[] = {"float_input"};
+        const char *output_node_names[] = {"output_label"};
 
-    // Definir la forma de la entrada
-    std::vector<int64_t> input_dims = {1, static_cast<int64_t>(inputData.size())};
+        // Ejecutar el modelo y obtener la salida
+        auto output_tensors = session.Run(Ort::RunOptions{nullptr}, input_node_names, &input_tensor, 1, output_node_names, 1);
 
-    // Crear el tensor de entrada
-    Ort::Value input_tensor = Ort::Value::CreateTensor<float>(Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault), input_data_float.data(), inputData.size(), input_dims.data(), 2);
+        // Obtener los valores del tensor de salida
+        Ort::Value &output_tensor = output_tensors.front();
+        Ort::TypeInfo type_info = output_tensor.GetTypeInfo();
+        auto tensor_info = type_info.GetTensorTypeAndShapeInfo();
+        ONNXTensorElementDataType output_type = tensor_info.GetElementType();
 
-    // Nombres de las entradas del modelo
-    const char *input_names[] = {
-        "mean_1", "mean_2", "mean_3", "mean_4", "mean_5",
-        "mean_acc_x", "mean_acc_y", "mean_acc_z",
-        "mean_gyro_x", "mean_gyro_y", "mean_gyro_z",
-        "mag_1", "mag_2", "mag_3", "mag_4", "mag_5",
-        "mag_acc_x", "mag_acc_y", "mag_acc_z",
-        "mag_gyro_x", "mag_gyro_y", "mag_gyro_z"};
+        if (output_type == ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING)
+        {
+            size_t total_length;
+            // Asignar el valor de retorno a una variable, aunque no se use
+            OrtStatus *status_length = Ort::GetApi().GetStringTensorDataLength(output_tensor, &total_length);
 
-    // Nombre de la salida definido en el modelo
-    const char *output_names[] = {"output_string"};
+            std::vector<char> buffer(total_length);
+            std::vector<size_t> offsets(tensor_info.GetElementCount());
+            // Asignar el valor de retorno a una variable, aunque no se use
+            OrtStatus *status_content = Ort::GetApi().GetStringTensorContent(output_tensor, buffer.data(), buffer.size(), offsets.data(), offsets.size());
 
-    // Realizar la inferencia
-    Ort::RunOptions run_options;
-    std::vector<Ort::Value> output_tensors = session.Run(run_options, input_names, &input_tensor, 1, output_names, 1);
+            std::vector<std::string> output_strings;
+            for (size_t i = 0; i < offsets.size(); ++i)
+            {
+                size_t end_offset = (i == offsets.size() - 1) ? total_length : offsets[i + 1];
+                output_strings.emplace_back(buffer.data() + offsets[i], end_offset - offsets[i]);
+            }
 
-    // Obtener la salida
-    std::string result = *output_tensors.front().GetTensorMutableData<std::string>();
+            std::string result;
+            for (size_t i = 0; i < output_strings.size(); ++i)
+            {
+                result += output_strings[i];
+            }
 
-    return result;
+            return result;
+        }
+        else
+        {
+            return "Unexpected output type.";
+        }
+    }
+    catch (const Ort::Exception &e)
+    {
+        return std::string("Ort::Exception: ") + e.what();
+    }
 }

@@ -15,6 +15,7 @@ public:
     CSVReader(const std::string &filename);
     bool getcsvFSR(std::vector<int> &fsrData);
     bool getcsvIMU(std::vector<int> &imuData);
+    void CSVReader::skipLines(int n);
 
     bool isOpen() const;
 

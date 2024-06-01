@@ -9,6 +9,7 @@ int ClassifierFeatures::Feature1(std::vector<int> buffer)
 {
     // Calcular la media de cada buffer
     return calculateMean(buffer);
+    printf("FEATUREEEEEEEEEEEEEEE11111111111111111111 %i\n", calculateMean(buffer));
 }
 
 int ClassifierFeatures::calculateMean(const std::vector<int> &buffer)

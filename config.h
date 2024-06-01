@@ -9,7 +9,11 @@
 #define FLASH_SIZE 32
 
 extern int INITIAL_WAIT;
+extern int HIGH_FREQ_WAIT;
+extern int LOW_FREQ_WAIT;
+extern int SKIP_FACTOR;
 extern int STATE_GENERAL_DURATION;
+
 extern int STATE_FSR_DURATION;
 extern int STATE_IMU_DURATION;
 extern int STATE_RAM_DURATION;

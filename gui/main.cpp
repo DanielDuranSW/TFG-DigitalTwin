@@ -42,7 +42,8 @@ int main(int argc, char *argv[])
     CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
     CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data3.csv");
     ClassifierFeatures classifierFeatures;
-    ClassifierModel classifierModel;
+    ClassifierModel classifierModelFSR("/home/daniduran/ws/TFG-DigitalTwin/resources/model_fsr.onnx");
+    // ClassifierModel classifierModel("/home/daniduran/ws/TFG-DigitalTwin/resources/model.onnx");
 
     Instances argsInstance;
     argsInstance.state = state;
@@ -53,7 +54,8 @@ int main(int argc, char *argv[])
     argsInstance.csvReaderIMU = &csvReaderIMU;
     argsInstance.dataPacket = DataPacket();
     argsInstance.classifierFeatures = &classifierFeatures;
-    argsInstance.classifierModel = &classifierModel;
+    argsInstance.classifierModelFSR = &classifierModelFSR;
+    // argsInstance.classifierModel = &classifierModel;
 
     GUIArguments guiArgs;
     guiArgs.argc = argc;

@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "Resource.h"
+#include <string>
 
 class ClassifierModel
 {
@@ -15,10 +16,10 @@ private:
     Ort::Session session;
 
 public:
-    ClassifierModel();
+    ClassifierModel(const std::string &model_path);
     ~ClassifierModel();
 
-    std::string runInference(const std::vector<int> &inputData);
+    std::string runInference(std::vector<float> &inputData);
 };
 
 #endif

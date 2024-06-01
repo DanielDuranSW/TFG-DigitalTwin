@@ -24,7 +24,8 @@ struct Instances
     std::vector<int> imuData;
     std::vector<uint8_t> leftoverData;
     ClassifierFeatures *classifierFeatures;
-    ClassifierModel *classifierModel;
+    ClassifierModel *classifierModelFSR;
+    // ClassifierModel *classifierModel;
 
     Instances() : ram(nullptr) {}
 };
