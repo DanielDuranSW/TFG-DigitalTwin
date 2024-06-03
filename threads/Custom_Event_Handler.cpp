@@ -7,7 +7,7 @@ void *custom_run(void *arg)
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
-    while (true)
+    while (!terminateFlag)
     {
         state->lockMutex();
         while (state->getCurrentStage() != 5)
@@ -16,13 +16,13 @@ void *custom_run(void *arg)
         }
         stateSignalHandler->onWorking("Rtc", false);
         stateSignalHandler->onWorking("Custom", true);
-        printf("Custom_Event_Handler ejecutando...\n");
+        // printf("Custom_Event_Handler ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         INTENSITY_CONSUMED += 0.1;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
-        printf("Custom_Event_Handler terminado\n");
+        // printf("Custom_Event_Handler terminado\n");
         stateSignalHandler->onWorking("Custom", false);
 
         state->setCurrentStage(0);

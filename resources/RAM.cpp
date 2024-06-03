@@ -39,17 +39,17 @@ void RAM::add(std::vector<uint8_t> packet)
         pthread_cond_wait(&can_produce, &mutex);
     }
 
-    std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAA-Contenido del packete es:" << std::endl;
-    for (const auto &byte : packet)
-    {
-        std::cout << std::hex << static_cast<int>(byte) << " "; // Imprimir el byte en hexadecimal
-    }
-    std::cout << std::endl;
+    // std::cout << "Contenido del packete es:" << std::endl;
+    // for (const auto &byte : packet)
+    // {
+    //     std::cout << std::hex << static_cast<int>(byte) << " "; // Imprimir el byte en hexadecimal
+    // }
+    // std::cout << std::endl;
 
     QString bufferName = QString("Buffer%1").arg(writePos);
-    printf("----------------------Dibujo nombre del buffer: %s\n", qPrintable(bufferName));
+    // printf("----------------------Dibujo nombre del buffer: %s\n", qPrintable(bufferName));
     stateSignalHandler->onWorkingBuffer(bufferName, true); // aqui se deberia dibujar el rectangulo
-    printf("Añadido a buffer con tamaño %d\n", count);
+    // printf("Añadido a buffer con tamaño %d\n", count);
     stateSignalHandler->onWorking("WaitingTransfer", true);
     buffer[writePos] = packet;
     // buffer[writePos] = 1;
@@ -85,7 +85,6 @@ void RAM::checkAndConsume()
     {
 
         // printf("Esperando a consumir...con tamaño %d\n", count);
-        // pthread_mutex_lock(&mutex);
 
         // Lógica para anticipar el consumo si el buffer está por llenarse
         if (count >= BUFFER_SIZE - 1)
@@ -102,7 +101,7 @@ void RAM::checkAndConsume()
             }
 
             QString FlashName = QString("Flash%1").arg(flashCount);
-            printf("----------------------Dibujo nombre del Flash: %s\n", qPrintable(FlashName));
+            // printf("----------------------Dibujo nombre del Flash: %s\n", qPrintable(FlashName));
             stateSignalHandler->onWorkingBuffer(FlashName, true);
             ++flashCount;
 
@@ -113,7 +112,7 @@ void RAM::checkAndConsume()
                 stateSignalHandler->onWorking("WaitingTransfer", false);
 
                 QString bufferName = QString("Buffer%1").arg(readPos);
-                printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
+                // printf("----------------------Borro nombre del buffer: %s\n", qPrintable(bufferName));
                 stateSignalHandler->onWorkingBuffer(bufferName, false);
 
                 std::vector<uint8_t> consumedPacket = buffer[readPos];
@@ -131,8 +130,6 @@ void RAM::checkAndConsume()
             }
             pthread_cond_signal(&can_produce); // Notificar que hay espacio para producir
         }
-
-        // pthread_mutex_unlock(&mutex);
         usleep(STATE_GENERAL_DURATION); // Evitar la sobrecarga
     }
 }

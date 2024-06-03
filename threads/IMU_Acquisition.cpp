@@ -8,7 +8,7 @@ void *imu_run(void *arg)
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
     CSVReader *csvReaderIMU = args->csvReaderIMU;
 
-    while (true)
+    while (!terminateFlag)
     {
         state->lockMutex();
         while (state->getCurrentStage() != 1)
@@ -17,7 +17,7 @@ void *imu_run(void *arg)
         }
 
         stateSignalHandler->onWorking("Imu", true);
-        printf("IMU ejecutando...\n");
+        // printf("IMU ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         std::vector<int> imuData;
@@ -27,7 +27,7 @@ void *imu_run(void *arg)
         INTENSITY_CONSUMED += 0.1;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
-        printf("IMU terminado\n");
+        // printf("IMU terminado\n");
         stateSignalHandler->onWorking("Imu", false);
 
         // Dar paso a LLAC

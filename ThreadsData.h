@@ -10,6 +10,7 @@
 #include "DataPacket.h"
 #include "resources/ClassifierFeatures.h"
 #include "resources/ClassifierModel.h"
+#include "gui/mainwindow.h"
 
 struct Instances
 {
@@ -25,7 +26,7 @@ struct Instances
     std::vector<uint8_t> leftoverData;
     ClassifierFeatures *classifierFeatures;
     ClassifierModel *classifierModelFSR;
-    // ClassifierModel *classifierModel;
+    ClassifierModel *classifierModel;
 
     Instances() : ram(nullptr) {}
 };

@@ -7,7 +7,7 @@ void *ram_run(void *arg)
     Instances *args = static_cast<Instances *>(arg);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
-    while (true)
+    while (!terminateFlag)
     {
         args->state.lockMutex();
         while (args->state.getCurrentStage() != 2)
@@ -15,13 +15,13 @@ void *ram_run(void *arg)
             args->state.waitCondition();
         }
         stateSignalHandler->onWorking("Ram", true);
-        printf("RAM_Operation ejecutando...\n");
+        // printf("RAM_Operation ejecutando...\n");
         ram_function(args);
 
         INTENSITY_CONSUMED += 0.1;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
-        printf("RAM_Operation terminado\n");
+        // printf("RAM_Operation terminado\n");
         stateSignalHandler->onWorking("Ram", false);
         args->state.setCurrentStage(3);
         args->state.broadcastCondition();
@@ -34,11 +34,10 @@ void ram_function(Instances *args)
 {
     std::vector<int> fsrData = args->fsrData;
     std::vector<int> imuData = args->imuData;
-    printf("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n");
-    printVector(fsrData);
-    printf("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\n");
-    printVector(imuData);
-    printf("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr\n");
+    // printf("FSR Data: \n");
+    // printVector(fsrData);
+    // printf("IMU Data: \n");
+    // printVector(imuData);
 
     // Convertir los datos de fsr e imu a bytes
     std::vector<uint8_t> fsrBytes;
@@ -65,7 +64,7 @@ void ram_function(Instances *args)
     data.insert(data.end(), fsrBytes.begin(), fsrBytes.end());
     data.insert(data.end(), imuBytes.begin(), imuBytes.end());
 
-    // std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAA-Contenido del vector data:" << std::endl;
+    // std::cout << "Contenido del vector data:" << std::endl;
     // for (const auto &byte : data)
     // {
     //     std::cout << std::hex << static_cast<int>(byte) << " "; // Imprimir el byte en hexadecimal
@@ -75,12 +74,8 @@ void ram_function(Instances *args)
     // Recuperar DataPacket y añadir los bytes
     DataPacket &dataPacket = args->dataPacket;
     size_t bytesLeft = dataPacket.getBytesLeft();
-    printf("EEEEEEEEEEE-Bytes left: %ld\n", bytesLeft);
+    // printf("EEEEEEEEEEE-Bytes left: %ld\n", bytesLeft);
     // printf("OOOOOOOOOOO-Data size: %ld\n", data.size());
-
-    // HASTA AQUI VA BUENO
-    // Comprobado que hace bien la primera iteración, a partir de la primera no hace resta ni nada
-    // se queda en 0 bytes left
 
     // Si los datos caben en el paquete, añadirlos
     if (bytesLeft >= data.size())

@@ -6,8 +6,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
-#define linesToRead 1
+#include <unistd.h>
+#include "config.h"
+#include "gui/mainwindow.h"
 
 class CSVReader
 {
@@ -15,7 +16,7 @@ public:
     CSVReader(const std::string &filename);
     bool getcsvFSR(std::vector<int> &fsrData);
     bool getcsvIMU(std::vector<int> &imuData);
-    void CSVReader::skipLines(int n);
+    void skipLines(int n);
 
     bool isOpen() const;
 

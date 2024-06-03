@@ -8,7 +8,7 @@ void *energy_run(void *arg)
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
     Resource *resource = &(args->resource);
 
-    while (true)
+    while (!terminateFlag)
     {
         state->lockMutex();
         while (state->getCurrentStage() != 4)
@@ -17,7 +17,7 @@ void *energy_run(void *arg)
         }
 
         stateSignalHandler->onWorking("Energy", true);
-        printf("Energy_Saving ejecutando...\n");
+        // printf("Energy_Saving ejecutando...\n");
 
         // Aqui se debe dormir hasta que el hilo RTC lo despierte
         // Notificar al hilo RTC y esperar
@@ -32,7 +32,7 @@ void *energy_run(void *arg)
         INTENSITY_CONSUMED += 0.001;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
-        printf("Energy_Saving terminado\n");
+        // printf("Energy_Saving terminado\n");
         stateSignalHandler->onWorking("Energy", false);
 
         state->setCurrentStage(5);

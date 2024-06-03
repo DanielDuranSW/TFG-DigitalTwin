@@ -8,7 +8,7 @@ void *fsr_run(void *arg)
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
     CSVReader *csvReaderFSR = args->csvReaderFSR;
 
-    while (true)
+    while (!terminateFlag)
     {
         state->lockMutex();
         while (state->getCurrentStage() != 0)
@@ -16,7 +16,7 @@ void *fsr_run(void *arg)
             state->waitCondition();
         }
         stateSignalHandler->onWorking("Fsr", true);
-        printf("FSR_Acquisition ejecutando...\n");
+        // printf("FSR_Acquisition ejecutando...\n");
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
         std::vector<int> fsrData;
@@ -26,7 +26,7 @@ void *fsr_run(void *arg)
         INTENSITY_CONSUMED += 0.1;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
-        printf("FSR_Acquisition terminado\n");
+        // printf("FSR_Acquisition terminado\n");
         stateSignalHandler->onWorking("Fsr", false);
 
         state->setCurrentStage(1);

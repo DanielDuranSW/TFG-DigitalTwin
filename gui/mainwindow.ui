@@ -351,11 +351,11 @@
      <string>Save</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEditStateGeneralDuration">
+   <widget class="QLineEdit" name="lineEditHIGH_FREQ_WAIT">
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>40</y>
+      <y>50</y>
       <width>113</width>
       <height>25</height>
      </rect>
@@ -365,7 +365,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>20</y>
+      <y>30</y>
       <width>151</width>
       <height>17</height>
      </rect>
@@ -374,10 +374,10 @@
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Espera general</string>
+     <string>High freq wait</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEditResourceRtcDuration">
+   <widget class="QLineEdit" name="lineEditLOW_FREQ_WAIT">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -400,7 +400,7 @@
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Espera ISR</string>
+     <string>Low freq wait</string>
     </property>
     <property name="openExternalLinks">
      <bool>false</bool>
@@ -1672,9 +1672,9 @@
    <zorder>graphicsViewBuffer</zorder>
    <zorder>graphicsViewFlash</zorder>
    <zorder>pushButtonUpdateConfigurations</zorder>
-   <zorder>lineEditStateGeneralDuration</zorder>
+   <zorder>lineEditHIGH_FREQ_WAIT</zorder>
    <zorder>label_2</zorder>
-   <zorder>lineEditResourceRtcDuration</zorder>
+   <zorder>lineEditLOW_FREQ_WAIT</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>label_5</zorder>

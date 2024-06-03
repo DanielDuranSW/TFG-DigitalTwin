@@ -6,8 +6,9 @@
 #include "StateSignalHandler.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -27,9 +28,9 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    QMap<QString, QGraphicsScene*> sceneMap;
-    QMap<QString, QGraphicsEllipseItem*> circleMap;
-    QMap<QString, QGraphicsRectItem*> rectangleMap;
+    QMap<QString, QGraphicsScene *> sceneMap;
+    QMap<QString, QGraphicsEllipseItem *> circleMap;
+    QMap<QString, QGraphicsRectItem *> rectangleMap;
 };
 
 #endif // MAINWINDOW_H

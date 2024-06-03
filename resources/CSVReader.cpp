@@ -16,8 +16,14 @@ bool CSVReader::getcsvFSR(std::vector<int> &fsrData)
             {
                 if (!std::getline(iss, token, ','))
                     return false; // No hay suficientes datos en la línea
+
                 fsrData.push_back(std::stoi(token));
             }
+        }
+        else
+        {
+            printf("Total consumido: %f\n", INTENSITY_CONSUMED);
+            terminateFlag = true;
         }
     }
     return true;
@@ -56,6 +62,7 @@ void CSVReader::skipLines(int n)
     {
         if (!std::getline(file, line))
         {
+            printf("Total consumido: %f\n", INTENSITY_CONSUMED);
             break; // Si no hay suficientes líneas, sal del bucle
         }
     }

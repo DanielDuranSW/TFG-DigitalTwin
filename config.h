@@ -5,8 +5,9 @@
 #include <vector>
 
 #define BUFFER_SIZE 16
-#define BUFFER_LLAC_SIZE 10
+#define BUFFER_LLAC_SIZE 128
 #define FLASH_SIZE 32
+#define linesToRead 1
 
 extern int INITIAL_WAIT;
 extern int HIGH_FREQ_WAIT;
@@ -24,6 +25,8 @@ extern int RESOURCE_RTC_DURATION;
 extern int RAM_BUFFER_RATIO_REFRESH;
 
 extern float INTENSITY_CONSUMED;
+
+extern bool terminateFlag;
 
 extern std::vector<int> fsr_in_distal_phalanges;
 extern std::vector<int> fsr_in_mid_proximal_phalanges;
