@@ -39,8 +39,9 @@ int main(int argc, char *argv[])
     StateSignalHandler stateSignalHandler;
     RAM ram(&stateSignalHandler);
     Resource resource;
-    CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
-    CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/data2.csv");
+    // marcha.csv -> WA - ID - WA - ST
+    CSVReader csvReaderFSR("/home/daniduran/ws/TFG-DigitalTwin/data/marcha.csv");
+    CSVReader csvReaderIMU("/home/daniduran/ws/TFG-DigitalTwin/data/marcha.csv");
     ClassifierFeatures classifierFeatures;
     ClassifierModel classifierModelFSR("/home/daniduran/ws/TFG-DigitalTwin/resources/model_fsr.onnx");
     ClassifierModel classifierModel("/home/daniduran/ws/TFG-DigitalTwin/resources/model.onnx");

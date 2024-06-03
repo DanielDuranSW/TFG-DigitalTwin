@@ -71,6 +71,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ../data/data1.csv
         ../data/data2.csv
         ../data/data3.csv
+        ../data/marcha.csv
     )
 
 # Include path for fft3.h

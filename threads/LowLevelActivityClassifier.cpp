@@ -243,15 +243,22 @@ void *low_level_activity_classifier_run(void *arg)
             printf("%s  \n", activity.c_str());
 
             // printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
-            if (activity == "WA")
+            if (activity == "WA" && classifierWorking)
             {
                 printf("Walking\n");
                 STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
                 printf("STATE_GENERAL_DURATION: %d\n", STATE_GENERAL_DURATION);
             }
-            else if (activity == "ID" || activity == "ST")
+            else if (activity == "ID" && classifierWorking)
             {
-                printf("Idle or Sit\n");
+                printf("Idle\n");
+                // STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
+                // csvReaderFSR->skipLines(SKIP_FACTOR);
+                // csvReaderIMU->skipLines(SKIP_FACTOR);
+            }
+            else if (activity == "ST" && classifierWorking)
+            {
+                printf("Sitting\n");
                 // STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
                 // csvReaderFSR->skipLines(SKIP_FACTOR);
                 // csvReaderIMU->skipLines(SKIP_FACTOR);

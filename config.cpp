@@ -24,6 +24,7 @@ int RAM_BUFFER_RATIO_REFRESH = STATE_GENERAL_DURATION / 4;
 float INTENSITY_CONSUMED = 0;
 
 bool terminateFlag = false;
+bool classifierWorking = true;
 
 // Definiciones de las posiciones de los grupos FSR
 std::vector<int> fsr_in_distal_phalanges = {20, 4, 23, 7, 6};

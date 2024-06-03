@@ -27,6 +27,7 @@ extern int RAM_BUFFER_RATIO_REFRESH;
 extern float INTENSITY_CONSUMED;
 
 extern bool terminateFlag;
+extern bool classifierWorking;
 
 extern std::vector<int> fsr_in_distal_phalanges;
 extern std::vector<int> fsr_in_mid_proximal_phalanges;
