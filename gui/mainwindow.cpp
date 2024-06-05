@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
     connect(stateSignalHandler, &StateSignalHandler::circleColorChanged, this, &MainWindow::onCircleColorChanged);
     connect(stateSignalHandler, &StateSignalHandler::rectangleColorChanged, this, &MainWindow::onRectangleColorChanged);
     connect(ui->pushButtonUpdateConfigurations, &QPushButton::clicked, this, &MainWindow::updateConfigurations);
+    connect(stateSignalHandler, &StateSignalHandler::classifierStateChanged, this, &MainWindow::onClassifierStateChanged);
     connect(stateSignalHandler, &StateSignalHandler::intensityChanged, this, &MainWindow::onIntensityChanged);
 
     // Guardar los mapas para su uso posterior
@@ -99,6 +100,11 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
 void MainWindow::onIntensityChanged(float intensityValue)
 {
     ui->labelIntensity->setText(QString::number(intensityValue, 'f', 3));
+}
+
+void MainWindow::onClassifierStateChanged(const QString &StateName)
+{
+    ui->labelClassifierState->setText(StateName);
 }
 
 void MainWindow::onCircleColorChanged(const QString &circleName, bool isWorking)
@@ -138,8 +144,8 @@ void MainWindow::onRectangleColorChanged(const QString &rectangleName, bool isWo
 void MainWindow::updateConfigurations()
 {
     // BUFFER_SIZE = ui->lineEditBufferSize->text().toInt();
-    HIGH_FREQ_WAIT = ui->lineEditHIGH_FREQ_WAIT->text().toInt();
-    LOW_FREQ_WAIT = ui->lineEditLOW_FREQ_WAIT->text().toInt();
+    HIGH_FREQ_WAIT = 1000000 / ui->lineEditHIGH_FREQ_WAIT->text().toInt();
+    LOW_FREQ_WAIT = 1000000 / ui->lineEditLOW_FREQ_WAIT->text().toInt();
 }
 
 MainWindow::~MainWindow()

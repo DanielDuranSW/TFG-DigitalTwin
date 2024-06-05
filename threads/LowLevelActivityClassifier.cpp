@@ -40,6 +40,7 @@ void *low_level_activity_classifier_run(void *arg)
     ClassifierModel *classifierModel = args->classifierModel;
     CSVReader *csvReaderFSR = args->csvReaderFSR;
     CSVReader *csvReaderIMU = args->csvReaderIMU;
+    StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
 
     while (!terminateFlag)
     {
@@ -245,23 +246,26 @@ void *low_level_activity_classifier_run(void *arg)
             // printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
             if (activity == "WA" && classifierWorking)
             {
+                stateSignalHandler->classifierStateToChange("Walking");
                 printf("Walking\n");
                 STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
                 printf("STATE_GENERAL_DURATION: %d\n", STATE_GENERAL_DURATION);
             }
             else if (activity == "ID" && classifierWorking)
             {
+                stateSignalHandler->classifierStateToChange("Idle");
                 printf("Idle\n");
-                // STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
-                // csvReaderFSR->skipLines(SKIP_FACTOR);
-                // csvReaderIMU->skipLines(SKIP_FACTOR);
+                STATE_GENERAL_DURATION = LOW_FREQ_WAIT;
+                csvReaderFSR->skipLines(SKIP_FACTOR);
+                csvReaderIMU->skipLines(SKIP_FACTOR);
             }
             else if (activity == "ST" && classifierWorking)
             {
+                stateSignalHandler->classifierStateToChange("Sitting");
                 printf("Sitting\n");
-                // STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
-                // csvReaderFSR->skipLines(SKIP_FACTOR);
-                // csvReaderIMU->skipLines(SKIP_FACTOR);
+                STATE_GENERAL_DURATION = LOW_FREQ_WAIT;
+                csvReaderFSR->skipLines(SKIP_FACTOR);
+                csvReaderIMU->skipLines(SKIP_FACTOR);
             }
 
             bo = true;

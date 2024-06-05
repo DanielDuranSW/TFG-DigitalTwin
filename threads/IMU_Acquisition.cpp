@@ -18,13 +18,13 @@ void *imu_run(void *arg)
 
         stateSignalHandler->onWorking("Imu", true);
         // printf("IMU ejecutando...\n");
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+        usleep(STATE_IMU_DURATION); // Simulación de trabajo
 
         std::vector<int> imuData;
         csvReaderIMU->getcsvIMU(imuData);
         args->imuData = imuData;
 
-        INTENSITY_CONSUMED += 0.1;
+        // INTENSITY_CONSUMED += 0.14;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("IMU terminado\n");

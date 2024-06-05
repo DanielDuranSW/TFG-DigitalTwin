@@ -29,7 +29,7 @@ void *energy_run(void *arg)
         // sleep(2);
         usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
-        INTENSITY_CONSUMED += 0.001;
+        INTENSITY_CONSUMED += 0.0001;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("Energy_Saving terminado\n");

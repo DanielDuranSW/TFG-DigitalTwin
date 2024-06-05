@@ -20,3 +20,8 @@ void StateSignalHandler::intensityToChange(float intensityValue)
     // Emite la señal de cambio de intensidad
     emit intensityChanged(intensityValue);
 }
+
+void StateSignalHandler::classifierStateToChange(const QString &stateName)
+{
+    emit classifierStateChanged(stateName);
+}

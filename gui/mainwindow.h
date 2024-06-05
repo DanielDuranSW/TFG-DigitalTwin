@@ -24,6 +24,7 @@ public slots:
     void onCircleColorChanged(const QString &circleName, bool isWorking);
     void onRectangleColorChanged(const QString &rectangleName, bool isWorking);
     void updateConfigurations();
+    void onClassifierStateChanged(const QString &StateName);
     void onIntensityChanged(float intensityValue);
 
 private:

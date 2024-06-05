@@ -364,17 +364,22 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>55</x>
       <y>30</y>
       <width>151</width>
       <height>17</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>High freq wait</string>
+     <string>Normal freq (Hz)</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEditLOW_FREQ_WAIT">
@@ -390,17 +395,22 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>55</x>
       <y>90</y>
       <width>151</width>
       <height>17</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Low freq wait</string>
+     <string>Energy Saving freq (Hz)</string>
     </property>
     <property name="openExternalLinks">
      <bool>false</bool>
@@ -1528,7 +1538,7 @@
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>reciber and</string>
+     <string>receiver and</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -1598,8 +1608,8 @@
    <widget class="QLabel" name="labelIntensity">
     <property name="geometry">
      <rect>
-      <x>533</x>
-      <y>350</y>
+      <x>560</x>
+      <y>320</y>
       <width>121</width>
       <height>22</height>
      </rect>
@@ -1633,8 +1643,8 @@
    <widget class="QLabel" name="labelIntensity_2">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>350</y>
+      <x>690</x>
+      <y>320</y>
       <width>64</width>
       <height>22</height>
      </rect>
@@ -1651,6 +1661,35 @@
     </property>
     <property name="text">
      <string>mA</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelClassifierState">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>350</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>14</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -1719,6 +1758,7 @@
    <zorder>label_44</zorder>
    <zorder>labelIntensity</zorder>
    <zorder>labelIntensity_2</zorder>
+   <zorder>labelClassifierState</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
