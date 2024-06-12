@@ -18,7 +18,7 @@ void *ram_run(void *arg)
         // printf("RAM_Operation ejecutando...\n");
         ram_function(args);
 
-        INTENSITY_CONSUMED += 0.1;
+        INTENSITY_CONSUMED += STATE_GENERAL_INTENSITY;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("RAM_Operation terminado\n");
@@ -93,7 +93,14 @@ void ram_function(Instances *args)
         args->dataPacket.insert_data(std::vector<uint8_t>(data.begin() + bytesLeft, data.end()));
     }
 
-    usleep(STATE_GENERAL_DURATION);
+    if (realSimulation)
+    {
+        usleep(STATE_RAM_DURATION);
+    }
+    else
+    {
+        usleep(STATE_GENERAL_DURATION);
+    }
 }
 
 void printVector(const std::vector<int> &vec)

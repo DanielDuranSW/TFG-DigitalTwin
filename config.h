@@ -15,6 +15,8 @@ extern int LOW_FREQ_WAIT;
 extern int SKIP_FACTOR;
 extern int STATE_GENERAL_DURATION;
 
+// extern int STATE_DURATION;
+
 extern int STATE_FSR_DURATION;
 extern int STATE_IMU_DURATION;
 extern int STATE_RAM_DURATION;
@@ -22,14 +24,19 @@ extern int STATE_BLE_DURATION;
 extern int STATE_ENERGY_DURATION;
 extern int STATE_CUSTOM_DURATION;
 
-extern int PERCENTAGE_RTC;
 extern int RESOURCE_RTC_DURATION;
-extern int RAM_BUFFER_RATIO_REFRESH;
 
 extern float INTENSITY_CONSUMED;
+extern float STATE_GENERAL_INTENSITY;
+extern float STATE_IMU_INTENSITY;
+extern float STATE_ENERGY_INTENSITY;
+extern float CYCLE_INTENSITY;
+
+extern int PERCENTAGE_ENERGY_DURATION;
 
 extern bool terminateFlag;
 extern bool classifierWorking;
+extern bool realSimulation;
 
 extern std::vector<int> fsr_in_distal_phalanges;
 extern std::vector<int> fsr_in_mid_proximal_phalanges;

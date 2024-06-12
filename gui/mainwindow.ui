@@ -360,6 +360,9 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="text">
+     <string>50</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -390,6 +393,9 @@
       <width>113</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>5</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -1610,7 +1616,7 @@
      <rect>
       <x>560</x>
       <y>320</y>
-      <width>121</width>
+      <width>148</width>
       <height>22</height>
      </rect>
     </property>
@@ -1643,7 +1649,7 @@
    <widget class="QLabel" name="labelIntensity_2">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>710</x>
       <y>320</y>
       <width>64</width>
       <height>22</height>
@@ -1660,7 +1666,7 @@
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>mA</string>
+     <string>µA</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>

@@ -7,6 +7,8 @@ void *energy_run(void *arg)
     State *state = &(args->state);
     StateSignalHandler *stateSignalHandler = args->stateSignalHandler;
     Resource *resource = &(args->resource);
+    CSVReader *csvReaderFSR = args->csvReaderFSR;
+    CSVReader *csvReaderIMU = args->csvReaderIMU;
 
     while (!terminateFlag)
     {
@@ -19,6 +21,8 @@ void *energy_run(void *arg)
         stateSignalHandler->onWorking("Energy", true);
         // printf("Energy_Saving ejecutando...\n");
 
+        usleep(STATE_GENERAL_DURATION * PERCENTAGE_ENERGY_DURATION);
+
         // Aqui se debe dormir hasta que el hilo RTC lo despierte
         // Notificar al hilo RTC y esperar
         resource->signalCondition();
@@ -26,14 +30,13 @@ void *energy_run(void *arg)
         resource->lockMutex();
         resource->waitCondition();
         resource->unlockMutex();
-        // sleep(2);
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
-        INTENSITY_CONSUMED += 0.0001;
+        stateSignalHandler->onWorking("Energy", false);
+
+        INTENSITY_CONSUMED += STATE_ENERGY_INTENSITY;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("Energy_Saving terminado\n");
-        stateSignalHandler->onWorking("Energy", false);
 
         state->setCurrentStage(5);
         state->broadcastCondition();

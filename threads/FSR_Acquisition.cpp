@@ -17,13 +17,21 @@ void *fsr_run(void *arg)
         }
         stateSignalHandler->onWorking("Fsr", true);
         // printf("FSR_Acquisition ejecutando...\n");
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
+
+        if (realSimulation)
+        {
+            usleep(STATE_FSR_DURATION);
+        }
+        else
+        {
+            usleep(STATE_GENERAL_DURATION);
+        }
 
         std::vector<int> fsrData;
         csvReaderFSR->getcsvFSR(fsrData);
         args->fsrData = fsrData;
 
-        INTENSITY_CONSUMED += 0.1;
+        INTENSITY_CONSUMED += STATE_GENERAL_INTENSITY;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("FSR_Acquisition terminado\n");

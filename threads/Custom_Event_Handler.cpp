@@ -14,12 +14,19 @@ void *custom_run(void *arg)
         {
             state->waitCondition();
         }
-        stateSignalHandler->onWorking("Rtc", false);
         stateSignalHandler->onWorking("Custom", true);
         // printf("Custom_Event_Handler ejecutando...\n");
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
-        INTENSITY_CONSUMED += 0.1;
+        if (realSimulation)
+        {
+            usleep(STATE_CUSTOM_DURATION);
+        }
+        else
+        {
+            usleep(STATE_GENERAL_DURATION);
+        }
+
+        INTENSITY_CONSUMED += STATE_GENERAL_INTENSITY;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("Custom_Event_Handler terminado\n");

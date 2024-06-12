@@ -16,8 +16,9 @@ void *rtc_run(void *arg)
 
         resource->lockMutex();
         resource->waitCondition();
-        usleep(RESOURCE_RTC_DURATION);
         stateSignalHandler->onWorking("Rtc", true);
+        usleep(STATE_GENERAL_DURATION);
+        stateSignalHandler->onWorking("Rtc", false);
         resource->signalCondition();
         resource->unlockMutex();
     }

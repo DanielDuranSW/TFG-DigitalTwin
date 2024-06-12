@@ -16,9 +16,17 @@ void *ble_run(void *arg)
         }
         stateSignalHandler->onWorking("Ble", true);
         // printf("BLE_Stack_Operation ejecutando...\n");
-        usleep(STATE_GENERAL_DURATION); // Simulación de trabajo
 
-        INTENSITY_CONSUMED += 0.1;
+        if (realSimulation)
+        {
+            usleep(STATE_BLE_DURATION);
+        }
+        else
+        {
+            usleep(STATE_GENERAL_DURATION);
+        }
+
+        INTENSITY_CONSUMED += STATE_GENERAL_INTENSITY;
         stateSignalHandler->intensityToChange(INTENSITY_CONSUMED);
 
         // printf("BLE_Stack_Operation terminado\n");

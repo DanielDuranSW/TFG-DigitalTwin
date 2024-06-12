@@ -99,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
 
 void MainWindow::onIntensityChanged(float intensityValue)
 {
-    ui->labelIntensity->setText(QString::number(intensityValue, 'f', 3));
+    ui->labelIntensity->setText(QString::number(intensityValue, 'f', 4));
 }
 
 void MainWindow::onClassifierStateChanged(const QString &StateName)
@@ -146,6 +146,7 @@ void MainWindow::updateConfigurations()
     // BUFFER_SIZE = ui->lineEditBufferSize->text().toInt();
     HIGH_FREQ_WAIT = 1000000 / ui->lineEditHIGH_FREQ_WAIT->text().toInt();
     LOW_FREQ_WAIT = 1000000 / ui->lineEditLOW_FREQ_WAIT->text().toInt();
+    STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
 }
 
 MainWindow::~MainWindow()
