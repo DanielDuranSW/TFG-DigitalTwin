@@ -22,7 +22,7 @@ bool CSVReader::getcsvFSR(std::vector<int> &fsrData)
         }
         else
         {
-            printf("Total consumido: %f\n", INTENSITY_CONSUMED);
+            printf("Gemelo Digital realizado con éxito\n");
             terminateFlag = true;
         }
     }

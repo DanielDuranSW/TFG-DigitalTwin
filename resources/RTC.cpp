@@ -20,7 +20,7 @@ void *rtc_run(void *arg)
         // usleep(STATE_GENERAL_DURATION * COEFFICIENT_RTC);
         if (classifierWorking)
         {
-            usleep(LOW_FREQ_WAIT);
+            usleep(STATE_GENERAL_DURATION);
         }
         else
         {
