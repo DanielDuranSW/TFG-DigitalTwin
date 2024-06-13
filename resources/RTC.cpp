@@ -16,9 +16,18 @@ void *rtc_run(void *arg)
 
         resource->lockMutex();
         resource->waitCondition();
-        stateSignalHandler->onWorking("Rtc", true);
-        usleep(STATE_GENERAL_DURATION);
-        stateSignalHandler->onWorking("Rtc", false);
+        // stateSignalHandler->onWorking("Rtc", true);
+        // usleep(STATE_GENERAL_DURATION * COEFFICIENT_RTC);
+        if (classifierWorking)
+        {
+            usleep(LOW_FREQ_WAIT);
+        }
+        else
+        {
+            usleep(STATE_ENERGY_DURATION);
+        }
+        // printf("LOW_FREQ_WAIT: %d\n", LOW_FREQ_WAIT);
+        // stateSignalHandler->onWorking("Rtc", false);
         resource->signalCondition();
         resource->unlockMutex();
     }

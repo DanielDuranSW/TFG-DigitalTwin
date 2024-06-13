@@ -12,10 +12,9 @@
 extern int INITIAL_WAIT;
 extern int HIGH_FREQ_WAIT;
 extern int LOW_FREQ_WAIT;
-extern int SKIP_FACTOR;
-extern int STATE_GENERAL_DURATION;
 
-// extern int STATE_DURATION;
+extern int COEFFICIENT_RTC;
+extern int STATE_GENERAL_DURATION;
 
 extern int STATE_FSR_DURATION;
 extern int STATE_IMU_DURATION;
@@ -31,8 +30,6 @@ extern float STATE_GENERAL_INTENSITY;
 extern float STATE_IMU_INTENSITY;
 extern float STATE_ENERGY_INTENSITY;
 extern float CYCLE_INTENSITY;
-
-extern int PERCENTAGE_ENERGY_DURATION;
 
 extern bool terminateFlag;
 extern bool classifierWorking;

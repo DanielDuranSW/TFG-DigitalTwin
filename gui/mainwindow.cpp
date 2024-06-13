@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent, StateSignalHandler *stateSignalHandler) 
 {
     ui->setupUi(this);
 
+    ui->lineEditHIGH_FREQ_WAIT->setText(QString::number(1000000 / HIGH_FREQ_WAIT));
+    ui->lineEditCOEFFICIENT_RTC->setText(QString::number(COEFFICIENT_RTC));
+
     // Crear las escenas y asociarlas con los QGraphicsView
     QMap<QString, QGraphicsScene *> sceneMap;
     sceneMap["Fsr"] = new QGraphicsScene(this);
@@ -145,8 +148,19 @@ void MainWindow::updateConfigurations()
 {
     // BUFFER_SIZE = ui->lineEditBufferSize->text().toInt();
     HIGH_FREQ_WAIT = 1000000 / ui->lineEditHIGH_FREQ_WAIT->text().toInt();
-    LOW_FREQ_WAIT = 1000000 / ui->lineEditLOW_FREQ_WAIT->text().toInt();
+    COEFFICIENT_RTC = ui->lineEditCOEFFICIENT_RTC->text().toInt();
     STATE_GENERAL_DURATION = HIGH_FREQ_WAIT;
+
+    STATE_FSR_DURATION = HIGH_FREQ_WAIT;
+    STATE_IMU_DURATION = HIGH_FREQ_WAIT;
+    STATE_RAM_DURATION = HIGH_FREQ_WAIT;
+    STATE_BLE_DURATION = HIGH_FREQ_WAIT;
+    STATE_ENERGY_DURATION = HIGH_FREQ_WAIT;
+    STATE_CUSTOM_DURATION = HIGH_FREQ_WAIT;
+    RESOURCE_RTC_DURATION = STATE_GENERAL_DURATION;
+    LOW_FREQ_WAIT = HIGH_FREQ_WAIT * COEFFICIENT_RTC;
+
+    printf("Valor de STATE_GENERAL_DURATION: %d\n", STATE_FSR_DURATION);
 }
 
 MainWindow::~MainWindow()

@@ -244,6 +244,7 @@ void *low_level_activity_classifier_run(void *arg)
             printf("%s  \n", activity.c_str());
 
             // printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
+
             if (activity == "WA" && classifierWorking)
             {
                 stateSignalHandler->classifierStateToChange("Walking");
@@ -256,16 +257,22 @@ void *low_level_activity_classifier_run(void *arg)
                 stateSignalHandler->classifierStateToChange("Idle");
                 printf("Idle\n");
                 STATE_GENERAL_DURATION = LOW_FREQ_WAIT;
-                csvReaderFSR->skipLines(SKIP_FACTOR);
-                csvReaderIMU->skipLines(SKIP_FACTOR);
+                if (COEFFICIENT_RTC != 1)
+                {
+                    csvReaderFSR->skipLines(COEFFICIENT_RTC);
+                    csvReaderIMU->skipLines(COEFFICIENT_RTC);
+                }
             }
             else if (activity == "ST" && classifierWorking)
             {
                 stateSignalHandler->classifierStateToChange("Sitting");
                 printf("Sitting\n");
                 STATE_GENERAL_DURATION = LOW_FREQ_WAIT;
-                csvReaderFSR->skipLines(SKIP_FACTOR);
-                csvReaderIMU->skipLines(SKIP_FACTOR);
+                if (COEFFICIENT_RTC != 1)
+                {
+                    csvReaderFSR->skipLines(COEFFICIENT_RTC);
+                    csvReaderIMU->skipLines(COEFFICIENT_RTC);
+                }
             }
 
             bo = true;
