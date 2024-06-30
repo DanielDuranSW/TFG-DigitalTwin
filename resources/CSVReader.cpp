@@ -62,7 +62,7 @@ void CSVReader::skipLines(int n)
     {
         if (!std::getline(file, line))
         {
-            // printf("Total consumido: %f\n", INTENSITY_CONSUMED);
+            printf("Gemelo Digital realizado con éxito\n");
             break; // Si no hay suficientes líneas, sal del bucle
         }
     }
